@@ -2,8 +2,8 @@
 @section('title', 'Create Product')
 @section('content')
     <div class="card">
-        @if(session()->has("error"))
-            <p>{{session()->get("error")}}</p>
+        @if (session()->has('error'))
+            <p>{{ session()->get('error') }}</p>
         @endif
         <div>
             <form action="{{ route('products.store') }}" method="post" enctype="multipart/form-data">
@@ -29,7 +29,7 @@
                                     <ul id="search-results"></ul>
                                 </div>
                             </div>
-        
+
                             <!-- navbar right -->
                             <div class="navbar-right">
                                 <ul class="nav navbar-nav">
@@ -61,7 +61,8 @@
                                                 <a href="#"> <i class="mdi mdi-diamond-stone"></i> Projects </a>
                                             </li>
                                             <li class="right-sidebar-in">
-                                                <a href="javascript:0"> <i class="mdi mdi-settings-outline"></i> Setting </a>
+                                                <a href="javascript:0"> <i class="mdi mdi-settings-outline"></i> Setting
+                                                </a>
                                             </li>
                                             <li class="dropdown-footer">
                                                 <a href="index.html"> <i class="mdi mdi-logout"></i> Log Out </a>
@@ -72,34 +73,34 @@
                                         <button class="dropdown-toggle notify-toggler custom-dropdown-toggler">
                                             <i class="mdi mdi-bell-outline"></i>
                                         </button>
-        
+
                                         <div class="card card-default dropdown-notify dropdown-menu-right mb-0">
                                             <div class="card-header card-header-border-bottom px-3">
                                                 <h2>Notifications</h2>
                                             </div>
-        
+
                                             <div class="card-body px-0 py-0">
-                                                <ul class="nav nav-tabs nav-style-border p-0 justify-content-between" id="myTab"
-                                                    role="tablist">
+                                                <ul class="nav nav-tabs nav-style-border p-0 justify-content-between"
+                                                    id="myTab" role="tablist">
                                                     <li class="nav-item mx-3 my-0 py-0">
                                                         <a href="#" class="nav-link active pb-3" id="home2-tab"
                                                             data-bs-toggle="tab" data-bs-target="#home2" role="tab"
                                                             aria-controls="home2" aria-selected="true">All (10)</a>
                                                     </li>
-        
+
                                                     <li class="nav-item mx-3 my-0 py-0">
-                                                        <a href="#" class="nav-link pb-3" id="profile2-tab" data-bs-toggle="tab"
-                                                            data-bs-target="#profile2" role="tab" aria-controls="profile2"
-                                                            aria-selected="false">Msgs (5)</a>
+                                                        <a href="#" class="nav-link pb-3" id="profile2-tab"
+                                                            data-bs-toggle="tab" data-bs-target="#profile2" role="tab"
+                                                            aria-controls="profile2" aria-selected="false">Msgs (5)</a>
                                                     </li>
-        
+
                                                     <li class="nav-item mx-3 my-0 py-0">
-                                                        <a href="#" class="nav-link pb-3" id="contact2-tab" data-bs-toggle="tab"
-                                                            data-bs-target="#contact2" role="tab" aria-controls="contact2"
-                                                            aria-selected="false">Others (5)</a>
+                                                        <a href="#" class="nav-link pb-3" id="contact2-tab"
+                                                            data-bs-toggle="tab" data-bs-target="#contact2" role="tab"
+                                                            aria-controls="contact2" aria-selected="false">Others (5)</a>
                                                     </li>
                                                 </ul>
-        
+
                                                 <div class="tab-content" id="myTabContent3">
                                                     <div class="tab-pane fade show active" id="home2" role="tabpanel"
                                                         aria-labelledby="home2-tab">
@@ -108,8 +109,8 @@
                                                                 <a href="javscript:void(0)"
                                                                     class="media media-message media-notification">
                                                                     <div class="position-relative mr-3">
-                                                                        <img class="rounded-circle" src="assets/img/user/u2.jpg"
-                                                                            alt="Image">
+                                                                        <img class="rounded-circle"
+                                                                            src="assets/img/user/u2.jpg" alt="Image">
                                                                         <span class="status away"></span>
                                                                     </div>
                                                                     <div class="media-body d-flex justify-content-between">
@@ -117,24 +118,26 @@
                                                                             <h4 class="title">Nitin</h4>
                                                                             <p class="last-msg">Lorem ipsum dolor sit, amet
                                                                                 consectetur adipisicing elit. Nam itaque
-                                                                                doloremque odio, eligendi delectus vitae.</p>
-        
+                                                                                doloremque odio, eligendi delectus vitae.
+                                                                            </p>
+
                                                                             <span
                                                                                 class="font-size-12 font-weight-medium text-secondary">
-                                                                                <i class="mdi mdi-clock-outline"></i> 30 min
+                                                                                <i class="mdi mdi-clock-outline"></i> 30
+                                                                                min
                                                                                 ago...
                                                                             </span>
                                                                         </div>
                                                                     </div>
                                                                 </a>
                                                             </li>
-        
+
                                                             <li>
                                                                 <a href="javscript:void(0)"
                                                                     class="media media-message media-notification media-active">
                                                                     <div class="position-relative mr-3">
-                                                                        <img class="rounded-circle" src="assets/img/user/u1.jpg"
-                                                                            alt="Image">
+                                                                        <img class="rounded-circle"
+                                                                            src="assets/img/user/u1.jpg" alt="Image">
                                                                         <span class="status active"></span>
                                                                     </div>
                                                                     <div class="media-body d-flex justify-content-between">
@@ -142,8 +145,9 @@
                                                                             <h4 class="title">Lovina</h4>
                                                                             <p class="last-msg">Donec mattis augue a nisl
                                                                                 consequat, nec imperdiet ex rutrum. Fusce et
-                                                                                vehicula enim. Sed in enim eu odio vehic.</p>
-        
+                                                                                vehicula enim. Sed in enim eu odio vehic.
+                                                                            </p>
+
                                                                             <span
                                                                                 class="font-size-12 font-weight-medium text-white">
                                                                                 <i class="mdi mdi-clock-outline"></i> Just
@@ -153,13 +157,13 @@
                                                                     </div>
                                                                 </a>
                                                             </li>
-        
+
                                                             <li>
                                                                 <a href="javscript:void(0)"
                                                                     class="media media-message media-notification">
                                                                     <div class="position-relative mr-3">
-                                                                        <img class="rounded-circle" src="assets/img/user/u5.jpg"
-                                                                            alt="Image">
+                                                                        <img class="rounded-circle"
+                                                                            src="assets/img/user/u5.jpg" alt="Image">
                                                                         <span class="status away"></span>
                                                                     </div>
                                                                     <div class="media-body d-flex justify-content-between">
@@ -167,8 +171,9 @@
                                                                             <h4 class="title">Crinali</h4>
                                                                             <p class="last-msg">Lorem ipsum dolor sit, amet
                                                                                 consectetur adipisicing elit. Nam itaque
-                                                                                doloremque odio, eligendi delectus vitae.</p>
-        
+                                                                                doloremque odio, eligendi delectus vitae.
+                                                                            </p>
+
                                                                             <span
                                                                                 class="font-size-12 font-weight-medium text-secondary">
                                                                                 <i class="mdi mdi-clock-outline"></i> 1 hrs
@@ -178,49 +183,54 @@
                                                                     </div>
                                                                 </a>
                                                             </li>
-        
+
                                                             <li>
                                                                 <a href="javscript:void(0)"
                                                                     class="media media-message media-notification event-active">
-        
+
                                                                     <div
                                                                         class="d-flex rounded-circle align-items-center justify-content-center mr-3 media-icon iconbox-45 bg-info text-white">
                                                                         <i class="mdi mdi-calendar-check font-size-20"></i>
                                                                     </div>
-        
+
                                                                     <div class="media-body d-flex justify-content-between">
                                                                         <div class="message-contents">
                                                                             <h4 class="title">Upcomming event added</h4>
-                                                                            <p class="last-msg font-size-14">03/Jan/2020 (1pm -
+                                                                            <p class="last-msg font-size-14">03/Jan/2020
+                                                                                (1pm -
                                                                                 2pm)</p>
-        
+
                                                                             <span
                                                                                 class="font-size-12 font-weight-medium text-secondary">
-                                                                                <i class="mdi mdi-clock-outline"></i> 10 min
+                                                                                <i class="mdi mdi-clock-outline"></i> 10
+                                                                                min
                                                                                 ago...
                                                                             </span>
                                                                         </div>
                                                                     </div>
                                                                 </a>
                                                             </li>
-        
+
                                                             <li>
                                                                 <a href="javscript:void(0)"
                                                                     class="media media-message media-notification">
-        
+
                                                                     <div
                                                                         class="d-flex rounded-circle align-items-center justify-content-center mr-3 media-icon iconbox-45 bg-warning text-white">
-                                                                        <i class="mdi mdi-chart-areaspline font-size-20"></i>
+                                                                        <i
+                                                                            class="mdi mdi-chart-areaspline font-size-20"></i>
                                                                     </div>
-        
+
                                                                     <div class="media-body d-flex justify-content-between">
                                                                         <div class="message-contents">
                                                                             <h4 class="title">Yearly Sales report</h4>
-                                                                            <p class="last-msg font-size-14">Lorem ipsum dolor
+                                                                            <p class="last-msg font-size-14">Lorem ipsum
+                                                                                dolor
                                                                                 sit, amet consectetur adipisicing elit. Nam
-                                                                                itaque doloremque odio, eligendi delectus vitae.
+                                                                                itaque doloremque odio, eligendi delectus
+                                                                                vitae.
                                                                             </p>
-        
+
                                                                             <span
                                                                                 class="font-size-12 font-weight-medium text-secondary">
                                                                                 <i class="mdi mdi-clock-outline"></i> 1 hrs
@@ -230,29 +240,31 @@
                                                                     </div>
                                                                 </a>
                                                             </li>
-        
+
                                                             <li>
                                                                 <a href="javscript:void(0)"
                                                                     class="media media-message media-notification">
-        
+
                                                                     <div
                                                                         class="d-flex rounded-circle align-items-center justify-content-center mr-3 media-icon iconbox-45 bg-primary text-white">
                                                                         <i
                                                                             class="mdi mdi-account-multiple-check font-size-20"></i>
                                                                     </div>
-        
+
                                                                     <div class="media-body d-flex justify-content-between">
                                                                         <div class="message-contents">
                                                                             <h4 class="title">New request</h4>
-                                                                            <p class="last-msg font-size-14">Add Dany Jones as
-                                                                                your contact consequat nec imperdiet ex rutrum.
+                                                                            <p class="last-msg font-size-14">Add Dany Jones
+                                                                                as
+                                                                                your contact consequat nec imperdiet ex
+                                                                                rutrum.
                                                                                 Fusce et vehicula enim. Sed in enim.</p>
-        
+
                                                                             <span
                                                                                 class="my-1 btn btn-sm btn-success">Accept</span>
                                                                             <span
                                                                                 class="my-1 btn btn-sm btn-secondary">Delete</span>
-        
+
                                                                             <span
                                                                                 class="font-size-12 font-weight-medium text-secondary d-block">
                                                                                 <i class="mdi mdi-clock-outline"></i> 5 min
@@ -262,49 +274,55 @@
                                                                     </div>
                                                                 </a>
                                                             </li>
-        
+
                                                             <li>
                                                                 <a href="javscript:void(0)"
                                                                     class="media media-message media-notification">
-        
+
                                                                     <div
                                                                         class="d-flex rounded-circle align-items-center justify-content-center mr-3 media-icon iconbox-45 bg-danger text-white">
-                                                                        <i class="mdi mdi-server-network-off font-size-20"></i>
+                                                                        <i
+                                                                            class="mdi mdi-server-network-off font-size-20"></i>
                                                                     </div>
-        
+
                                                                     <div class="media-body d-flex justify-content-between">
                                                                         <div class="message-contents">
                                                                             <h4 class="title">Server overloaded</h4>
-                                                                            <p class="last-msg font-size-14">Donec mattis augue
-                                                                                a nisl consequat, nec imperdiet ex rutrum. Fusce
-                                                                                et vehicula enim. Sed in enim eu odio vehic.</p>
-        
+                                                                            <p class="last-msg font-size-14">Donec mattis
+                                                                                augue
+                                                                                a nisl consequat, nec imperdiet ex rutrum.
+                                                                                Fusce
+                                                                                et vehicula enim. Sed in enim eu odio vehic.
+                                                                            </p>
+
                                                                             <span
                                                                                 class="font-size-12 font-weight-medium text-secondary">
-                                                                                <i class="mdi mdi-clock-outline"></i> 30 min
+                                                                                <i class="mdi mdi-clock-outline"></i> 30
+                                                                                min
                                                                                 ago...
                                                                             </span>
                                                                         </div>
                                                                     </div>
                                                                 </a>
                                                             </li>
-        
+
                                                             <li>
                                                                 <a href="javscript:void(0)"
                                                                     class="media media-message media-notification">
-        
+
                                                                     <div
                                                                         class="d-flex rounded-circle align-items-center justify-content-center mr-3 media-icon iconbox-45 bg-purple text-white">
                                                                         <i class="mdi mdi-playlist-check font-size-20"></i>
                                                                     </div>
-        
+
                                                                     <div class="media-body d-flex justify-content-between">
                                                                         <div class="message-contents">
                                                                             <h4 class="title">Task complete</h4>
-                                                                            <p class="last-msg font-size-14">Nam ut nisi erat.
+                                                                            <p class="last-msg font-size-14">Nam ut nisi
+                                                                                erat.
                                                                                 Ut quis tortor varius, hendrerit arcu quis,
                                                                                 congue nisl. In scelerisque, sem ut ve.</p>
-        
+
                                                                             <span
                                                                                 class="font-size-12 font-weight-medium text-secondary">
                                                                                 <i class="mdi mdi-clock-outline"></i> 2 hrs
@@ -314,10 +332,10 @@
                                                                     </div>
                                                                 </a>
                                                             </li>
-        
+
                                                         </ul>
                                                     </div>
-        
+
                                                     <div class="tab-pane fade" id="profile2" role="tabpanel"
                                                         aria-labelledby="profile2-tab">
                                                         <ul class="list-unstyled" data-simplebar style="height: 360px">
@@ -325,8 +343,8 @@
                                                                 <a href="javscript:void(0)"
                                                                     class="media media-message media-notification">
                                                                     <div class="position-relative mr-3">
-                                                                        <img class="rounded-circle" src="assets/img/user/u6.jpg"
-                                                                            alt="Image">
+                                                                        <img class="rounded-circle"
+                                                                            src="assets/img/user/u6.jpg" alt="Image">
                                                                         <span class="status away"></span>
                                                                     </div>
                                                                     <div class="media-body d-flex justify-content-between">
@@ -334,8 +352,9 @@
                                                                             <h4 class="title">Hardiko</h4>
                                                                             <p class="last-msg">Donec mattis augue a nisl
                                                                                 consequat, nec imperdiet ex rutrum. Fusce et
-                                                                                vehicula enim. Sed in enim eu odio vehic.</p>
-        
+                                                                                vehicula enim. Sed in enim eu odio vehic.
+                                                                            </p>
+
                                                                             <span
                                                                                 class="font-size-12 font-weight-medium text-secondary">
                                                                                 <i class="mdi mdi-clock-outline"></i> 1 hrs
@@ -345,22 +364,23 @@
                                                                     </div>
                                                                 </a>
                                                             </li>
-        
+
                                                             <li>
                                                                 <a href="javscript:void(0)"
                                                                     class="media media-message media-notification">
                                                                     <div class="position-relative mr-3">
-                                                                        <img class="rounded-circle" src="assets/img/user/u7.jpg"
-                                                                            alt="Image">
+                                                                        <img class="rounded-circle"
+                                                                            src="assets/img/user/u7.jpg" alt="Image">
                                                                         <span class="status away"></span>
                                                                     </div>
                                                                     <div class="media-body d-flex justify-content-between">
                                                                         <div class="message-contents">
                                                                             <h4 class="title">Browin</h4>
-                                                                            <p class="last-msg">Nam ut nisi erat. Ut quis tortor
+                                                                            <p class="last-msg">Nam ut nisi erat. Ut quis
+                                                                                tortor
                                                                                 varius, hendrerit arcu quis, congue nisl. In
                                                                                 scelerisque, sem ut ve.</p>
-        
+
                                                                             <span
                                                                                 class="font-size-12 font-weight-medium text-secondary">
                                                                                 <i class="mdi mdi-clock-outline"></i> 1 hrs
@@ -370,13 +390,13 @@
                                                                     </div>
                                                                 </a>
                                                             </li>
-        
+
                                                             <li>
                                                                 <a href="javscript:void(0)"
                                                                     class="media media-message media-notification media-active">
                                                                     <div class="position-relative mr-3">
-                                                                        <img class="rounded-circle" src="assets/img/user/u1.jpg"
-                                                                            alt="Image">
+                                                                        <img class="rounded-circle"
+                                                                            src="assets/img/user/u1.jpg" alt="Image">
                                                                         <span class="status active"></span>
                                                                     </div>
                                                                     <div class="media-body d-flex justify-content-between">
@@ -384,8 +404,9 @@
                                                                             <h4 class="title">jenelia</h4>
                                                                             <p class="last-msg">Donec mattis augue a nisl
                                                                                 consequat, nec imperdiet ex rutrum. Fusce et
-                                                                                vehicula enim. Sed in enim eu odio vehic.</p>
-        
+                                                                                vehicula enim. Sed in enim eu odio vehic.
+                                                                            </p>
+
                                                                             <span
                                                                                 class="font-size-12 font-weight-medium text-white">
                                                                                 <i class="mdi mdi-clock-outline"></i> Just
@@ -395,13 +416,13 @@
                                                                     </div>
                                                                 </a>
                                                             </li>
-        
+
                                                             <li>
                                                                 <a href="javscript:void(0)"
                                                                     class="media media-message media-notification">
                                                                     <div class="position-relative mr-3">
-                                                                        <img class="rounded-circle" src="assets/img/user/u2.jpg"
-                                                                            alt="Image">
+                                                                        <img class="rounded-circle"
+                                                                            src="assets/img/user/u2.jpg" alt="Image">
                                                                         <span class="status away"></span>
                                                                     </div>
                                                                     <div class="media-body d-flex justify-content-between">
@@ -409,8 +430,9 @@
                                                                             <h4 class="title">Bhavlio</h4>
                                                                             <p class="last-msg">Lorem ipsum dolor sit, amet
                                                                                 consectetur adipisicing elit. Nam itaque
-                                                                                doloremque odio, eligendi delectus vitae.</p>
-        
+                                                                                doloremque odio, eligendi delectus vitae.
+                                                                            </p>
+
                                                                             <span
                                                                                 class="font-size-12 font-weight-medium text-secondary">
                                                                                 <i class="mdi mdi-clock-outline"></i> 1 hrs
@@ -420,13 +442,13 @@
                                                                     </div>
                                                                 </a>
                                                             </li>
-        
+
                                                             <li>
                                                                 <a href="javscript:void(0)"
                                                                     class="media media-message media-notification">
                                                                     <div class="position-relative mr-3">
-                                                                        <img class="rounded-circle" src="assets/img/user/u5.jpg"
-                                                                            alt="Image">
+                                                                        <img class="rounded-circle"
+                                                                            src="assets/img/user/u5.jpg" alt="Image">
                                                                         <span class="status away"></span>
                                                                     </div>
                                                                     <div class="media-body d-flex justify-content-between">
@@ -434,8 +456,9 @@
                                                                             <h4 class="title">Browini</h4>
                                                                             <p class="last-msg">Lorem ipsum dolor sit, amet
                                                                                 consectetur adipisicing elit. Nam itaque
-                                                                                doloremque odio, eligendi delectus vitae.</p>
-        
+                                                                                doloremque odio, eligendi delectus vitae.
+                                                                            </p>
+
                                                                             <span
                                                                                 class="font-size-12 font-weight-medium text-secondary">
                                                                                 <i class="mdi mdi-clock-outline"></i> 1 hrs
@@ -445,55 +468,60 @@
                                                                     </div>
                                                                 </a>
                                                             </li>
-        
+
                                                         </ul>
                                                     </div>
-        
+
                                                     <div class="tab-pane fade" id="contact2" role="tabpanel"
                                                         aria-labelledby="contact2-tab">
                                                         <ul class="list-unstyled" data-simplebar style="height: 360px">
                                                             <li>
                                                                 <a href="javscript:void(0)"
                                                                     class="media media-message media-notification event-active">
-        
+
                                                                     <div
                                                                         class="d-flex rounded-circle align-items-center justify-content-center mr-3 media-icon iconbox-45 bg-info text-white">
                                                                         <i class="mdi mdi-calendar-check font-size-20"></i>
                                                                     </div>
-        
+
                                                                     <div class="media-body d-flex justify-content-between">
                                                                         <div class="message-contents">
                                                                             <h4 class="title">Upcomming event added</h4>
-                                                                            <p class="last-msg font-size-14">03/Jan/2020 (1pm -
+                                                                            <p class="last-msg font-size-14">03/Jan/2020
+                                                                                (1pm -
                                                                                 2pm)</p>
-        
+
                                                                             <span
                                                                                 class="font-size-12 font-weight-medium text-secondary">
-                                                                                <i class="mdi mdi-clock-outline"></i> 10 min
+                                                                                <i class="mdi mdi-clock-outline"></i> 10
+                                                                                min
                                                                                 ago...
                                                                             </span>
                                                                         </div>
                                                                     </div>
                                                                 </a>
                                                             </li>
-        
+
                                                             <li>
                                                                 <a href="javscript:void(0)"
                                                                     class="media media-message media-notification">
-        
+
                                                                     <div
                                                                         class="d-flex rounded-circle align-items-center justify-content-center mr-3 media-icon iconbox-45 bg-warning text-white">
-                                                                        <i class="mdi mdi-chart-areaspline font-size-20"></i>
+                                                                        <i
+                                                                            class="mdi mdi-chart-areaspline font-size-20"></i>
                                                                     </div>
-        
+
                                                                     <div class="media-body d-flex justify-content-between">
                                                                         <div class="message-contents">
                                                                             <h4 class="title">New Sales report</h4>
-                                                                            <p class="last-msg font-size-14">Lorem ipsum dolor
+                                                                            <p class="last-msg font-size-14">Lorem ipsum
+                                                                                dolor
                                                                                 sit, amet consectetur adipisicing elit. Nam
-                                                                                itaque doloremque odio, eligendi delectus vitae.
+                                                                                itaque doloremque odio, eligendi delectus
+                                                                                vitae.
                                                                             </p>
-        
+
                                                                             <span
                                                                                 class="font-size-12 font-weight-medium text-secondary">
                                                                                 <i class="mdi mdi-clock-outline"></i> 1 hrs
@@ -503,29 +531,31 @@
                                                                     </div>
                                                                 </a>
                                                             </li>
-        
+
                                                             <li>
                                                                 <a href="javscript:void(0)"
                                                                     class="media media-message media-notification">
-        
+
                                                                     <div
                                                                         class="d-flex rounded-circle align-items-center justify-content-center mr-3 media-icon iconbox-45 bg-primary text-white">
                                                                         <i
                                                                             class="mdi mdi-account-multiple-check font-size-20"></i>
                                                                     </div>
-        
+
                                                                     <div class="media-body d-flex justify-content-between">
                                                                         <div class="message-contents">
                                                                             <h4 class="title">New Request</h4>
-                                                                            <p class="last-msg font-size-14">Add Dany Jones as
-                                                                                your contact consequat nec imperdiet ex rutrum.
+                                                                            <p class="last-msg font-size-14">Add Dany Jones
+                                                                                as
+                                                                                your contact consequat nec imperdiet ex
+                                                                                rutrum.
                                                                                 Fusce et vehicula enim. Sed in enim.</p>
-        
+
                                                                             <span
                                                                                 class="my-1 btn btn-sm btn-success">Accept</span>
                                                                             <span
                                                                                 class="my-1 btn btn-sm btn-secondary">Delete</span>
-        
+
                                                                             <span
                                                                                 class="font-size-12 font-weight-medium text-secondary d-block">
                                                                                 <i class="mdi mdi-clock-outline"></i> 5 min
@@ -535,49 +565,55 @@
                                                                     </div>
                                                                 </a>
                                                             </li>
-        
+
                                                             <li>
                                                                 <a href="javscript:void(0)"
                                                                     class="media media-message media-notification">
-        
+
                                                                     <div
                                                                         class="d-flex rounded-circle align-items-center justify-content-center mr-3 media-icon iconbox-45 bg-danger text-white">
-                                                                        <i class="mdi mdi-server-network-off font-size-20"></i>
+                                                                        <i
+                                                                            class="mdi mdi-server-network-off font-size-20"></i>
                                                                     </div>
-        
+
                                                                     <div class="media-body d-flex justify-content-between">
                                                                         <div class="message-contents">
                                                                             <h4 class="title">Server overloaded</h4>
-                                                                            <p class="last-msg font-size-14">Donec mattis augue
-                                                                                a nisl consequat, nec imperdiet ex rutrum. Fusce
-                                                                                et vehicula enim. Sed in enim eu odio vehic.</p>
-        
+                                                                            <p class="last-msg font-size-14">Donec mattis
+                                                                                augue
+                                                                                a nisl consequat, nec imperdiet ex rutrum.
+                                                                                Fusce
+                                                                                et vehicula enim. Sed in enim eu odio vehic.
+                                                                            </p>
+
                                                                             <span
                                                                                 class="font-size-12 font-weight-medium text-secondary">
-                                                                                <i class="mdi mdi-clock-outline"></i> 30 min
+                                                                                <i class="mdi mdi-clock-outline"></i> 30
+                                                                                min
                                                                                 ago...
                                                                             </span>
                                                                         </div>
                                                                     </div>
                                                                 </a>
                                                             </li>
-        
+
                                                             <li>
                                                                 <a href="javscript:void(0)"
                                                                     class="media media-message media-notification">
-        
+
                                                                     <div
                                                                         class="d-flex rounded-circle align-items-center justify-content-center mr-3 media-icon iconbox-45 bg-purple text-white">
                                                                         <i class="mdi mdi-playlist-check font-size-20"></i>
                                                                     </div>
-        
+
                                                                     <div class="media-body d-flex justify-content-between">
                                                                         <div class="message-contents">
                                                                             <h4 class="title">New Task complete</h4>
-                                                                            <p class="last-msg font-size-14">Nam ut nisi erat.
+                                                                            <p class="last-msg font-size-14">Nam ut nisi
+                                                                                erat.
                                                                                 Ut quis tortor varius, hendrerit arcu quis,
                                                                                 congue nisl. In scelerisque, sem ut ve.</p>
-        
+
                                                                             <span
                                                                                 class="font-size-12 font-weight-medium text-secondary">
                                                                                 <i class="mdi mdi-clock-outline"></i> 2 hrs
@@ -592,7 +628,7 @@
                                                 </div>
                                             </div>
                                         </div>
-        
+
                                         <ul class="dropdown-menu dropdown-menu-right d-none">
                                             <li class="dropdown-header">You have 5 notifications</li>
                                             <li>
@@ -642,7 +678,7 @@
                             </div>
                         </nav>
                     </header>
-        
+
                     <!-- CONTENT WRAPPER -->
                     <div class="ec-content-wrapper">
                         <div class="content">
@@ -650,7 +686,8 @@
                                 <div>
                                     <h1>Add Product</h1>
                                     <p class="breadcrumbs"><span><a href="index.html">Home</a></span>
-                                        <span><i class="mdi mdi-chevron-right"></i></span>Product</p>
+                                        <span><i class="mdi mdi-chevron-right"></i></span>Product
+                                    </p>
                                 </div>
                                 <div>
                                     <a href="{{ route('products.index') }}" class="btn btn-primary"> View All
@@ -663,7 +700,7 @@
                                         <div class="card-header card-header-border-bottom">
                                             <h2>Add Product</h2>
                                         </div>
-        
+
                                         <div class="card-body">
                                             <div class="row ec-vendor-uploads">
                                                 <div class="col-lg-4">
@@ -672,12 +709,12 @@
                                                             <div class="avatar-upload">
                                                                 <div class="avatar-edit">
                                                                     <input type='file' id="imageUpload"
-                                                                    name="img_upload_0"
-                                                                    class="ec-image-upload"
+                                                                        name="img_upload_0" class="ec-image-upload"
                                                                         accept=".png, .jpg, .jpeg" />
                                                                     <label for="imageUpload"><img
                                                                             src="assets/img/icons/edit.svg"
-                                                                            class="svg_img header_svg" alt="edit" /></label>
+                                                                            class="svg_img header_svg"
+                                                                            alt="edit" /></label>
                                                                 </div>
                                                                 <div class="avatar-preview ec-preview">
                                                                     <div class="imagePreview ec-div-preview">
@@ -691,12 +728,12 @@
                                                                 <div class="thumb-upload">
                                                                     <div class="thumb-edit">
                                                                         <input type='file' id="thumbUpload01"
-                                                                            class="ec-image-upload"
-                                                                            name="img_upload_1"
+                                                                            class="ec-image-upload" name="img_upload_1"
                                                                             accept=".png, .jpg, .jpeg" />
                                                                         <label for="imageUpload"><img
                                                                                 src="assets/img/icons/edit.svg"
-                                                                                class="svg_img header_svg" alt="edit" /></label>
+                                                                                class="svg_img header_svg"
+                                                                                alt="edit" /></label>
                                                                     </div>
                                                                     <div class="thumb-preview ec-preview">
                                                                         <div class="image-thumb-preview">
@@ -709,12 +746,12 @@
                                                                 <div class="thumb-upload">
                                                                     <div class="thumb-edit">
                                                                         <input type='file' id="thumbUpload02"
-                                                                        name="img_upload_2"
-                                                                            class="ec-image-upload"
+                                                                            name="img_upload_2" class="ec-image-upload"
                                                                             accept=".png, .jpg, .jpeg" />
                                                                         <label for="imageUpload"><img
                                                                                 src="assets/img/icons/edit.svg"
-                                                                                class="svg_img header_svg" alt="edit" /></label>
+                                                                                class="svg_img header_svg"
+                                                                                alt="edit" /></label>
                                                                     </div>
                                                                     <div class="thumb-preview ec-preview">
                                                                         <div class="image-thumb-preview">
@@ -731,7 +768,8 @@
                                                                             accept=".png, .jpg, .jpeg" />
                                                                         <label for="imageUpload"><img
                                                                                 src="assets/img/icons/edit.svg"
-                                                                                class="svg_img header_svg" alt="edit" /></label>
+                                                                                class="svg_img header_svg"
+                                                                                alt="edit" /></label>
                                                                     </div>
                                                                     <div class="thumb-preview ec-preview">
                                                                         <div class="image-thumb-preview">
@@ -748,7 +786,8 @@
                                                                             accept=".png, .jpg, .jpeg" />
                                                                         <label for="imageUpload"><img
                                                                                 src="assets/img/icons/edit.svg"
-                                                                                class="svg_img header_svg" alt="edit" /></label>
+                                                                                class="svg_img header_svg"
+                                                                                alt="edit" /></label>
                                                                     </div>
                                                                     <div class="thumb-preview ec-preview">
                                                                         <div class="image-thumb-preview">
@@ -765,7 +804,8 @@
                                                                             accept=".png, .jpg, .jpeg" />
                                                                         <label for="imageUpload"><img
                                                                                 src="assets/img/icons/edit.svg"
-                                                                                class="svg_img header_svg" alt="edit" /></label>
+                                                                                class="svg_img header_svg"
+                                                                                alt="edit" /></label>
                                                                     </div>
                                                                     <div class="thumb-preview ec-preview">
                                                                         <div class="image-thumb-preview">
@@ -782,7 +822,8 @@
                                                                             accept=".png, .jpg, .jpeg" />
                                                                         <label for="imageUpload"><img
                                                                                 src="assets/img/icons/edit.svg"
-                                                                                class="svg_img header_svg" alt="edit" /></label>
+                                                                                class="svg_img header_svg"
+                                                                                alt="edit" /></label>
                                                                     </div>
                                                                     <div class="thumb-preview ec-preview">
                                                                         <div class="image-thumb-preview">
@@ -800,36 +841,41 @@
                                                     <div class="ec-vendor-upload-detail">
                                                         <form class="row g-3">
                                                             <div class="col-md-6">
-                                                                <label for="inputEmail4" class="form-label">Product name</label>
-                                                                <input type="text" name="name" class="form-control slug-title" id="inputEmail4">
+                                                                <label for="inputEmail4" class="form-label">Product
+                                                                    name</label>
+                                                                <input type="text" name="name"
+                                                                    class="form-control slug-title" id="inputEmail4">
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label name="group" class="ms-4">Categories</label>
                                                                 <select name="category_ids" class="form-control">
                                                                     <option value="">Select Category</option>
-                                                                    @foreach($categories  as $cate)
-                                                                    <option value="{{ $cate->id }}">{{ $cate->name }}</option>
-                                                                    @endforeach                   
+                                                                    @foreach ($categories as $cate)
+                                                                        <option value="{{ $cate->id }}">
+                                                                            {{ $cate->name }}</option>
+                                                                    @endforeach
                                                                 </select>
-                                            
+
                                                                 @error('category_ids')
                                                                     <span class="text-danger"> {{ $message }}</span>
                                                                 @enderror
-                                                            </div> 
+                                                            </div>
                                                             <div class="col-md-4 mb-25">
                                                                 <div id="sizes_1">
                                                                     <div class="size" id="example-size">
                                                                         <label for="size_name_1_1">Size Name:</label><br>
-                                                                        <input type="text" id="size_name_1_1" name="product_details[0][sizes][0][name]" required><br>
+                                                                        <input type="text" id="size_name_1_1"
+                                                                            name="product_details[0][sizes][0][name]"
+                                                                            required><br>
                                                                         <label class="form-label">Quantity</label>
-                                                                        <input type="number" class="form-control" name="product_details[0][sizes][0][quantity]" id="quantity">
+                                                                        <input type="number" class="form-control"
+                                                                            name="product_details[0][sizes][0][quantity]"
+                                                                            id="quantity">
                                                                     </div>
                                                                 </div>
-                                                                <button
-                                                                type="button" class="add-button" data-toggle="modal" onclick="saveSize()"
-                                                                
-                                                                {{-- data-target="#addSizeModal" --}}
-                                                                >Add Size</button><br><br>
+                                                                <button type="button" class="add-button"
+                                                                    data-toggle="modal" onclick="saveSize()"
+                                                                    {{-- data-target="#addSizeModal" --}}>Add Size</button><br><br>
                                                             </div>
                                                             {{-- <div class="modal fade" id="addSizeModal" tabindex="-1" role="dialog" aria-labelledby="addSizeModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
@@ -856,8 +902,10 @@
                                                             <div class="col-md-6">
                                                                 <label class="form-label">Price: <span>( In USD
                                                                         )</span></label>
-                                                                <input type="number" name="price" class="form-control" id="price" step="0.01" value="{{ old('price') }}" required min="0">
-                                                            </div>  
+                                                                <input type="number" name="price" class="form-control"
+                                                                    id="price" step="0.01"
+                                                                    value="{{ old('price') }}" required min="0">
+                                                            </div>
                                                             <div class="col-md-12">
                                                                 <label class="form-label">Description</label>
                                                                 <textarea class="form-control" rows="4" name="description"></textarea>
@@ -870,7 +918,8 @@
                                                                     data-role="tagsinput" />
                                                             </div>
                                                             <div class="col-md-12">
-                                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                                                <button type="submit"
+                                                                    class="btn btn-primary">Submit</button>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -881,12 +930,12 @@
                                 </div>
                             </div>
                         </div> <!-- End Content -->
-                    </div> <!-- End Content Wrapper -->    
+                    </div> <!-- End Content Wrapper -->
                 </div>
             </form>
         </div>
     </div>
-    
+
     <style>
         .add-button {
             padding: 10px 20px;
@@ -897,19 +946,19 @@
             cursor: pointer;
             border-radius: 5px;
         }
-    
+
         .add-button:hover {
             background-color: #0056b3;
         }
-    
+
         .size {
             margin-bottom: 20px;
         }
-    
+
         .size label {
             font-weight: bold;
         }
-    
+
         .size input[type="text"],
         .size input[type="number"] {
             width: 100%;
@@ -920,14 +969,15 @@
             border-radius: 4px;
             box-sizing: border-box;
         }
-    </style>   
+    </style>
     {{-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> --}}
-    
+
     <script>
         let sizeCounter = 0;
         let countDetail = 0;
+
         function saveSize() {
             sizeCounter++;
             countDetail++;
@@ -937,23 +987,23 @@
             // set input names
             const inputs = sizeDiv.querySelectorAll("input");
             const length = inputs.length;
-            for(let i=0;i<length;i++){
+            for (let i = 0; i < length; i++) {
                 console.log(inputs[i])
-                inputs[i].name = inputs[i].name.replace("0",countDetail);
+                inputs[i].name = inputs[i].name.replace("0", countDetail);
             }
             document.getElementById('sizes_1').appendChild(sizeDiv);
             // Reset modal inputs
             // document.getElementById('modal_size_name').value = '';
             // document.getElementById('modal_quantity').value = '';
-        
+
             // Close the modal
             // $('#addSizeModal').modal('hide');
         }
     </script>
     <script>
-        const onSelectImage = e=>{
+        const onSelectImage = e => {
             const n = e.target.value.split("\\").length;
-            document.querySelector("#img_name_label").innerText = e.target.value.split("\\")[n-1];
+            document.querySelector("#img_name_label").innerText = e.target.value.split("\\")[n - 1];
         }
     </script>
 @endsection

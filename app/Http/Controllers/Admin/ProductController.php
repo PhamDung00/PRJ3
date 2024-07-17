@@ -54,17 +54,28 @@ class ProductController extends Controller
             ]);
         }
     }
+    private function createQuantity($request){
+        $quantity = 0;
+        $productDetails = $request->product_details;
+        foreach ($productDetails as $value) {
+            foreach($value["sizes"] as $sizes){
+                $quantity += $sizes["quantity"];
+            }
+        }
+        return $quantity;
+    }
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    
     public function store(Request $request)
     {
         $productDetailsResponse = [];
-        $product = Product::create($request->all());
+        $product = Product::create(array_merge($request->all(), [
+            "quantity" => self::createQuantity($request)
+        ]));
         $productDetails = $request->product_details;
         foreach($productDetails as $detail){
             $productDetail = ProductDetail::create([
@@ -134,7 +145,9 @@ class ProductController extends Controller
     {
         //
         $product = Product::findOrFail($id);
-        $product->update($request->all());
+        $product->update(array_merge($request->all(),[
+            "quantity" => self::createQuantity($request)
+        ]));
         // Xóa chi tiết sản phẩm cũ
         $product->details()->delete();
         $productDetails = $request->product_details;
@@ -159,8 +172,10 @@ class ProductController extends Controller
                 ]);
             }
         }
-
-        return redirect(route("products.index"))->with("success", "Cập nhật thành công");
+        return response()->json(array_merge($request->all(),[
+            "quantity" => self::createQuantity($request)
+        ]), 200);
+        // return redirect(route("products.index"))->with("success", "Cập nhật thành công");
     }
 
     /**
