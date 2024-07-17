@@ -30,7 +30,7 @@ class ProductController extends Controller
     {
         //
         $products = $this->product->latest("id")->paginate(3);
-        return view('admin.products.index', compact('products'));
+        return response()->view('admin.products.index', compact('products'));
     }
 
     /**
@@ -42,59 +42,40 @@ class ProductController extends Controller
     {
         //
         $categories = $this->category->get(['id','name']);
-        return view('admin.products.create', compact('categories'));
-
+        return response()->view('admin.products.create', compact('categories'));
     }
-
+    private function addSizes(Request $request, $productDetail){
+        $productDetail->sizes()->delete();
+        foreach ($productDetail->sizes as $size) {
+            Size::create([
+                "product_detail_id" => $productDetail["id"],
+                "name" => $size["name"],
+                "quantity" => $size["quantity"]
+            ]);
+        }
+    }
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    private function addSizes(Request $request, $productDetail){
-        $oldSizes = $productDetail->sizes;
-        foreach($oldSizes as $size){
-            $size->delete();
-        }
-        $countSizes = 0;
-        $name = "product_details[0][sizes][".$countSizes."][name]";
-        while($request->input($name)){
-            Color::create([
-                "name" => $request->input($name),
-                "product_detail_id" => $productDetail->id
-            ]);
-            $countSizes++;
-            $name = "product_details[0][sizes][".$countSizes."][name]";
-        }
-    }
-    private function addColors(Request $request, $productDetail){
-        $oldColors = $productDetail->colors;
-        foreach($oldColors as $color){
-            $color->delete();
-        }
-        $countColors = 0;
-        $name = "product_details[0][colors][".$countColors."][name]";
-        while($request->input($name)){
-            Color::create([
-                "name" => $request->input($name),
-                "product_detail_id" => $productDetail->id
-            ]);
-            $countColors++;
-            $name = "product_details[0][colors][".$countColors."][name]";
-        }
-    }
+    
     public function store(Request $request)
     {
         $productDetailsResponse = [];
         $product = Product::create($request->all());
-
-        $detail = ProductDetail::create([
-            "product_id" => $product->id,
-            "quantity" => $request->quantity
-        ]);
-        self::addSizes($request, $detail);
-        self::addColors($request, $detail);
+        $productDetails = $request->product_details;
+        foreach($productDetails as $detail){
+            $productDetail = ProductDetail::create([
+                "product_id" => $product->id
+            ]);
+            // merge detail with productDetail
+            foreach ($detail as $key => $value) {
+                $productDetail->setAttribute($key, $value);
+            }
+            self::addSizes($request, $productDetail);
+        }
         // Upload images
         for ($i = 0; $i < 7; $i++) {
             if (isset($request["img_upload_" . $i])) {
@@ -106,7 +87,6 @@ class ProductController extends Controller
                 ]);
             }
         }
-
         return redirect(route("products.index"))->with("success", "Tạo thành công");
     }
 
@@ -122,7 +102,7 @@ class ProductController extends Controller
         //
         $product = $this->product->findOrFail($id);
         $categories = Category::all();
-        return view('admin.products.show', compact('product'));
+        return response()->view('admin.products.show', compact('product'));
     }
 
     /**
@@ -140,7 +120,7 @@ class ProductController extends Controller
         //
         $product = $this->product->findOrFail($id);
         $categories = Category::all();
-        return view('admin.products.edit', compact('product', "categories"));
+        return response()->view('admin.products.edit', compact('product', "categories"));
     }
 
     /**
@@ -156,13 +136,19 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         $product->update($request->all());
         // Xóa chi tiết sản phẩm cũ
-        $productDetail = $product->productDetail;
-        $productDetail->update([
-            'quantity' => $request->quantity,
-        ]);
-        self::addSizes($request, $productDetail);
-        self::addColors($request, $productDetail);
-        // Upload hình ảnh
+        $product->details()->delete();
+        $productDetails = $request->product_details;
+        foreach($productDetails as $detail){
+            $productDetail = ProductDetail::create([
+                "product_id" => $product->id
+            ]);
+            // merge detail with productDetail
+            foreach ($detail as $key => $value) {
+                $productDetail->setAttribute($key, $value);
+            }
+            self::addSizes($request, $productDetail);
+        }
+        // Upload images
         for ($i = 0; $i < 7; $i++) {
             if (isset($request["img_upload_" . $i])) {
                 $imageName = self::uploadImage($request, "products", "img_upload_" . $i);

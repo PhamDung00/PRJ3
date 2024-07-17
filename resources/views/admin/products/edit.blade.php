@@ -9,7 +9,6 @@
             <form action="{{ route('products.update', $product->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-
                 <div style="padding-left: 0">
                     <!-- Header -->
                     <header class="ec-main-header" id="header">
@@ -717,7 +716,7 @@
                                                                 <div class="avatar-preview ec-preview">
                                                                     <div class="imagePreview ec-div-preview">
                                                                         <img class="ec-image-preview"
-                                                                            src="{{ isset($product->images[0]->url)?asset($product->images[0]->url):''  }}"
+                                                                            src="{{ isset($product->images[0]->url) ? asset($product->images[0]->url) : '' }}"
                                                                             alt="edit" />
                                                                     </div>
                                                                 </div>
@@ -864,52 +863,64 @@
                                                                     <div id="sizes_1">
                                                                         <div class="size" id="example-size">
 
-                                                                                <label for="product_details[{{0}}][sizes][0][name]">Name</label>
-                                                                                <input type="text" name="product_details[{{0}}][sizes][0][name]" value="{{$product->details[0]["sizes"][0]["name"]??''}}">
-                                                                                    <label for="product_details[{{0}}][sizes][0][quantity]">Quantity</label>
-                                                                                    <input type="number" name="product_details[{{0}}][sizes][0][quantity]" value="{{$product->details[0]["sizes"][0]["quantity"]??''}}">
+                                                                            <label
+                                                                                for="product_details[{{ 0 }}][sizes][0][name]">Name</label>
+                                                                            <input type="text"
+                                                                                name="product_details[{{ 0 }}][sizes][0][name]"
+                                                                                value="{{ $product->details[0]['sizes'][0]['name'] ?? '' }}">
+                                                                            <label
+                                                                                for="product_details[{{ 0 }}][sizes][0][quantity]">Quantity</label>
+                                                                            <input type="number"
+                                                                                name="product_details[{{ 0 }}][sizes][0][quantity]"
+                                                                                value="{{ $product->details[0]['sizes'][0]['quantity'] ?? '' }}">
                                                                         </div>
-                                                                        @if (isset($product->details))    
-                                                                        @foreach ($product->details as $index=>$value)
-                                                                        @if (isset($value['sizes'][0])&&$index>0)                                                                                
-                                                                        <label for="product_details[{{$index}}][sizes][0][name]">Name</label>
-                                                                        <input type="text" name="product_details[{{$index}}][sizes][0][name]" value="{{$value["sizes"][0]["name"]}}">
-                                                                            <label for="product_details[{{$index}}][sizes][0][quantity]">Quantity</label>
-                                                                            <input type="number" name="product_details[{{$index}}][sizes][0][quantity]" value="{{$value["sizes"][0]["quantity"]}}">
-                                                                        @endif
-                                                                        @endforeach
+                                                                        @if (isset($product->details))
+                                                                            @foreach ($product->details as $index => $value)
+                                                                                @if (isset($value['sizes'][0]) && $index > 0)
+                                                                                    <label
+                                                                                        for="product_details[{{ $index }}][sizes][0][name]">Name</label>
+                                                                                    <input type="text"
+                                                                                        name="product_details[{{ $index }}][sizes][0][name]"
+                                                                                        value="{{ $value['sizes'][0]['name'] }}">
+                                                                                    <label
+                                                                                        for="product_details[{{ $index }}][sizes][0][quantity]">Quantity</label>
+                                                                                    <input type="number"
+                                                                                        name="product_details[{{ $index }}][sizes][0][quantity]"
+                                                                                        value="{{ $value['sizes'][0]['quantity'] }}">
+                                                                                @endif
+                                                                            @endforeach
                                                                         @endif
 
                                                                     </div>
 
-                                                                    
-                                                                <button type="button" class="add-button"
-                                                                onclick="saveSize()">Add Size</button><br><br>
+
+                                                                    <button type="button" class="add-button"
+                                                                        onclick="saveSize()">Add Size</button><br><br>
                                                                 </div>
                                                             </div>
-                                                        </div>
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <label class="form-label">Price: <span>( In USD
-                                                                )</span></label>
-                                                        <input type="number" name="price" class="form-control"
-                                                            id="price" step="0.01" value="{{ $product->price }}"
-                                                            required min="0">
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <label class="form-label">Description</label>
-                                                        <textarea class="form-control" rows="4" name="description">{{ $product->description }}</textarea>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <label class="form-label">Product Tags <span>( Type and
-                                                                make comma to separate tags )</span></label>
-                                                        <input type="text" class="form-control" id="group_tag"
-                                                            name="group_tag" value="" placeholder=""
-                                                            data-role="tagsinput" />
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Price: <span>( In USD
+                                                            )</span></label>
+                                                    <input type="number" name="price" class="form-control"
+                                                        id="price" step="0.01" value="{{ $product->price }}"
+                                                        required min="0">
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <label class="form-label">Description</label>
+                                                    <textarea class="form-control" rows="4" name="description">{{ $product->description }}</textarea>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <label class="form-label">Product Tags <span>( Type and
+                                                            make comma to separate tags )</span></label>
+                                                    <input type="text" class="form-control" id="group_tag"
+                                                        name="group_tag" value="" placeholder=""
+                                                        data-role="tagsinput" />
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                </div>
             </form>
         </div>
     </div>
@@ -994,8 +1005,9 @@
         }
     </style>
     <script>
-        let sizeCounter =  {{count($product->details)}};
-        let countDetail = {{count($product->details)}};
+        let sizeCounter = {{ count($product->details) }};
+        let countDetail = {{ count($product->details) }};
+
         function saveSize() {
             sizeCounter++;
             countDetail++;
@@ -1005,15 +1017,15 @@
             // set input names
             const inputs = sizeDiv.querySelectorAll("input");
             const length = inputs.length;
-            for(let i=0;i<length;i++){
-                inputs[i].name = inputs[i].name.replace("0",countDetail);
+            for (let i = 0; i < length; i++) {
+                inputs[i].name = inputs[i].name.replace("0", countDetail);
                 inputs[i].value = "";
             }
             document.getElementById('sizes_1').appendChild(sizeDiv);
             // Reset modal inputs
             // document.getElementById('modal_size_name').value = '';
             // document.getElementById('modal_quantity').value = '';
-        
+
             // Close the modal
             // $('#addSizeModal').modal('hide');
         }

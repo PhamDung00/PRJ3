@@ -3,18 +3,41 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
+    protected $category;
+    public function __construct(Category $category){
+        $this->category = $category;
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($category_id)
     {
         //
+        $parentCategories = $this->category->getParents();
+        $categories = [];
+        foreach($parentCategories as $parentCategory){
+            // TODO: get child categories
+            $categories[] = [
+                "parent" => $parentCategory,
+                "childrens" => $parentCategory->childrens
+            ];
+        }
+        $products = Product::join('category_prd as c_p', 'products.id', '=', 'c_p.product_id')
+                        ->join('categories as c', 'c_p.category_id', '=', 'c.id')
+                        ->where('c.id', $category_id)
+                        ->orWhere('c.parent_id', $category_id)
+                        ->select('products.*')
+                        ->paginate(2); // số sản phẩm trên mỗi trang
+        return response()->view("client.products.productlist", compact("products", "categories"));
     }
 
     /**

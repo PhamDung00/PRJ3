@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -13,8 +14,10 @@ class HomeController extends Controller
      * @return void
      */
     protected $product;
-    public function __construct(Product $product)
+    protected $category;
+    public function __construct(Product $product, Category $category)
     {
+        $this->category = $category;
         $this->product = $product;
     }
 
@@ -26,7 +29,15 @@ class HomeController extends Controller
     public function index()
     {
         $products =  $this->product->latest('id')->paginate(8);
-
-        return view('client.home.index', compact('products'));
+        $parentCategories = $this->category->getParents();
+        $categories = [];
+        foreach($parentCategories as $parentCategory){
+            // TODO: get child categories
+            $categories[] = [
+                "parent" => $parentCategory,
+                "childrens" => $parentCategory->childrens
+            ];
+        }
+        return view('client.home.index', compact('products',"categories"));
     }
 }
