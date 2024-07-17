@@ -172,10 +172,8 @@ class ProductController extends Controller
                 ]);
             }
         }
-        return response()->json(array_merge($request->all(),[
-            "quantity" => self::createQuantity($request)
-        ]), 200);
-        // return redirect(route("products.index"))->with("success", "Cập nhật thành công");
+        
+        return redirect(route("products.index"))->with("success", "Cập nhật thành công");
     }
 
     /**
