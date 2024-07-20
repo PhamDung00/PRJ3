@@ -20,7 +20,7 @@
                         </ul>
           </li>
           <li class="navigation__item">
-            <a href="#" class="navigation__link">Blog</a>
+            <a href="{{ route('client.orders.index')}}" class="navigation__link">Order</a>
           </li>
           <li class="navigation__item">
             <a href="about.html" class="navigation__link">About</a>

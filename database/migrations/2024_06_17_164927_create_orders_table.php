@@ -19,6 +19,12 @@ return new class extends Migration
             $table->id();
             $table->string('status');
             $table->double('total');
+            $table->double('ship');
+            $table->string('customer_name');
+            $table->string('customer_email');
+            $table->string('customer_phone');
+            $table->text('customer_address');
+            $table->text('note');
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });

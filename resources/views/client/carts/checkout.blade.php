@@ -69,9 +69,6 @@
                   <input type="text" class="form-control" id="checkout_street_address" placeholder="Street Address *">
                   <label for="checkout_company_name">Street Address *</label>
                 </div>
-                <div class="form-floating mt-3 mb-3">
-                  <input type="text" class="form-control" id="checkout_street_address_2">
-                </div>
               </div>
               <div class="col-md-12">
                 <div class="form-floating my-3">
@@ -218,4 +215,5 @@
         </div>
       </form>
     </section>
+    <div class="mb-5 pb-xl-5"></div>
     @endsection

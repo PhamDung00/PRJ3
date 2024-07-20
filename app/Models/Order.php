@@ -19,4 +19,9 @@ class Order extends Model
         'customer_address',
         'note'
     ] ;
+    public function getWithPaginateBy($userId)
+    {
+        return $this->whereUserId($userId)->latest('id')->paginate(10);
+    }
+
 }

@@ -710,26 +710,6 @@
                                                         </form>                     
                                                     </div>
                                                 </div>
-                                                    {{-- <div class="btn-group mb-1">
-                                                        <button type="button"
-                                                            class="mdi mdi-pencil dropdown-toggle dropdown-toggle-split"
-                                                            data-bs-toggle="dropdown" aria-haspopup="true"
-                                                            aria-expanded="false" data-display="static">
-                                                        </button>
-                                                        <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="{{ route('products.edit', $iprd->id) }}">Edit</a>
-                                                            <div class="dropdown-menu">
-                                                                <a class="dropdown-item" href="{{ route('products.edit', $iprd->id) }}">Edit</a>
-                                                                <form action="{{ route('products.destroy', $iprd->id) }}" id="form-delete{{ $iprd->id }}" method="post">
-                                                                    @csrf
-                                                                    @method('delete')
-                                                                    <a class="dropdown-item delete-item cursor-pointer" data-id="{{ $iprd->id }}" onclick="event.preventDefault(); confirmDelete().then(() => { document.getElementById('form-delete{{ $iprd->id }}').submit(); }).catch(() => {});">
-                                                                        De
-                                                                    </a>
-                                                                </form>                     
-                                                            </div>                   
-                                                        </div>
-                                                    </div> --}}
                                             </td>
                                         </tr>
                                         @endforeach
