@@ -10,7 +10,8 @@ class Cart extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id'
+        'user_id',
+        "product_id"
     ] ;
     public function products()
     {
@@ -22,12 +23,11 @@ class Cart extends Model
         return Cart::whereUserId($userId)->first();
     }
 
-    public function firtOrCreateBy($userId)
+    public function firtOrCreateBy($userId, $productId = 0)
     {
         $cart = $this->getBy($userId);
-
         if (!$cart) {
-            $cart = Cart::create(['user_id' => $userId]);
+            $cart = Cart::create(['user_id' => $userId, "product_id"=>$productId]);
         }
         return $cart;
     }
