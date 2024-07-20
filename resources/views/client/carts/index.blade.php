@@ -8,14 +8,14 @@
     <section class="shop-checkout container">
         <h2 class="page-title">Cart</h2>
         <div class="checkout-steps">
-            <a href="shop_cart.html" class="checkout-steps__item active">
+            <a href="{{ route('client.carts.index') }}" class="checkout-steps__item active">
                 <span class="checkout-steps__item-number">01</span>
                 <span class="checkout-steps__item-title">
                     <span>Shopping Bag</span>
                     <em>Manage Your Items List</em>
                 </span>
             </a>
-            <a href="shop_checkout.html" class="checkout-steps__item">
+            <a href="{{ route('client.checkout.index') }}" class="checkout-steps__item">
                 <span class="checkout-steps__item-number">02</span>
                 <span class="checkout-steps__item-title">
                     <span>Shipping and Checkout</span>

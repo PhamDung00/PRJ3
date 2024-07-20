@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Province;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -204,8 +205,7 @@ class CartController extends Controller
             ];
         }
         $cart = $this->cart->firtOrCreateBy(auth()->user()->id)->load('products');
-
-        return view('client.carts.checkout', compact('cart', 'categories'));
+        $provinces = Province::where("province_at", null)->get();
+        return view('client.carts.checkout', compact('cart', 'categories', "provinces"));
     }
-
 }

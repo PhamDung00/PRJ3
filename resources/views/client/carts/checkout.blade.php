@@ -1,44 +1,45 @@
 @extends('client.layout.app')
 @section('title', 'Checkout')
-@section('content') 
+@section('content')
     <div class="mb-4 pb-4"></div>
     <section class="shop-checkout container">
-      <h2 class="page-title">Shipping and Checkout</h2>
-      <div class="checkout-steps">
-        <a href="shop_cart.html" class="checkout-steps__item active">
-          <span class="checkout-steps__item-number">01</span>
-          <span class="checkout-steps__item-title">
-            <span>Shopping Bag</span>
-            <em>Manage Your Items List</em>
-          </span>
-        </a>
-        <a href="" class="checkout-steps__item active">
-          <span class="checkout-steps__item-number">02</span>
-          <span class="checkout-steps__item-title">
-            <span>Shipping and Checkout</span>
-            <em>Checkout Your Items List</em>
-          </span>
-        </a>
-        <a href="shop_order_complete.html" class="checkout-steps__item">
-          <span class="checkout-steps__item-number">03</span>
-          <span class="checkout-steps__item-title">
-            <span>Confirmation</span>
-            <em>Review And Submit Your Order</em>
-          </span>
-        </a>
-      </div>
-      <form name="checkout-form">
-        <div class="checkout-form">
-          <div class="billing-info__wrapper">
-            <h4>BILLING DETAILS</h4>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-floating my-3">
-                  <input type="text" class="form-control" value="{{ old('customer_name') }}" id="checkout_company_name" placeholder="">
-                  <label for="checkout_company_name">Name</label>
-                    @error('customer_name')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror ()
+        <h2 class="page-title">Shipping and Checkout</h2>
+        <div class="checkout-steps">
+            <a href="shop_cart.html" class="checkout-steps__item active">
+                <span class="checkout-steps__item-number">01</span>
+                <span class="checkout-steps__item-title">
+                    <span>Shopping Bag</span>
+                    <em>Manage Your Items List</em>
+                </span>
+            </a>
+            <a href="" class="checkout-steps__item active">
+                <span class="checkout-steps__item-number">02</span>
+                <span class="checkout-steps__item-title">
+                    <span>Shipping and Checkout</span>
+                    <em>Checkout Your Items List</em>
+                </span>
+            </a>
+            <a href="shop_order_complete.html" class="checkout-steps__item">
+                <span class="checkout-steps__item-number">03</span>
+                <span class="checkout-steps__item-title">
+                    <span>Confirmation</span>
+                    <em>Review And Submit Your Order</em>
+                </span>
+            </a>
+        </div>
+        <form name="checkout-form">
+            <div class="checkout-form">
+                <div class="billing-info__wrapper">
+                    <h4>BILLING DETAILS</h4>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-floating my-3">
+                                <input type="text" class="form-control" value="{{ old('customer_name') }}"
+                                    id="checkout_company_name" placeholder="">
+                                <label for="checkout_company_name">Name</label>
+                                @error('customer_name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror ()
 
                 </div>
               </div>
@@ -68,6 +69,9 @@
                 <div class="form-floating mt-3 mb-3">
                   <input type="text" class="form-control" id="checkout_street_address" placeholder="Street Address *">
                   <label for="checkout_company_name">Street Address *</label>
+                </div>
+                <div class="form-floating mt-3 mb-3">
+                  <input type="text" class="form-control" id="checkout_street_address_2">
                 </div>
               </div>
               <div class="col-md-12">
@@ -215,5 +219,4 @@
         </div>
       </form>
     </section>
-    <div class="mb-5 pb-xl-5"></div>
     @endsection
