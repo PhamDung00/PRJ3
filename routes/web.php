@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\ProductController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\ProductController as ClientProductController;
+use App\Models\Province;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,7 +38,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('remove-product-in-cart/{cart_product_id}', [CartController::class, 'removeProductInCart'])->name('client.carts.remove_product');    
     Route::post('apply-coupon', [CartController::class, 'applyCoupon'])->name('client.carts.apply_coupon');
     Route::get('checkout', [CartController::class, 'checkout'])->name('client.checkout.index');
-
+    Route::get('/user', [UserController::class, 'index']);
+    Route::get("/province-example", function () {
+        $provinces = Province::where("type", "Parent")->get();
+        return view("example.province", compact("provinces"));
+    });
+    Route::get('/district', [AddressController::class,'getDistricts'])->name('district');
+    Route::get('/ward', [AddressController::class,'getWards'])->name('ward');
 });
 
 Auth::routes();
