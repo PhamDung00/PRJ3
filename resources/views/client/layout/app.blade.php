@@ -1,7 +1,11 @@
 @php
     $subTotal = -session('discount_amount_price') ?? 0;
-    foreach ($GLOBAL_CART['products'] as $product) {
-        $subTotal += $product->product_price * $product->product_quantity;
+    if (isset($GLOBAL_CART['products'])) {
+        foreach ($GLOBAL_CART['products'] as $product) {
+            $subTotal += $product->product_price * $product->product_quantity;
+        }
+    } else {
+        $GLOBAL_CART['products'] = [];
     }
 @endphp
 <!DOCTYPE html>
@@ -230,14 +234,14 @@
             </div><!-- /.aside-header -->
 
             <div class="aside-content cart-drawer-items-list">
-                <div class="cart-drawer-item d-flex position-relative">
-                    <div class="position-relative">
-                        <a href="product1_simple.html">
-                            <img loading="lazy" class="cart-drawer-item__img" src="../images/cart-item-1.jpg"
-                                alt="">
-                        </a>
-                    </div>
-                    @foreach ($GLOBAL_CART['products'] as $index => $product)
+                @foreach ($GLOBAL_CART['products'] as $index => $product)
+                    <div class="cart-drawer-item d-flex position-relative">
+                        <div class="position-relative">
+                            <a href="{{ route('client.products.productdetail', $product->id) }}">
+                                <img loading="lazy" class="cart-drawer-item__img" src="../images/cart-item-1.jpg"
+                                    alt="">
+                            </a>
+                        </div>
                         <div class="cart-drawer-item__info flex-grow-1">
                             <h6 class="cart-drawer-item__title fw-normal"><a
                                     href="{{ route('client.products.productdetail', $product->id) }}">{{ $PRODUCT_CART[$index] }}</a>
@@ -255,12 +259,12 @@
                                 class="cart-drawer-item__price money price">${{ $GLOBAL_CART->product->price }}</span> --}}
                             </div>
                         </div>
-                    @endforeach
+                    </div><!-- /.cart-drawer-item d-flex -->
+                    <hr class="cart-drawer-divider">
+                @endforeach
 
-                    <button class="btn-close-xs position-absolute top-0 end-0 js-cart-item-remove"></button>
-                </div><!-- /.cart-drawer-item d-flex -->
+                <button class="btn-close-xs position-absolute top-0 end-0 js-cart-item-remove"></button>
 
-                <hr class="cart-drawer-divider">
             </div><!-- /.aside-content -->
 
             <div class="cart-drawer-actions position-absolute start-0 bottom-0 w-100">

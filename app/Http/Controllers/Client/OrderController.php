@@ -51,21 +51,10 @@ class OrderController extends Controller
         ]));
         // remove cart after convert it to order record
         $carts = Cart::where("user_id", auth()->user()->id)->get();
-        foreach ($carts as $cart) {
-            // TODO: create history and remove cart
-            foreach ($cart->products as $product) {
-                // TODO: create history
-            History::create([
-                "order_id"=>$order->id,
-                "cart_id" => $cart->id,
-                "user_id" => auth()->user()->id,
-                "product_name"=>$product->product_name,
-                "product->quantity"=> $product->product_quantity,
-                "product_price"=>$request->total,
-                "product_size"=>$product->product_size
+        foreach($carts as $cart){
+            $cart->update([
+                "status"=>"processing"
             ]);
-        }
-        $cart->delete();
         }
         return response()->redirectTo(route("orders.complete"));
     }

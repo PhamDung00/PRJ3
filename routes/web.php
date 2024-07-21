@@ -42,7 +42,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('checkout', [CartController::class, 'checkout'])->name('client.checkout.index');
     Route::get('list-orders', [OrderController::class, 'index'])->name('client.orders.index');
     Route::post('orders/cancel/{id}', [OrderController::class, 'cancel'])->name('client.orders.cancel');
-    Route::resource("orders",OrderController::class);
+    Route::resource("client-orders",OrderController::class);
     Route::get("/checkout-complete",[CartController::class, 'checkoutComplete'])->name("orders.complete");
     Route::get('/user', [UserController::class, 'index']);
     Route::get("/province-example", function () {

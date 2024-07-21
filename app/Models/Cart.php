@@ -11,6 +11,7 @@ class Cart extends Model
 
     protected $fillable = [
         'user_id',
+        "status",
         "product_id"
     ] ;
     public function products()
@@ -20,14 +21,17 @@ class Cart extends Model
 
     public static function getBy($userId)
     {
-        return Cart::whereUserId($userId)->first();
+        return Cart::whereUserId($userId)->where("status","pending")->first();
     }
 
     public function firtOrCreateBy($userId, $productId = 0)
     {
         $cart = $this->getBy($userId);
         if (!$cart) {
-            $cart = Cart::create(['user_id' => $userId, "product_id"=>$productId]);
+            if ($productId == 0)
+                $cart = [];
+            else 
+            $cart = Cart::create(['user_id' => $userId, "product_id"=>$productId,"status"=>"pending"]);
         }
         return $cart;
     }

@@ -35,11 +35,18 @@ class AppServiceProvider extends ServiceProvider
         //
         View::composer("*", function ($view) {
             $cartModel = new Cart();
-            $cart = $cartModel->firtOrCreateBy(auth()->user()->id)->load('products');
-            $productNames = [];
-            foreach($cart->products as $product){
-                $productNames[] = Product::find($product->product_id)["name"];
-            }
+                $cart = null;
+                $productNames = [];
+            if(auth()){
+            $user = User::where("id", auth()->user()->id??auth()->id())->first();
+            if($user)
+            $cart = $cartModel->firtOrCreateBy($user->id);
+            if($cart){
+                $cart = $cart->load('products');
+                foreach($cart->products as $product){
+                    $productNames[] = Product::find($product->product_id)["name"];
+                }}
+        }
             $categoryModel = new Category();
             $parentCategories = $categoryModel->getParents();
             $categories = [];
@@ -50,9 +57,7 @@ class AppServiceProvider extends ServiceProvider
                     "childrens" => $parentCategory->childrens
                 ];
             }
-            $user = User::where("id", auth()->user()->id)->first();
-                $histories = $user->histories; 
-            $view->with(["GLOBAL_CART"=>$cart,"PRODUCT_CART"=> $productNames,"GLOBAL_CATEGORIES"=> $categories, "HISTORIES"=>$histories]);
+            $view->with(["GLOBAL_CART"=>$cart,"PRODUCT_CART"=> $productNames,"GLOBAL_CATEGORIES"=> $categories]);
         }
     );
     }

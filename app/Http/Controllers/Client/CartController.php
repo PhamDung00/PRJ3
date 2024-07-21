@@ -52,7 +52,10 @@ class CartController extends Controller
                 "childrens" => $parentCategory->childrens
             ];
         }
-        $cart = $this->cart->firtOrCreateBy(auth()->user()->id)->load('products');
+        $cart = $this->cart->firtOrCreateBy(auth()->user()->id);
+        if($cart){
+            $cart = $cart->load('products');
+        }
         return view('client.carts.index', compact('cart','categories'));
     }
 
@@ -89,6 +92,7 @@ class CartController extends Controller
                 $dataCreate['product_quantity'] = $request->product_quantity ?? 1;
                 $dataCreate['product_price'] = $product->price;
                 $dataCreate['product_id'] = $request->product_id;
+                $dataCreate["status"] = "pending";
                 $this->cartProduct->create($dataCreate);
             }
             return back()->with(['message' => 'Add success']);
@@ -203,11 +207,12 @@ class CartController extends Controller
                 "childrens" => $parentCategory->childrens
             ];
         }
-        $carts = $this->cart->firtOrCreateBy(auth()->user()->id)->load('products');
+        $carts = $this->cart->firtOrCreateBy(auth()->user()->id);
         $productNames = [];
+        if($carts) {$carts = $carts->load('products');
         foreach($carts->products as $product){
             $productNames[] = Product::find($product->product_id)["name"];
-        }
+        }}
         $provinces = Province::where("province_at", null)->get();
         return view('client.carts.checkout', compact('carts', 'categories', "provinces", "productNames"));
     }
@@ -221,7 +226,10 @@ class CartController extends Controller
                 "childrens" => $parentCategory->childrens
             ];
         }
-        $carts = $this->cart->firtOrCreateBy(auth()->user()->id)->load('products');
+        $carts = $this->cart->firtOrCreateBy(auth()->user()->id);
+        if ($carts) {
+            $carts = $carts->load("products");
+        }
         $productNames = [];
         foreach($carts->products as $product){
             $productNames[] = Product::find($product->product_id)["name"];

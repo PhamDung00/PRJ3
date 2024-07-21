@@ -2,8 +2,12 @@
 @section('title', 'Checkout')
 @php
     $subTotal = -session('discount_amount_price') ?? 0;
-    foreach ($carts['products'] as $product) {
-        $subTotal += $product->product_price * $product->product_quantity;
+    if (isset($carts['products'])) {
+        foreach ($carts['products'] as $product) {
+            $subTotal += $product->product_price * $product->product_quantity;
+        }
+    } else {
+        $carts['products'] = [];
     }
 @endphp
 @section('content')
@@ -25,7 +29,7 @@
                     <em>Checkout Your Items List</em>
                 </span>
             </a>
-            <a href="shop_order_complete.html" class="checkout-steps__item">
+            <a style="cursor: pointer;" id="confirmation" class="checkout-steps__item">
                 <span class="checkout-steps__item-number">03</span>
                 <span class="checkout-steps__item-title">
                     <span>Confirmation</span>
@@ -33,7 +37,7 @@
                 </span>
             </a>
         </div>
-        <form name="checkout-form" action="{{ route('orders.store') }}" method="post">
+        <form name="checkout-form" action="{{ route('client-orders.store') }}" method="post">
             @csrf
             {{-- hiddened inputs --}}
             <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
@@ -174,6 +178,15 @@
     <script>
         $(document).ready(() => {
             document.getElementById("shipment_method").innerText = localStorage.getItem("shipmentMethod");
+        })
+        $(document).on("click", "#confirmation", e => {
+            Swal.fire({
+                position: "center",
+                icon: "warning",
+                title: "Please complete your order information",
+                showConfirmButton: true,
+                timer: 2000
+            })
         })
     </script>
 @endsection
