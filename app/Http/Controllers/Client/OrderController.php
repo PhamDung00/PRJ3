@@ -42,7 +42,7 @@ class OrderController extends Controller
             "customer_email"=>"required|email",
         ]);
         $address = "{$request['address-ward']}, {$request['address-district']}, {$request['address']}";
-        $this->order->create(array_merge($request->all(),[
+        $order = $this->order->create(array_merge($request->all(),[
             "customer_address"=>$address
         ]));
         return response()->redirectTo(route("orders.complete"));

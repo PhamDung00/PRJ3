@@ -13,6 +13,7 @@ use App\Models\Product;
 use App\Models\Province;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
@@ -220,6 +221,13 @@ class CartController extends Controller
                 "childrens" => $parentCategory->childrens
             ];
         }
-        return view("client.carts.checkoutcomplete",compact("categories"));
+        $carts = $this->cart->firtOrCreateBy(auth()->user()->id)->load('products');
+        $productNames = [];
+        foreach($carts->products as $product){
+            $productNames[] = Product::find($product->product_id)["name"];
+        }
+        $rawOrder = DB::select("SELECT * FROM orders WHERE id = (SELECT MAX(id) FROM orders)");
+        $order = Order::hydrate($rawOrder)[0];
+        return view("client.carts.checkoutcomplete",compact("categories","order","carts","productNames"));
     }
 }
