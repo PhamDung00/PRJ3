@@ -210,4 +210,16 @@ class CartController extends Controller
         $provinces = Province::where("province_at", null)->get();
         return view('client.carts.checkout', compact('carts', 'categories', "provinces", "productNames"));
     }
+    public function checkoutComplete() {
+        $parentCategories = $this->category->getParents();
+        $categories = [];
+        foreach($parentCategories as $parentCategory){
+            // TODO: get child categories
+            $categories[] = [
+                "parent" => $parentCategory,
+                "childrens" => $parentCategory->childrens
+            ];
+        }
+        return view("client.carts.checkoutcomplete",compact("categories"));
+    }
 }

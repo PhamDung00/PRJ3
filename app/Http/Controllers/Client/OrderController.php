@@ -12,7 +12,7 @@ class OrderController extends Controller
     //
     protected $order;
     protected $cart;
-
+    
     public function __construct(Order $order,Cart $cart)
     {
         $this->order = $order;
@@ -40,12 +40,11 @@ class OrderController extends Controller
         $request->validate([
             "customer_name"=>"required",
             "customer_email"=>"required|email",
-            "customer_phone"=>"required|regex:/(01)[0-9]{9}/",
         ]);
         $address = "{$request['address-ward']}, {$request['address-district']}, {$request['address']}";
         $this->order->create(array_merge($request->all(),[
             "customer_address"=>$address
         ]));
-        return response()->back('success');
+        return response()->redirectTo(route("orders.complete"));
     }
 }

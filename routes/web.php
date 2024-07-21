@@ -42,6 +42,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('list-orders', [OrderController::class, 'index'])->name('client.orders.index');
     Route::post('orders/cancel/{id}', [OrderController::class, 'cancel'])->name('client.orders.cancel');
     Route::resource("orders",OrderController::class);
+    Route::get("/checkout-complete",[CartController::class, 'checkoutComplete'])->name("orders.complete");
     Route::get('/user', [UserController::class, 'index']);
     Route::get("/province-example", function () {
         $provinces = Province::where("type", "Parent")->get();
