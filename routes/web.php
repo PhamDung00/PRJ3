@@ -115,7 +115,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get("order/history",[AdminOrderController::class,"history"])->name("orders.history");
     Route::get('order', [AdminOrderController::class, 'index'])->name('admin.orders.index');
     Route::post('orders/cancel/{id}', [AdminOrderController::class, 'cancel'])->name('client.orders.cancel');
-});
-Auth::routes();
+    Route::post('update-status/{id}', [AdminOrderController::class, 'updateStatus'])->name('admin.orders.update_status')->middleware('list-order');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+});

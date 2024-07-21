@@ -42,7 +42,17 @@
                                         <td>${{ $item->ship }}</td>
                                         <td>{{ $item->note }}</td>
                                         <td>{{ $item->payment }}</td>
-                                        <td>{{ $item->status }}</td>
+                                        <td>
+                                            <div class="input-group input-group-static mb-4">
+                                            <select name="status" class="form-control select-status"
+                                                data-action="{{ route('admin.orders.update_status', $item->id) }}">
+                                                @foreach (config('order.status') as $status)
+                                                    <option value="{{ $status }}"
+                                                        {{ $status == $item->status ? 'selected' : '' }}>{{ $status }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </td>
                                         <td>${{ $item->total }}</td>
                                     <td>
                                         <div class="btn-group mb-1">
@@ -77,4 +87,25 @@
         </div>
     </div> <!-- End Content -->
 </div> <!-- End Content Wrapper -->
+<script>
+    $(function () {
+    $(document).on("change", ".select-status", function (e) {
+            e.preventDefault();
+            let url = $(this).data("action");
+            let data = {
+                status: $(this).val(),
+            };
+
+            $.post(url, data, (res) => {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "success",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+            });
+        });
+    });
+</script>
 @endsection
