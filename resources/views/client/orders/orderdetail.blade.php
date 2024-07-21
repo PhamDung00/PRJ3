@@ -83,22 +83,22 @@
 															<td class="text-right"><strong>$2,400.00</strong></td>
 														</tr>
 
-														<tr>
-															<td colspan="4"></td>
-															<td class="text-right"><strong>Payment Status</strong></td>
-															<td class="text-right"><strong>PAID</strong></td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div> <!-- End Content -->
-			</div>
-    </section>
-  </main>
+                                                        <tr>
+                                                            <td colspan="4"></td>
+                                                            <td class="text-right"><strong>Payment Status</strong></td>
+                                                            <td class="text-right"><strong>PAID</strong></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- End Content -->
+            </div>
+        </section>
+    </main>
 @endsection

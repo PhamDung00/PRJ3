@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Product;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,9 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('carts', function (Blueprint $table) {
+        Schema::table('histories', function (Blueprint $table) {
             //
-            $table->foreignIdFor(Product::class, "product_id");
+            $table->string("product_name");
+            $table->double("product_price");
+            $table->smallInteger("product_quantity");
+            $table->string("product_size");
         });
     }
 
@@ -27,7 +29,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('carts', function (Blueprint $table) {
+        Schema::table('histories', function (Blueprint $table) {
             //
         });
     }

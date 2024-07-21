@@ -13,6 +13,7 @@ use App\Models\Product;
 use App\Models\Province;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
@@ -182,13 +183,11 @@ class CartController extends Controller
             Session::put('coupon_id', $coupon->id);
             Session::put('discount_amount_price', $coupon->value);
             Session::put('coupon_code' , $coupon->name);
-
         }else{
 
             Session::forget(['coupon_id', 'discount_amount_price', 'coupon_code']);
             $message = 'Discount code does not exist or has expired!';
         }
-
         return redirect()->route('client.carts.index')->with([
             'message' => $message,
         ]);
@@ -204,8 +203,31 @@ class CartController extends Controller
                 "childrens" => $parentCategory->childrens
             ];
         }
-        $cart = $this->cart->firtOrCreateBy(auth()->user()->id)->load('products');
+        $carts = $this->cart->firtOrCreateBy(auth()->user()->id)->load('products');
+        $productNames = [];
+        foreach($carts->products as $product){
+            $productNames[] = Product::find($product->product_id)["name"];
+        }
         $provinces = Province::where("province_at", null)->get();
-        return view('client.carts.checkout', compact('cart', 'categories', "provinces"));
+        return view('client.carts.checkout', compact('carts', 'categories', "provinces", "productNames"));
+    }
+    public function checkoutComplete() {
+        $parentCategories = $this->category->getParents();
+        $categories = [];
+        foreach($parentCategories as $parentCategory){
+            // TODO: get child categories
+            $categories[] = [
+                "parent" => $parentCategory,
+                "childrens" => $parentCategory->childrens
+            ];
+        }
+        $carts = $this->cart->firtOrCreateBy(auth()->user()->id)->load('products');
+        $productNames = [];
+        foreach($carts->products as $product){
+            $productNames[] = Product::find($product->product_id)["name"];
+        }
+        $rawOrder = DB::select("SELECT * FROM orders WHERE id = (SELECT MAX(id) FROM orders)");
+        $order = Order::hydrate($rawOrder)[0];
+        return view("client.carts.checkoutcomplete",compact("categories","order","carts","productNames"));
     }
 }

@@ -29,15 +29,7 @@ class HomeController extends Controller
     public function index()
     {
         $products =  $this->product->latest('id')->paginate(8);
-        $parentCategories = $this->category->getParents();
-        $categories = [];
-        foreach($parentCategories as $parentCategory){
-            // TODO: get child categories
-            $categories[] = [
-                "parent" => $parentCategory,
-                "childrens" => $parentCategory->childrens
-            ];
-        }
+        
         return view('client.home.index', compact('products',"categories"));
     }
 }
