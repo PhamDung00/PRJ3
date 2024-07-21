@@ -45,6 +45,8 @@ class OrderController extends Controller
         $order = $this->order->create(array_merge($request->all(),[
             "customer_address"=>$address
         ]));
+        // remove cart after convert it to order record
+        Cart::where("user_id", auth()->user()->id)->delete();
         return response()->redirectTo(route("orders.complete"));
     }
 }

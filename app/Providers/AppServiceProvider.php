@@ -3,10 +3,12 @@
 namespace App\Providers;
 
 use App\Composers\CartComposer;
+use App\Models\Cart;
+use App\Models\Product;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\View\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,6 +17,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
+    protected Cart $cart;
     public function register()
     {
         //
@@ -28,5 +31,15 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        View::composer("*", function ($view) {
+            $cartModel = new Cart();
+            $cart = $cartModel->firtOrCreateBy(auth()->user()->id)->load('products');
+            $productNames = [];
+            foreach($cart->products as $product){
+                $productNames[] = Product::find($product->product_id)["name"];
+            }
+            $view->with(["GLOBAL_CART"=>$cart,"PRODUCT_CART"=> $productNames]);
+        }
+    );
     }
 }
