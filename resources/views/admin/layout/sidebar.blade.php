@@ -20,14 +20,15 @@
                     </a>
                     <hr>
                 </li>
-
+                @hasrole('super-admin')
                 <li class="has-sub {{ str_contains(URL::full(), '/roles') ? 'active' : '' }}">
                     <a class="sidenav-item-link" href="{{ route('roles.index') }}">
                         <i><span class="mdi mdi-24px mdi-account-card-details"></span></i>
                         <span class="nav-text">Role</span>
                     </a>
                 </li>
-
+                @endhasrole
+                @can('show-user')
                 <!-- Vendors -->
                 <li class="has-sub {{ str_contains(URL::full(), '/users') ? 'active' : '' }}">
                     <a class="sidenav-item-link">
@@ -50,6 +51,7 @@
                         </ul>
                     </div>
                 </li>
+                @endcan
 
                 <!-- Users -->
                 <li class="has-sub">
@@ -79,7 +81,7 @@
                     </div>
                     <hr>
                 </li>
-
+                @can('show-category')
                 <!-- Category -->
                 <li class="has-sub"{{ str_contains(URL::full(), '/categories') ? 'active' : '' }}>
                     <a class="sidenav-item-link" href="{{ route('categories.index') }}">
@@ -87,7 +89,8 @@
                         <span class="nav-text">Categories</span>
                     </a>
                 </li>
-
+                @endcan
+                @can('show-product')
                 <!-- Products -->
                 <li class="has-sub"{{ str_contains(URL::full(), '/products') ? 'active' : '' }}>
                     <a class="sidenav-item-link" href="{{ route('products.index') }}">
@@ -95,7 +98,8 @@
                         <span class="nav-text">Products</span></b>
                     </a>
                 </li>
-
+                @endcan
+                @can('show-coupon')
                 <!-- Coupons -->
                 <li class="has-sub"{{ str_contains(URL::full(), '/coupons') ? 'active' : '' }}>
                     <a class="sidenav-item-link" href="{{ route('coupons.index') }}">
@@ -103,7 +107,7 @@
                         <span class="nav-text">Coupons</span></b>
                     </a>
                 </li>
-
+                @endcan
                 <!-- Orders -->
                 <li class="has-sub" {{ str_contains(URL::full(), '/coupons') ? 'active' : '' }}>
                     <a class="sidenav-item-link" href="javascript:void(0)">

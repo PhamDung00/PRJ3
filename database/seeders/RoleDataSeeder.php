@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Permisson;
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -27,6 +28,16 @@ class RoleDataSeeder extends Seeder
         foreach ($roles as $role) {
             Role::updateOrCreate($role);
         }
+
+
+        $superAdmin = User::whereEmail('admin@gmail.com')->first();
+
+        if(!$superAdmin)
+        {
+            $superAdmin = User::factory()->create(['email' => 'admin@gmail.com']);
+        }
+        $superAdmin->assignRole('super-admin');
+
 
         $premissions = [
             ['name' => 'create-user', 'display_name' => 'Create User', 'group' => 'User'],
@@ -53,6 +64,9 @@ class RoleDataSeeder extends Seeder
             ['name' => 'update-coupon', 'display_name' => 'Update coupon', 'group' => 'coupon'],
             ['name' => 'show-coupon', 'display_name' => 'Show coupon', 'group' => 'coupon'],
             ['name' => 'delete-coupon', 'display_name' => 'Deleter coupon', 'group' => 'coupon'],
+
+            ['name' => 'list-order', 'display_name' => 'list order', 'group' => 'orders'],
+            ['name' => 'update-order-status', 'display_name' => 'Update order status', 'group' => 'orders'],
         ];
 
         foreach ($premissions as $item) {

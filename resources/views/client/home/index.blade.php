@@ -241,7 +241,8 @@
     </div><!-- /.position-relative -->
   </section>
   <!-- Customer Login Form -->
-  <div class="aside aside_right overflow-hidden customer-forms" id="customerForms">
+
+  {{-- <div class="aside aside_right overflow-hidden customer-forms" id="customerForms">
     <div class="customer-forms__wrapper d-flex position-relative">
       <div class="customer__login">
         <div class="aside-header d-flex align-items-center">
@@ -249,32 +250,50 @@
           <button class="btn-close-lg js-close-aside ms-auto"></button>
         </div><!-- /.aside-header -->
 
-        <form action="https://uomo-html.flexkitux.com/Demo16/login_register.html" method="POST" class="aside-content">
+        <form method="POST" action="{{ route('login') }}" class="aside-content">
           <div class="form-floating mb-3">
-            <input name="email" type="email" class="form-control form-control_gray" id="customerNameEmailInput" placeholder="name@example.com">
-            <label for="customerNameEmailInput">Username or email address *</label>
+            <input name="email" type="email" class="form-control form-control_gray @error('email') is-invalid @enderror" value="{{ old('email') }}" id="customerNameEmailInput" placeholder="name@example.com" required autocomplete="email" autofocus>
+            <label for="customerNameEmailInput">{{ __('Email Address') }}</label>
+            @error('email')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+          @enderror
           </div>
 
           <div class="pb-3"></div>
 
           <div class="form-label-fixed mb-3">
-            <label for="customerPasswordInput" class="form-label">Password *</label>
-            <input name="password" id="customerPasswordInput" class="form-control form-control_gray" type="password" placeholder="********">
+            <label for="customerPasswordInput" class="form-label">{{ __('Password') }}</label>
+            <input id="customerPasswordInput" class="form-control form-control_gray @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" type="password" placeholder="********">
+            @error('password')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+
+
           </div>
 
           <div class="d-flex align-items-center mb-3 pb-2">
             <div class="form-check mb-0">
-              <input name="remember" class="form-check-input form-check-input_fill" type="checkbox" value="" id="flexCheckDefault">
-              <label class="form-check-label text-secondary" for="flexCheckDefault">Remember me</label>
+              <input name="remember" class="form-check-input form-check-input_fill" type="checkbox" value="" id="flexCheckDefault" {{ old('remember') ? 'checked' : '' }}>
+              <label class="form-check-label text-secondary" for="flexCheckDefault">{{ __('Remember Me') }}</label>
             </div>
-            <a href="reset_password.html" class="btn-text ms-auto">Lost password?</a>
+            @if (Route::has('password.request'))
+            <a href="{{ route('password.request') }}" class="btn-text ms-auto">{{ __('Forgot Your Password?') }}</a>
+            @endif
           </div>
 
-          <button class="btn btn-primary w-100 text-uppercase" type="submit">Log In</button>
-
+          <button class="btn btn-primary w-100 text-uppercase" type="submit">{{ __('Login') }}</button>
+          @if (Route::has('password.request'))
+          <a class="btn btn-link" href="{{ route('password.request') }}">
+              {{ __('Forgot Your Password?') }}
+          </a>
+          @endif
           <div class="customer-option mt-4 text-center">
             <span class="text-secondary">No account yet?</span>
-            <a href="login_register.html#register-tab" class="btn-text js-show-register">Create Account</a>
+            <a href="{{ route('register') }}" class="btn-text js-show-register">Create Account</a>
           </div>
         </form>
       </div><!-- /.customer__login -->
@@ -285,38 +304,89 @@
           <button class="btn-close-lg js-close-aside btn-close-aside ms-auto"></button>
         </div><!-- /.aside-header -->
 
-        <form action="https://uomo-html.flexkitux.com/Demo16/login_register.html" method="POST" class="aside-content">
+        <form method="POST" action="{{ route('register') }}">
+          @csrf
           <div class="form-floating mb-4">
-            <input name="username" type="text" class="form-control form-control_gray" id="registerUserNameInput" placeholder="Username">
-            <label for="registerUserNameInput">Username</label>
+            <input type="text" class="form-control form-control_gray @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus id="registerUserNameInput" placeholder="Username">
+            <label for="registerUserNameInput">{{ __('Name') }}</label>
+            @error('name')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+
           </div>
 
           <div class="pb-1"></div>
 
           <div class="form-floating mb-4">
-            <input name="email" type="email" class="form-control form-control_gray" id="registerUserEmailInput" placeholder="user@company.com">
-            <label for="registerUserEmailInput">Email address *</label>
+            <input id="email" type="email" class="form-control form-control_grayerror('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+            <label for="registerUserEmailInput">{{ __('Email Address') }}</label>
+            @error('email')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+
           </div>
 
           <div class="pb-1"></div>
 
           <div class="form-label-fixed mb-4">
-            <label for="registerPasswordInput" class="form-label">Password *</label>
-            <input name="password" id="registerPasswordInput" class="form-control form-control_gray" type="password" placeholder="*******">
+            <label for="Phone" class="form-label">{{ __('Phone') }}</label>
+            <input id="phone" type="text" class="form-control form-control_gray@error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+            @error('phone')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
           </div>
 
-          <p class="text-secondary mb-4">Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our privacy policy.</p>
+          <div class="pb-1"></div>
 
-          <button class="btn btn-primary w-100 text-uppercase" type="submit">Register</button>
+          <div class="form-label-fixed mb-4">
+            <label for="Phone" class="form-label">{{ __('Gender') }}</label>
+            <select name="gender" class="form-control">
+              <option value="male">Male</option>
+              <option value="fe-male">FeMale</option>
+            </select>
+            @error('gender')
+            <span class="text-danger"> {{ $message }}</span>
+            @enderror
+
+          </div>
+
+          <div class="pb-1"></div>
+
+          <div class="form-label-fixed mb-4">
+            <label for="registerPasswordInput" class="form-label">{{ __('Password') }}</label>
+            <input id="registerPasswordInput" class="form-control form-control_gray@error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+            @error('password')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror 
+          </div>
+          
+          <div class="pb-1"></div>
+
+          <div class="form-label-fixed mb-4">
+            <label for="password-confirm" class="form-label">{{ __('Confirm Password') }}</label>
+            <input id="password-confirm" class="form-control form-control_gray" name="password_confirmation" required autocomplete="new-password">
+          </div>
+
+          <button class="btn btn-primary w-100 text-uppercase" type="submit">{{ __('Register') }}</button>
 
           <div class="customer-option mt-4 text-center">
             <span class="text-secondary">Already have account?</span>
-            <a href="#" class="btn-text js-show-login">Login</a>
+            <a href="{{ route('login') }}" class="btn-text js-show-login">Login</a>
           </div>
         </form>
       </div><!-- /.customer__register -->
     </div><!-- /.customer-forms__wrapper -->
-  </div><!-- /.aside aside_right -->
+  </div> --}}
+  
+  <!-- /.aside aside_right -->
 
   <!-- Quick View -->
   
