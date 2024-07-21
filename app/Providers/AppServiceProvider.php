@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use App\Composers\CartComposer;
 use App\Models\Cart;
+use App\Models\Category;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
@@ -38,7 +40,19 @@ class AppServiceProvider extends ServiceProvider
             foreach($cart->products as $product){
                 $productNames[] = Product::find($product->product_id)["name"];
             }
-            $view->with(["GLOBAL_CART"=>$cart,"PRODUCT_CART"=> $productNames]);
+            $categoryModel = new Category();
+            $parentCategories = $categoryModel->getParents();
+            $categories = [];
+            foreach($parentCategories as $parentCategory){
+                // TODO: get child categories
+                $categories[] = [
+                    "parent" => $parentCategory,
+                    "childrens" => $parentCategory->childrens
+                ];
+            }
+            $user = User::where("id", auth()->user()->id)->first();
+                $histories = $user->histories; 
+            $view->with(["GLOBAL_CART"=>$cart,"PRODUCT_CART"=> $productNames,"GLOBAL_CATEGORIES"=> $categories, "HISTORIES"=>$histories]);
         }
     );
     }

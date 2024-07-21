@@ -24,5 +24,7 @@ class Order extends Model
     {
         return $this->whereUserId($userId)->latest('id')->paginate(10);
     }
-
+    public function history(){
+        return $this->hasOne(History::class,'order_id');
+    }
 }
