@@ -36,11 +36,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('add-to-cart',[CartController::class,'store'])->name('client.carts.add');
     Route::get('carts', [CartController::class, 'index'])->name('client.carts.index');
     Route::post('update-quantity-product-in-cart/{cart_product_id}', [CartController::class, 'updateQuantityProduct'])->name('client.carts.update_product_quantity');
-    Route::post('remove-product-in-cart/{cart_product_id}', [CartController::class, 'removeProductInCart'])->name('client.carts.remove_product');    
+    Route::delete('remove-product-in-cart/{cart_product_id}', [CartController::class, 'removeProductInCart'])->name('client.carts.remove_product');    
     Route::post('apply-coupon', [CartController::class, 'applyCoupon'])->name('client.carts.apply_coupon');
     Route::get('checkout', [CartController::class, 'checkout'])->name('client.checkout.index');
     Route::get('list-orders', [OrderController::class, 'index'])->name('client.orders.index');
     Route::post('orders/cancel/{id}', [OrderController::class, 'cancel'])->name('client.orders.cancel');
+    Route::resource("orders",OrderController::class);
     Route::get('/user', [UserController::class, 'index']);
     Route::get("/province-example", function () {
         $provinces = Province::where("type", "Parent")->get();

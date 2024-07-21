@@ -61,7 +61,9 @@
                                 </td>
                                 <td>
                                     <div class="shopping-cart__product-item__detail">
-                                        <h4><a href="product1_simple.html">{{ $item->product->name }}</a></h4>
+                                        <h4><a
+                                                href="{{ route('client.products.productdetail', $item->product->id) }}">{{ $item->product->name }}</a>
+                                        </h4>
                                         <ul class="shopping-cart__product-item__options">
                                             <li>Size: {{ $item->product_size }}</li>
                                         </ul>
@@ -84,8 +86,9 @@
                                     </div><!-- .qty-control -->
                                 </td>
                                 <td>
-                                    <span class="shopping-cart__subtotal"
-                                        id="cartProductPrice{{ $item->id }}">${{ $item->product->price * $item->product_quantity }}</span>
+                                    <span class="shopping-cart__subtotal" id="cartProductPrice{{ $item->id }}">
+                                        ${{ $item->product->price * $item->product_quantity }}
+                                    </span>
                                 </td>
                                 <td>
                                     <a href="#" class="remove-cart"
@@ -130,12 +133,14 @@
                                     <th>Shipping</th>
                                     <td>
                                         <div class="form-check">
-                                            <input class="form-check-input form-check-input_fill" type="checkbox" value="" id="free_shipping">
+                                            <input class="form-check-input form-check-input_fill" type="checkbox"
+                                                value="" id="free_shipping">
                                             <label class="form-check-label" for="free_shipping">Free shipping</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input form-check-input_fill" type="checkbox" value="" id="local_pickup">
-                                            <label class="form-check-label" for="local_pickup">Local pickup: $8</label>
+                                            <input class="form-check-input form-check-input_fill" type="checkbox"
+                                                value="" id="local_pickup">
+                                            <label class="form-check-label" for="local_pickup">Express shipping</label>
                                         </div>
                                     </td>
                                 </tr>
@@ -148,15 +153,16 @@
                                 </tr>
                                 <tr>
                                     <th>Total</th>
-                                    <td class="total-price-all" data-price="{{ $cart->total_price }}"></td>
+                                    <td class="total-price-all"
+                                        data-price="{{ $cart->total_price - session('discount_amount_price') }}"></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="mobile_fixed-btn_wrapper">
                         <div class="button-wrapper container">
-                            <button href='{{ route('client.checkout.index') }}'
-                                class="btn btn-primary btn-checkout">PROCEED TO CHECKOUT</button>
+                            <a href='{{ route('client.checkout.index') }}' class="btn btn-primary btn-checkout">PROCEED
+                                TO CHECKOUT</a>
                         </div>
                     </div>
                 </div>
@@ -186,6 +192,18 @@
         }
     </script>
     <script>
+        $(document).ready(() => {
+            const freeShippingElement = document.getElementById("free_shipping");
+            const localPickupElement = document.getElementById("local_pickup");
+            freeShippingElement.checked = localStorage.getItem("shipmentMethod") === "Free shipping";
+            localPickupElement.checked = localStorage.getItem("shipmentMethod") === "Express shipping";
+        })
+        const EXPRESS_SHIP_PRICE = 8;
+        const discountClientSide = discount => {
+            const totalPrice = Number(document.getElementsByClassName("total-price")[0].innerText.replace("$", ""));
+            const finalPrice = totalPrice - discount; //price after apply coupon
+            $(".total-price-all").text(`$${finalPrice}`);
+        }
         $(function() {
             getTotalValue();
 
@@ -198,7 +216,6 @@
                 // loop for each element
                 for (let i = 0; i < totalPriceElements.length; i++) {
                     // add total price
-                    console.log(totalPriceElements[i]);
                     totalPriceElements[i].textContent = `$${total - couponPrice}`;
                 }
                 // $(".total-price-all").text(`$${total - couponPrice}`);
@@ -208,20 +225,23 @@
                 let url = $(this).data("action");
                 confirmDelete()
                     .then(function() {
-                        $.post(url, (res) => {
-                            let cart = res.cart;
-                            let cartProductId = res.product_cart_id;
-                            $("#productCountCart").text(cart.product_count);
-                            $(".total-price")
-                                .text(`$${cart.total_price}`)
-                                .data("price", cart.product_count);
-                            $(`#row-${cartProductId}`).remove();
-                            getTotalValue();
-                        });
+                        $.ajax({
+                            url,
+                            type: "DELETE",
+                            success: (res) => {
+                                let cart = res.cart;
+                                let cartProductId = res.product_cart_id;
+                                $("#productCountCart").text(cart.product_count);
+                                $(".total-price")
+                                    .text(`$${cart.total_price}`)
+                                    .data("price", cart.product_count);
+                                $(`#row-${cartProductId}`).remove();
+                                getTotalValue();
+                            }
+                        })
                     })
                     .catch(console.log);
             });
-
             const TIME_TO_UPDATE = 1000;
 
             $(document).on(
@@ -242,14 +262,14 @@
                             $(`#row-${cartProductId}`).remove();
                         } else {
                             $(`#cartProductPrice${cartProductId}`).html(
-                                `$${res.cart_product_price}`
+                                `$${res.cart.total_price}`
                             );
-                            cartProductPrice = res.cart_product_price;
                         }
                         getTotalValue();
-                        cartProductPrice;
-                        $(".total-price").text(`$${cart.total_price}`);
-                        $(".total-price-all").text(`$${cart.total_price}`);
+                        const totalPrice = cart.total_price;
+                        $(".total-price").text(`$${totalPrice}`);
+                        discountClientSide(document.getElementById("local_pickup").checked ?
+                            -EXPRESS_SHIP_PRICE : 0);
                         Swal.fire({
                             position: "top-end",
                             icon: "success",
@@ -261,5 +281,25 @@
                 }, TIME_TO_UPDATE)
             );
         });
+        $(document).on("change", "#local_pickup", e => {
+            const price = Number(document.getElementsByClassName("total-price")[0].innerText.replace("$", ""));
+            const totalPriceAllElement = document.getElementsByClassName("total-price-all")[0];
+            totalPriceAllElement.innerText = `$${price + (e.target.checked ? EXPRESS_SHIP_PRICE : 0)}`;
+            const freeShipElement = document.getElementById("free_shipping");
+            if (e.target.checked) {
+                freeShipElement.checked = false;
+                localStorage.setItem("shipmentMethod", "Express shipping");
+            }
+        })
+
+        $(document).on("change", "#free_shipping", e => {
+            const price = Number(document.getElementsByClassName("total-price")[0].innerText.replace("$", ""));
+            discountClientSide(0);
+            const localPickupElement = document.getElementById("local_pickup");
+            if (e.target.checked) {
+                localPickupElement.checked = false;
+                localStorage.setItem("shipmentMethod", "Free shipping");
+            }
+        })
     </script>
 @endsection

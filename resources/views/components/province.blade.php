@@ -3,7 +3,7 @@
 @endphp
 
 <label for="{{ $inputName }}">{{ $label }}</label>
-<select name="{{ $inputName }}" id="province">
+<select name="{{ $inputName }}" id="province" class="form-select">
     @if (isset($defaultValue))
         <option value="{{ $defaultValue }}">{{ $defautValueDisplay ?? $defaultValue }}</option>
     @endif
@@ -14,7 +14,8 @@
 <div class="">
     <div class="">
         <label for="{{ $inputName }}-district">District</label>
-        <select class="" name="{{ $inputName }}-district" aria-label="Default select example" id="district">
+        <select class="form-select" name="{{ $inputName }}-district" aria-label="Default select example"
+            id="district">
             <option selected>Quận/ huyện</option>
         </select>
     </div>
