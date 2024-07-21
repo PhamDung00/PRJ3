@@ -1,5 +1,8 @@
 @extends('client.layout.app')
 @section('title', 'Checkout')
+@php
+    $cart = session('cart');
+@endphp
 @section('content')
     @if (isset($cart))
         <main>

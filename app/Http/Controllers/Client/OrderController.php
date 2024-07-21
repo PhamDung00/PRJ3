@@ -59,6 +59,6 @@ class OrderController extends Controller
             ]);
             DB::insert("INSERT INTO `order_carts` (`order_id`, `cart_id`) VALUES (?, ?)", [$order->id, $cart->id]);
         }
-        return response()->redirectTo(route("orders.complete"));
+        return response()->redirectTo(route("orders.complete"))->with("cart",$carts);
     }
 }
