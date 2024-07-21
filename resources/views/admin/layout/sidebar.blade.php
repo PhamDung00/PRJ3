@@ -105,7 +105,7 @@
                 </li>
 
                 <!-- Orders -->
-                <li class="has-sub">
+                <li class="has-sub" {{ str_contains(URL::full(), '/coupons') ? 'active' : '' }}>
                     <a class="sidenav-item-link" href="javascript:void(0)">
                         <i class="mdi mdi-cart"></i>
                         <span class="nav-text">Orders</span> <b class="caret"></b>
@@ -113,23 +113,13 @@
                     <div class="collapse">
                         <ul class="sub-menu" id="orders" data-parent="#sidebar-menu">
                             <li class="">
-                                <a class="sidenav-item-link" href="new-order.html">
+                                <a class="sidenav-item-link" href="{{ route('orders.index') }}">
                                     <span class="nav-text">New Order</span>
                                 </a>
                             </li>
                             <li class="">
-                                <a class="sidenav-item-link" href="order-history.html">
+                                <a class="sidenav-item-link" href="{{ route('orders.history') }}">
                                     <span class="nav-text">Order History</span>
-                                </a>
-                            </li>
-                            <li class="">
-                                <a class="sidenav-item-link" href="order-detail.html">
-                                    <span class="nav-text">Order Detail</span>
-                                </a>
-                            </li>
-                            <li class="">
-                                <a class="sidenav-item-link" href="invoice.html">
-                                    <span class="nav-text">Invoice</span>
                                 </a>
                             </li>
                         </ul>
