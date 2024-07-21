@@ -29,7 +29,7 @@
 												<div class="info-title"><strong>Ship To:</strong></div><br>
 												<div class="info-content">
 													Customer address <br>
-													<abbr title="Phone">P:</abbr> (sdt) note
+													<abbr title="Phone">P:</abbr> Phone
 												</div>
 											</address>
 										</div>
