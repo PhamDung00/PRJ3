@@ -67,7 +67,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('products', ProductController::class);
     Route::resource('coupons', CouponController::class);
     Route::resource("orders",AdminOrderController::class);
+    Route::get("order/history",[AdminOrderController::class,"history"])->name("orders.history");
     Route::get('order', [AdminOrderController::class, 'index'])->name('admin.orders.index');
     Route::post('orders/cancel/{id}', [AdminOrderController::class, 'cancel'])->name('client.orders.cancel');
-
 });

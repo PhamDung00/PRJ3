@@ -89,7 +89,7 @@ class CartController extends Controller
             } else {
                 $dataCreate['cart_id'] = $cart->id;
                 $dataCreate['product_size'] = $request->product_size;
-                $dataCreate['product_quantity'] = $request->product_quantity ?? 1;
+                $dataCreate['product_quantity'] = $request->quantity ?? 1;
                 $dataCreate['product_price'] = $product->price;
                 $dataCreate['product_id'] = $request->product_id;
                 $dataCreate["status"] = "pending";
@@ -231,9 +231,12 @@ class CartController extends Controller
             $carts = $carts->load("products");
         }
         $productNames = [];
-        foreach($carts->products as $product){
-            $productNames[] = Product::find($product->product_id)["name"];
-        }
+        if(isset($carts->products))
+        {        
+            foreach($carts->products as $product){
+                $productNames[] = Product::find($product->product_id)["name"];
+            }
+        }        
         $rawOrder = DB::select("SELECT * FROM orders WHERE id = (SELECT MAX(id) FROM orders)");
         $order = Order::hydrate($rawOrder)[0];
         return view("client.carts.checkoutcomplete",compact("categories","order","carts","productNames"));

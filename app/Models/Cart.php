@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Cart extends Model
 {
@@ -48,5 +49,5 @@ class Cart extends Model
             return $carry + $price;
         }, 0) : 0;
     }
-
+    
 }

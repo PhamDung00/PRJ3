@@ -316,9 +316,6 @@
             })
         </script>
     @else
-        <pre>
-        {{ json_encode($cart) }}
-    </pre>
         <h1 style="text-align: center">Cart is empty</h1>
     @endif
 @endsection

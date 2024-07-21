@@ -8,6 +8,7 @@ use App\Models\History;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -52,9 +53,11 @@ class OrderController extends Controller
         // remove cart after convert it to order record
         $carts = Cart::where("user_id", auth()->user()->id)->get();
         foreach($carts as $cart){
+            // TODO; update cart status and link it to order table
             $cart->update([
                 "status"=>"processing"
             ]);
+            DB::insert("INSERT INTO `order_carts` (`order_id`, `cart_id`) VALUES (?, ?)", [$order->id, $cart->id]);
         }
         return response()->redirectTo(route("orders.complete"));
     }
