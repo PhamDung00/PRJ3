@@ -30,6 +30,6 @@ class HomeController extends Controller
     {
         $products =  $this->product->latest('id')->paginate(8);
         
-        return view('client.home.index', compact('products',"categories"));
+        return view('client.home.index', compact('products'));
     }
 }
