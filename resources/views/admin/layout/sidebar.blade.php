@@ -129,36 +129,6 @@
                         </ul>
                     </div>
                 </li>
-
-                <!-- Reviews -->
-                <li>
-                    <a class="sidenav-item-link" href="review-list.html">
-                        <i class="mdi mdi-star-half"></i>
-                        <span class="nav-text">Reviews</span>
-                    </a>
-                </li>
-
-                <!-- Authentication -->
-                <li class="has-sub">
-                    <a class="sidenav-item-link" href="javascript:void(0)">
-                        <i class="mdi mdi-login"></i>
-                        <span class="nav-text">Authentication</span> <b class="caret"></b>
-                    </a>
-                    <div class="collapse">
-                        <ul class="sub-menu" id="authentication" data-parent="#sidebar-menu">
-                            <li class="">
-                                <a href="sign-in.html">
-                                    <span class="nav-text">Sign In</span>
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href="sign-up.html">
-                                    <span class="nav-text">Sign Up</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
             </ul>
         </div>
     </div>

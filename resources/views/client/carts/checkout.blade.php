@@ -57,6 +57,7 @@
                                 @enderror ()
                             </div>
                         </div>
+                        <div class="col-md-12">
                         @component('components.province', [
                             'name' => 'address',
                             'defaultValue' => '',
@@ -65,44 +66,12 @@
                             'label' => 'Country / Region*',
                         ])
                         @endcomponent
-                        <div class="col-md-12">
-                            <div class="search-field my-3">
-                                <div class="form-label-fixed hover-container">
-                                    <label for="search-dropdown" class="form-label">Country / Region*</label>
-                                    <div class="js-hover__open">
-                                        <input type="text"
-                                            class="form-control form-control-lg search-field__actor search-field__arrow-down"
-                                            id="search-dropdown" name="search-keyword" readonly
-                                            placeholder="Choose a location...">
-                                    </div>
-                                    <div class="filters-container js-hidden-content mt-2">
-                                        <div class="search-field__input-wrapper">
-                                            <input type="text"
-                                                class="search-field__input form-control form-control-sm bg-lighter border-lighter"
-                                                placeholder="Search">
-                                        </div>
-                                        <ul class="search-suggestion list-unstyled">
-                                            <li class="search-suggestion__item js-search-select">Australia</li>
-                                            <li class="search-suggestion__item js-search-select">Canada</li>
-                                            <li class="search-suggestion__item js-search-select">United Kingdom</li>
-                                            <li class="search-suggestion__item js-search-select">United States</li>
-                                            <li class="search-suggestion__item js-search-select">Turkey</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-floating mt-3 mb-3">
                                 <input type="text" class="form-control" id="checkout_street_address"
                                     placeholder="Street Address *" name="address-street">
                                 <label for="checkout_company_name">Street Address *</label>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-floating my-3">
-                                <input type="text" class="form-control" id="checkout_city" placeholder="Town / City *">
-                                <label for="checkout_city">Town / City *</label>
                             </div>
                         </div>
                         <div class="col-md-12">

@@ -76,12 +76,12 @@
 							<li class="dropdown user-menu">
 								<button class="dropdown-toggle nav-link ec-drop" data-bs-toggle="dropdown"
 									aria-expanded="false">
-									<img src="assets/img/user/user.png" class="user-image" alt="User Image" />
+									<img src="{{ auth()->user()->img }}" width="30px" height="40px" class="user-image" alt="User Image" />
 								</button>
 								<ul class="dropdown-menu dropdown-menu-right ec-dropdown-menu">
 									<!-- User image -->
 									<li class="dropdown-header">
-										<img src="assets/img/user/user.png" class="img-circle" alt="User Image" />
+										<img src="{{ auth()->user()->img }}" class="img-circle" alt="User Image" />
 										<div class="d-inline-block">
 											{{ auth()->user()->name }} <small class="pt-1"></small>
 										</div>

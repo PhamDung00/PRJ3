@@ -33,13 +33,15 @@ class OrderController extends Controller
         $order->update(['status' => 'cancel']);
         return redirect()->route('client.orders.index')->with(['message' => 'cancel success']);
     }
-    public function show($id)
-    {
-        //
-        $order =  $this->order->find($id);
-        // TODO: get 
-        $product = Product::where("name", $order->history->product_name)->first();
-        return response()->view('client.orders.orderdetail', compact('order',"product"));
+    public function show($id){
+        $order = $this->order->findOrFail($id);
+        $carts = $order->getCarts();
+        $products = [];
+        foreach ($carts[0]["products"] as $product) {
+            $products[] = Product::find($product->product_id);
+        }
+        // return response()->json($products);
+        return response()->view("client.orders.orderdetail", compact("order","carts","products"));
     }
     public function store(Request $request){
         $request->validate([

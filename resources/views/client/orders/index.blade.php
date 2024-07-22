@@ -50,7 +50,7 @@
                                                                 </button>
                                                                 <div class="dropdown-menu">
                                                                     <a class="dropdown-item"
-                                                                        href="{{ route('orders.show', $item->id) }}">Info</a>
+                                                                        href="{{ route('client.orders.orderdetail', $item->id) }}">Info</a>
                                                                     @if ($item->status == 'pending')
                                                                         <form
                                                                             action="{{ route('client.orders.cancel', $item->id) }}"

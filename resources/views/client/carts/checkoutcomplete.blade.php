@@ -72,7 +72,8 @@
                                         <th>SUBTOTAL</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody> 
+                                    {{-- hơi khoai --}}
                                     @if (isset($carts['products']))
                                         @foreach ($carts['products'] as $index => $product)
                                             <tr>

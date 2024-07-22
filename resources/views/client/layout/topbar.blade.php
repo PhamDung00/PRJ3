@@ -28,9 +28,6 @@
             <a href="about.html" class="navigation__link">About</a>
         </li>
         <li class="navigation__item">
-            <a href="about.html" class="navigation__link">Your order</a>
-        </li>
-        <li class="navigation__item">
             <a href="contact.html" class="navigation__link">Contact</a>
         </li>
     </ul><!-- /.navigation__list -->
