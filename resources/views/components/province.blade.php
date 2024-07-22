@@ -16,7 +16,7 @@
         <label for="{{ $inputName }}-district">District</label>
         <select class="form-select" name="{{ $inputName }}-district" aria-label="Default select example"
             id="district">
-            <option selected>Quận/ huyện</option>
+            <option selected>District</option>
         </select>
     </div>
 </div>
@@ -25,7 +25,7 @@
         <label for="${{ $inputName }}-wards">Wards</label>
         <select class="form-select" name="{{ $inputName }}-wards" aria-label="Default select example"
             id="ward">
-            <option selected>Xã/ phường</option>
+            <option selected>Wards</option>
         </select>
     </div>
 </div>

@@ -2,9 +2,11 @@
 @section('title', 'Checkout')
 @php
     $cart = session('cart');
+    $products = session('products');
+    $productCount = 0;
 @endphp
 @section('content')
-    @if (isset($cart))
+    @if (isset($cart) && isset($products))
         <main>
             <div class="mb-4 pb-4"></div>
             <section class="shop-checkout container">
@@ -73,18 +75,26 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if (isset($carts['products']))
-                                        @foreach ($carts['products'] as $index => $product)
+                                    {{-- hơi khoai --}}
+                                    <pre>
+                                        {{ json_encode($cart, JSON_PRETTY_PRINT) }}
+                                    </pre>
+                                    @foreach ($cart as $c)
+                                        @foreach ($c['products'] as $index => $product)
                                             <tr>
                                                 <td>
-                                                    {{ $productNames[$index] }} x {{ $product->product_quantity }}
+                                                    {{ $products[$productCount]['name'] }} x
+                                                    {{ $product->product_quantity }}
                                                 </td>
                                                 <td>
                                                     ${{ $product->product_price }}
                                                 </td>
                                             </tr>
+                                            @php
+                                                $productCount++;
+                                            @endphp
                                         @endforeach
-                                    @endif
+                                    @endforeach
                                 </tbody>
                             </table>
                             <table class="checkout-totals">
@@ -112,4 +122,11 @@
     @else
         <h1 class="text-center">Your cart is empty.</h1>
     @endif
+    <script>
+        $(document).ready(() => {
+            // TODO: if user come to this mother fucker page, remove the price and shipmentMethod from localStorage
+            localStorage.removeItem("totalPrice");
+            localStorage.removeItem("shipmentMethod");
+        })
+    </script>
 @endsection

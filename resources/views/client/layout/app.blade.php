@@ -203,6 +203,175 @@
 
 
         <div class="mb-3 mb-xl-5 pb-3 pt-1 pb-xl-5"></div>
+        <!-- Customer Login Form -->
+
+        <div class="aside aside_right overflow-hidden customer-forms" id="customerForms">
+            <div class="customer-forms__wrapper d-flex position-relative">
+                <div class="customer__login">
+                    <div class="aside-header d-flex align-items-center">
+                        <h3 class="text-uppercase fs-6 mb-0">Login</h3>
+                        <button class="btn-close-lg js-close-aside ms-auto"></button>
+                    </div><!-- /.aside-header -->
+
+                    <form method="POST" action="{{ route('login') }}" class="aside-content">
+                        @csrf
+                        <div class="form-floating mb-3">
+                            <input name="email" type="email"
+                                class="form-control form-control_gray @error('email') is-invalid @enderror"
+                                value="{{ old('email') }}" id="customerNameEmailInput"
+                                placeholder="name@example.com" required autocomplete="email" autofocus>
+                            <label for="customerNameEmailInput">{{ __('Email Address') }}</label>
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="pb-3"></div>
+
+                        <div class="form-label-fixed mb-3">
+                            <label for="customerPasswordInput" class="form-label">{{ __('Password') }}</label>
+                            <input id="customerPasswordInput"
+                                class="form-control form-control_gray @error('password') is-invalid @enderror"
+                                name="password" required autocomplete="current-password" type="password"
+                                placeholder="********">
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+
+
+                        </div>
+
+                        <div class="d-flex align-items-center mb-3 pb-2">
+                            <div class="form-check mb-0">
+                                <input name="remember" class="form-check-input form-check-input_fill" type="checkbox"
+                                    value="" id="flexCheckDefault" {{ old('remember') ? 'checked' : '' }}>
+                                <label class="form-check-label text-secondary"
+                                    for="flexCheckDefault">{{ __('Remember Me') }}</label>
+                            </div>
+                            @if (Route::has('password.request'))
+                                <a href="{{ route('password.request') }}"
+                                    class="btn-text ms-auto">{{ __('Forgot Your Password?') }}</a>
+                            @endif
+                        </div>
+
+                        <button class="btn btn-primary w-100 text-uppercase"
+                            type="submit">{{ __('Login') }}</button>
+                        @if (Route::has('password.request'))
+                            <a class="btn btn-link" href="{{ route('password.request') }}">
+                                {{ __('Forgot Your Password?') }}
+                            </a>
+                        @endif
+                        <div class="customer-option mt-4 text-center">
+                            <span class="text-secondary">No account yet?</span>
+                            <a href="#" class="btn-text js-show-register">Create Account</a>
+                        </div>
+                    </form>
+                </div><!-- /.customer__login -->
+
+                <div class="customer__register">
+                    <div class="aside-header d-flex align-items-center">
+                        <h3 class="text-uppercase fs-6 mb-0">Create an account</h3>
+                        <button class="btn-close-lg js-close-aside btn-close-aside ms-auto"></button>
+                    </div><!-- /.aside-header -->
+
+                    <form method="POST" action="{{ route('register') }}">
+                        @csrf
+                        <div class="form-floating mb-4">
+                            <input type="text"
+                                class="form-control form-control_gray @error('name') is-invalid @enderror"
+                                name="name" value="{{ old('name') }}" required autocomplete="name" autofocus
+                                id="registerUserNameInput" placeholder="Username">
+                            <label for="registerUserNameInput">{{ __('Name') }}</label>
+                            @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+
+                        </div>
+
+                        <div class="pb-1"></div>
+
+                        <div class="form-floating mb-4">
+                            <input id="email" type="email"
+                                class="form-control form-control_gray @error('email') is-invalid @enderror"
+                                name="email" value="{{ old('email') }}" required autocomplete="email">
+                            <label for="registerUserEmailInput">{{ __('Email Address') }}</label>
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+
+                        </div>
+
+                        <div class="pb-1">
+                        </div>
+
+                        <div class="form-label-fixed mb-4">
+                            <label for="Phone" class="form-label">{{ __('Phone') }}</label>
+                            <input id="phone" type="text"
+                                class="form-control form-control_gray @error('phone') is-invalid @enderror"
+                                name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+                            @error('phone')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="pb-1"></div>
+
+                        <div class="form-label-fixed mb-4">
+                            <label for="Phone" class="form-label">{{ __('Gender') }}</label>
+                            <select name="gender" class="form-control">
+                                <option value="male">Male</option>
+                                <option value="fe-male">FeMale</option>
+                            </select>
+                            @error('gender')
+                                <span class="text-danger"> {{ $message }}</span>
+                            @enderror
+
+                        </div>
+
+                        <div class="pb-1"></div>
+
+                        <div class="form-label-fixed mb-4">
+                            <label for="registerPasswordInput" class="form-label">{{ __('Password') }}</label>
+                            <input id="registerPasswordInput"
+                                class="form-control form-control_gray @error('password') is-invalid @enderror"
+                                name="password" required autocomplete="new-password" type="password">
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="pb-1"></div>
+
+                        <div class="form-label-fixed mb-4">
+                            <label for="password-confirm" class="form-label">{{ __('Confirm Password') }}</label>
+                            <input id="password-confirm" class="form-control form-control_gray"
+                                name="password_confirmation" required autocomplete="new-password" type="password">
+                        </div>
+
+                        <button class="btn btn-primary w-100 text-uppercase"
+                            type="submit">{{ __('Register') }}</button>
+
+                        <div class="customer-option mt-4 text-center">
+                            <span class="text-secondary">Already have account?</span>
+                            <a href="{{ route('login') }}" class="btn-text js-show-login">Login</a>
+                        </div>
+                    </form>
+                </div><!-- /.customer__register -->
+            </div><!-- /.customer-forms__wrapper -->
+        </div>
+
 
         @yield('content')
         <!-- Cart Drawer -->
@@ -239,11 +408,11 @@
                                 class="cart-drawer-item__price money price">${{ $GLOBAL_CART->product->price }}</span> --}}
                             </div>
                         </div>
+                        <button class="btn-close-xs position-absolute top-0 end-0 js-cart-item-remove"></button>
                     </div><!-- /.cart-drawer-item d-flex -->
                     <hr class="cart-drawer-divider">
                 @endforeach
 
-                <button class="btn-close-xs position-absolute top-0 end-0 js-cart-item-remove"></button>
 
             </div><!-- /.aside-content -->
 

@@ -21,36 +21,36 @@
                     <hr>
                 </li>
                 @hasrole('super-admin')
-                <li class="has-sub {{ str_contains(URL::full(), '/roles') ? 'active' : '' }}">
-                    <a class="sidenav-item-link" href="{{ route('roles.index') }}">
-                        <i><span class="mdi mdi-24px mdi-account-card-details"></span></i>
-                        <span class="nav-text">Role</span>
-                    </a>
-                </li>
+                    <li class="has-sub {{ str_contains(URL::full(), '/roles') ? 'active' : '' }}">
+                        <a class="sidenav-item-link" href="{{ route('roles.index') }}">
+                            <i><span class="mdi mdi-24px mdi-account-card-details"></span></i>
+                            <span class="nav-text">Role</span>
+                        </a>
+                    </li>
                 @endhasrole
                 @can('show-user')
-                <!-- Vendors -->
-                <li class="has-sub {{ str_contains(URL::full(), '/users') ? 'active' : '' }}">
-                    <a class="sidenav-item-link">
-                        <i class="mdi mdi-account-group-outline"></i>
-                        <span class="nav-text">User</span> <b class="caret"></b>
-                    </a>
-                    <div class="collapse">
-                        <ul class="sub-menu" id="vendors" data-parent="#sidebar-menu">
-                            <li class="">
-                                <a class="sidenav-item-link" href="vendor-card.html">
-                                    <span class="nav-text">User Grid</span>
-                                </a>
-                            </li>
+                    <!-- Vendors -->
+                    <li class="has-sub {{ str_contains(URL::full(), '/users') ? 'active' : '' }}">
+                        <a class="sidenav-item-link">
+                            <i class="mdi mdi-account-group-outline"></i>
+                            <span class="nav-text">User</span> <b class="caret"></b>
+                        </a>
+                        <div class="collapse">
+                            <ul class="sub-menu" id="vendors" data-parent="#sidebar-menu">
+                                <li class="">
+                                    <a class="sidenav-item-link" href="vendor-card.html">
+                                        <span class="nav-text">User Grid</span>
+                                    </a>
+                                </li>
 
-                            <li class="">
-                                <a class="sidenav-item-link" href="{{ route('users.index') }}">
-                                    <span class="nav-text">User List</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                                <li class="">
+                                    <a class="sidenav-item-link" href="{{ route('users.index') }}">
+                                        <span class="nav-text">User List</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
                 @endcan
 
                 <!-- Users -->
@@ -82,31 +82,31 @@
                     <hr>
                 </li>
                 @can('show-category')
-                <!-- Category -->
-                <li class="has-sub"{{ str_contains(URL::full(), '/categories') ? 'active' : '' }}>
-                    <a class="sidenav-item-link" href="{{ route('categories.index') }}">
-                        <i class="mdi mdi-dns-outline"></i>
-                        <span class="nav-text">Categories</span>
-                    </a>
-                </li>
+                    <!-- Category -->
+                    <li class="has-sub"{{ str_contains(URL::full(), '/categories') ? 'active' : '' }}>
+                        <a class="sidenav-item-link" href="{{ route('categories.index') }}">
+                            <i class="mdi mdi-dns-outline"></i>
+                            <span class="nav-text">Categories</span>
+                        </a>
+                    </li>
                 @endcan
                 @can('show-product')
-                <!-- Products -->
-                <li class="has-sub"{{ str_contains(URL::full(), '/products') ? 'active' : '' }}>
-                    <a class="sidenav-item-link" href="{{ route('products.index') }}">
-                        <i class="mdi mdi-palette-advanced"></i>
-                        <span class="nav-text">Products</span></b>
-                    </a>
-                </li>
+                    <!-- Products -->
+                    <li class="has-sub"{{ str_contains(URL::full(), '/products') ? 'active' : '' }}>
+                        <a class="sidenav-item-link" href="{{ route('products.index') }}">
+                            <i class="mdi mdi-palette-advanced"></i>
+                            <span class="nav-text">Products</span></b>
+                        </a>
+                    </li>
                 @endcan
                 @can('show-coupon')
-                <!-- Coupons -->
-                <li class="has-sub"{{ str_contains(URL::full(), '/coupons') ? 'active' : '' }}>
-                    <a class="sidenav-item-link" href="{{ route('coupons.index') }}">
-                        <i class="mdi mdi-percent"></i>
-                        <span class="nav-text">Coupons</span></b>
-                    </a>
-                </li>
+                    <!-- Coupons -->
+                    <li class="has-sub"{{ str_contains(URL::full(), '/coupons') ? 'active' : '' }}>
+                        <a class="sidenav-item-link" href="{{ route('coupons.index') }}">
+                            <i class="mdi mdi-percent"></i>
+                            <span class="nav-text">Coupons</span></b>
+                        </a>
+                    </li>
                 @endcan
                 <!-- Orders -->
                 <li class="has-sub" {{ str_contains(URL::full(), '/coupons') ? 'active' : '' }}>
@@ -117,43 +117,13 @@
                     <div class="collapse">
                         <ul class="sub-menu" id="orders" data-parent="#sidebar-menu">
                             <li class="">
-                                <a class="sidenav-item-link" href="{{ route('orders.index') }}">
+                                <a class="sidenav-item-link" href="{{ route('admin-orders.index') }}">
                                     <span class="nav-text">New Order</span>
                                 </a>
                             </li>
                             <li class="">
                                 <a class="sidenav-item-link" href="{{ route('orders.history') }}">
                                     <span class="nav-text">Order History</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!-- Reviews -->
-                <li>
-                    <a class="sidenav-item-link" href="review-list.html">
-                        <i class="mdi mdi-star-half"></i>
-                        <span class="nav-text">Reviews</span>
-                    </a>
-                </li>
-
-                <!-- Authentication -->
-                <li class="has-sub">
-                    <a class="sidenav-item-link" href="javascript:void(0)">
-                        <i class="mdi mdi-login"></i>
-                        <span class="nav-text">Authentication</span> <b class="caret"></b>
-                    </a>
-                    <div class="collapse">
-                        <ul class="sub-menu" id="authentication" data-parent="#sidebar-menu">
-                            <li class="">
-                                <a href="sign-in.html">
-                                    <span class="nav-text">Sign In</span>
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href="sign-up.html">
-                                    <span class="nav-text">Sign Up</span>
                                 </a>
                             </li>
                         </ul>

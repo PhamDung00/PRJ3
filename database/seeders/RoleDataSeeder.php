@@ -30,7 +30,7 @@ class RoleDataSeeder extends Seeder
         }
 
 
-        $superAdmin = User::whereEmail('admin@gmail.com')->first();
+        $superAdmin = User::whereEmail('admin@gmail.com')->orWhere("email","hahaiviet2411@gmail.com")->first();
 
         if(!$superAdmin)
         {

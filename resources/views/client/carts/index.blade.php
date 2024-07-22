@@ -2,6 +2,9 @@
 @section('title', 'Cart')
 @section('content')
     @if (isset($cart))
+        <pre>
+        {{ json_encode($cart, JSON_PRETTY_PRINT) }}
+    </pre>
         @if (session('message'))
             <h2 class="" style="text-align: center; width:100%; color:red"> {{ session('message') }}</h2>
         @endif
@@ -46,67 +49,69 @@
                         </thead>
                         <tbody>
 
-                            @foreach ($cart->products as $item)
-                                <tr id="row-{{ $item->id }}">
-                                    <td>
-                                        <div class="shopping-cart__product-item">
-                                            <a href="">
-                                                @if ($item->images()->first())
-                                                    <img loading="lazy" class="pc__img" width="330" height="330"
-                                                        src="{{ $item->images()->first()->url }}" alt="Product Image" />
-                                                @else
-                                                    <img loading="lazy" class="pc__img" width="330" height="330"
-                                                        src="{{ asset('placeholder-image.jpg') }}" alt="No Image" />
-                                                @endif
+                            @if (isset($cart['products']))
+                                @foreach ($cart['products'] as $item)
+                                    <tr id="row-{{ $item->id }}">
+                                        <td>
+                                            <div class="shopping-cart__product-item">
+                                                <a href="">
+                                                    @if ($item->images()->first())
+                                                        <img loading="lazy" class="pc__img" width="330" height="330"
+                                                            src="{{ $item->images()->first()->url }}" alt="Product Image" />
+                                                    @else
+                                                        <img loading="lazy" class="pc__img" width="330" height="330"
+                                                            src="{{ asset('placeholder-image.jpg') }}" alt="No Image" />
+                                                    @endif
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="shopping-cart__product-item__detail">
+                                                <h4><a
+                                                        href="{{ route('client.products.productdetail', $item->product->id) }}">{{ $item->product->name }}</a>
+                                                </h4>
+                                                <ul class="shopping-cart__product-item__options">
+                                                    <li>Size: {{ $item->product_size }}</li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="shopping-cart__product-price">${{ $item->product->price }}</span>
+                                        </td>
+                                        <td>
+                                            <div class="qty-control position-relative">
+                                                <input type="number" name="quantity"
+                                                    id='productQuantityInput-{{ $item->id }}'
+                                                    value="{{ $item->product_quantity }}"
+                                                    class="qty-control__number text-center border-0 p-0">
+                                                <div class="qty-control__reduce btn-update-quantity"
+                                                    data-action="{{ route('client.carts.update_product_quantity', $item->id) }}"
+                                                    data-id="{{ $item->id }}">-</div>
+                                                <div class="qty-control__increase btn-update-quantity"
+                                                    data-action="{{ route('client.carts.update_product_quantity', $item->id) }}"
+                                                    data-id="{{ $item->id }}">+</div>
+                                            </div><!-- .qty-control -->
+                                        </td>
+                                        <td>
+                                            <span class="shopping-cart__subtotal" id="cartProductPrice{{ $item->id }}">
+                                                ${{ $item->product->price * $item->product_quantity }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a href="#" class="remove-cart"
+                                                data-action="{{ route('client.carts.remove_product', $item->id) }}">
+                                                <svg width="10" height="10" viewBox="0 0 10 10" fill="#767676"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M0.259435 8.85506L9.11449 0L10 0.885506L1.14494 9.74056L0.259435 8.85506Z" />
+                                                    <path
+                                                        d="M0.885506 0.0889838L9.74057 8.94404L8.85506 9.82955L0 0.97449L0.885506 0.0889838Z" />
+                                                </svg>
                                             </a>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="shopping-cart__product-item__detail">
-                                            <h4><a
-                                                    href="{{ route('client.products.productdetail', $item->product->id) }}">{{ $item->product->name }}</a>
-                                            </h4>
-                                            <ul class="shopping-cart__product-item__options">
-                                                <li>Size: {{ $item->product_size }}</li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <span class="shopping-cart__product-price">${{ $item->product->price }}</span>
-                                    </td>
-                                    <td>
-                                        <div class="qty-control position-relative">
-                                            <input type="number" name="quantity"
-                                                id='productQuantityInput-{{ $item->id }}'
-                                                value="{{ $item->product_quantity }}"
-                                                class="qty-control__number text-center border-0 p-0">
-                                            <div class="qty-control__reduce btn-update-quantity"
-                                                data-action="{{ route('client.carts.update_product_quantity', $item->id) }}"
-                                                data-id="{{ $item->id }}">-</div>
-                                            <div class="qty-control__increase btn-update-quantity"
-                                                data-action="{{ route('client.carts.update_product_quantity', $item->id) }}"
-                                                data-id="{{ $item->id }}">+</div>
-                                        </div><!-- .qty-control -->
-                                    </td>
-                                    <td>
-                                        <span class="shopping-cart__subtotal" id="cartProductPrice{{ $item->id }}">
-                                            ${{ $item->product->price * $item->product_quantity }}
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="remove-cart"
-                                            data-action="{{ route('client.carts.remove_product', $item->id) }}">
-                                            <svg width="10" height="10" viewBox="0 0 10 10" fill="#767676"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M0.259435 8.85506L9.11449 0L10 0.885506L1.14494 9.74056L0.259435 8.85506Z" />
-                                                <path
-                                                    d="M0.885506 0.0889838L9.74057 8.94404L8.85506 9.82955L0 0.97449L0.885506 0.0889838Z" />
-                                            </svg>
-                                        </a>
-                                    </td>
-                                </tr>
-                            @endforeach
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
                         </tbody>
                     </table>
                     <div class="cart-table-footer">
@@ -157,7 +162,8 @@
                                     <tr>
                                         <th>Total</th>
                                         <td class="total-price-all"
-                                            data-price="{{ $cart->total_price - session('discount_amount_price') }}"></td>
+                                            data-price="{{ $cart->total_price - session('discount_amount_price') }}">
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -196,18 +202,26 @@
             }
         </script>
         <script>
+            const EXPRESS_SHIP_PRICE = 8;
+            const discountClientSide = discount => {
+                // TODO: update at client side
+                const totalPrice = Number(document.getElementsByClassName("total-price")[0].innerText.replace("$", ""));
+                const finalPrice = totalPrice - discount; //price after apply coupon
+                const totalPriceAllElement = document.getElementsByClassName("total-price-all")[0];
+                totalPriceAllElement.innerText = `$${finalPrice}`;
+                console.log(totalPriceAllElement.innerText);
+                // TODO: then save it to localstorage
+                localStorage.setItem("totalPrice", finalPrice);
+            }
             $(document).ready(() => {
                 const freeShippingElement = document.getElementById("free_shipping");
                 const localPickupElement = document.getElementById("local_pickup");
                 freeShippingElement.checked = localStorage.getItem("shipmentMethod") === "Free shipping";
                 localPickupElement.checked = localStorage.getItem("shipmentMethod") === "Express shipping";
+                discountClientSide(localStorage.getItem("shipmentMethod") === "Express shipping" ? -EXPRESS_SHIP_PRICE :
+                    0);
             })
-            const EXPRESS_SHIP_PRICE = 8;
-            const discountClientSide = discount => {
-                const totalPrice = Number(document.getElementsByClassName("total-price")[0].innerText.replace("$", ""));
-                const finalPrice = totalPrice - discount; //price after apply coupon
-                $(".total-price-all").text(`$${finalPrice}`);
-            }
+
             $(function() {
                 getTotalValue();
 
@@ -288,7 +302,7 @@
             $(document).on("change", "#local_pickup", e => {
                 const price = Number(document.getElementsByClassName("total-price")[0].innerText.replace("$", ""));
                 const totalPriceAllElement = document.getElementsByClassName("total-price-all")[0];
-                totalPriceAllElement.innerText = `$${price + (e.target.checked ? EXPRESS_SHIP_PRICE : 0)}`;
+                totalPriceAllElement.innerText = `$${price + (e.target.checked ? -EXPRESS_SHIP_PRICE : 0)}`;
                 const freeShipElement = document.getElementById("free_shipping");
                 if (e.target.checked) {
                     freeShipElement.checked = false;

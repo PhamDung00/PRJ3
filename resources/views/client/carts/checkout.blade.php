@@ -37,11 +37,11 @@
                 </span>
             </a>
         </div>
-        <form name="checkout-form" action="{{ route('client-orders.store') }}" method="post">
+        <form id="checkout-form" name="checkout-form" action="{{ route('client-orders.store') }}" method="post">
             @csrf
             {{-- hiddened inputs --}}
             <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
-            <input type="hidden" name="total" value="{{ $subTotal }}">
+            <input type="hidden" name="total" value="{{ $subTotal }}" id="total">
             <input type="hidden" name="status" value="Processing">
             <div class="checkout-form">
                 <div class="billing-info__wrapper">
@@ -57,52 +57,21 @@
                                 @enderror ()
                             </div>
                         </div>
-                        @component('components.province', [
-                            'name' => 'address',
-                            'defaultValue' => '',
-                            'defautValueDisplay' => 'Country / Region*',
-                            'provinces' => $provinces,
-                            'label' => 'Country / Region*',
-                        ])
-                        @endcomponent
                         <div class="col-md-12">
-                            <div class="search-field my-3">
-                                <div class="form-label-fixed hover-container">
-                                    <label for="search-dropdown" class="form-label">Country / Region*</label>
-                                    <div class="js-hover__open">
-                                        <input type="text"
-                                            class="form-control form-control-lg search-field__actor search-field__arrow-down"
-                                            id="search-dropdown" name="search-keyword" readonly
-                                            placeholder="Choose a location...">
-                                    </div>
-                                    <div class="filters-container js-hidden-content mt-2">
-                                        <div class="search-field__input-wrapper">
-                                            <input type="text"
-                                                class="search-field__input form-control form-control-sm bg-lighter border-lighter"
-                                                placeholder="Search">
-                                        </div>
-                                        <ul class="search-suggestion list-unstyled">
-                                            <li class="search-suggestion__item js-search-select">Australia</li>
-                                            <li class="search-suggestion__item js-search-select">Canada</li>
-                                            <li class="search-suggestion__item js-search-select">United Kingdom</li>
-                                            <li class="search-suggestion__item js-search-select">United States</li>
-                                            <li class="search-suggestion__item js-search-select">Turkey</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+                            @component('components.province', [
+                                'name' => 'address',
+                                'defaultValue' => '',
+                                'defautValueDisplay' => 'Country / Region*',
+                                'provinces' => $provinces,
+                                'label' => 'Country / Region*',
+                            ])
+                            @endcomponent
                         </div>
                         <div class="col-md-12">
                             <div class="form-floating mt-3 mb-3">
                                 <input type="text" class="form-control" id="checkout_street_address"
                                     placeholder="Street Address *" name="address-street">
                                 <label for="checkout_company_name">Street Address *</label>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-floating my-3">
-                                <input type="text" class="form-control" id="checkout_city" placeholder="Town / City *">
-                                <label for="checkout_city">Town / City *</label>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -178,6 +147,8 @@
     <script>
         $(document).ready(() => {
             document.getElementById("shipment_method").innerText = localStorage.getItem("shipmentMethod");
+            // get the totalPrice from localStorage
+            document.getElementById("total").value = localStorage.getItem("totalPrice") ?? 0;
         })
         $(document).on("click", "#confirmation", e => {
             Swal.fire({

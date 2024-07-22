@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\ProductDetail;
 use App\Models\Size;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -98,6 +99,9 @@ class ProductController extends Controller
                 ]);
             }
         }
+        // insert category for this product
+        DB::insert("INSERT INTO `category_prd` (`product_id`, `category_id`) VALUES (?, ?)", [$product->id, $request->category_ids]);
+        // return response()->json($request->all());
         return redirect(route("products.index"))->with("success", "Tạo thành công");
     }
 
@@ -131,7 +135,11 @@ class ProductController extends Controller
         //
         $product = $this->product->findOrFail($id);
         $categories = Category::all();
-        return response()->view('admin.products.edit', compact('product', "categories"));
+        $rawSelectedCategory = DB::select("SELECT c.id FROM (categories as c JOIN category_prd as c_p ON c.id = c_p.category_id) JOIN products as p ON p.id = c_p.product_id WHERE p.id = (SELECT MAX(id) from products);
+");
+        $selectedCategory = $rawSelectedCategory[0]->id;
+        // return response()->json(["product" => $product, "categories" => $categories, "selectedCategory" => $selectedCategory]);
+        return response()->view('admin.products.edit', compact('product', "categories", "selectedCategory"));
     }
 
     /**

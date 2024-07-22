@@ -43,6 +43,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('apply-coupon', [CartController::class, 'applyCoupon'])->name('client.carts.apply_coupon');
     Route::get('checkout', [CartController::class, 'checkout'])->name('client.checkout.index');
     Route::get('list-orders', [OrderController::class, 'index'])->name('client.orders.index');
+    Route::get('/orders/{id}', [OrderController::class, 'show'])->name('client.orders.orderdetail');
     Route::post('orders/cancel/{id}', [OrderController::class, 'cancel'])->name('client.orders.cancel');
     Route::resource("client-orders",OrderController::class);
     Route::get("/checkout-complete",[CartController::class, 'checkoutComplete'])->name("orders.complete");
@@ -112,10 +113,10 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/{coupon}/edit', 'edit')->name('edit')->middleware('permission:update-coupon');
     });
 
-    Route::resource("orders",AdminOrderController::class);
+    Route::resource("admin-orders",AdminOrderController::class);
     Route::get("order/history",[AdminOrderController::class,"history"])->name("orders.history");
+    Route::get("order/show",[AdminOrderController::class,"show"])->name("orders.detail");
     Route::get('order', [AdminOrderController::class, 'index'])->name('admin.orders.index');
     Route::post('orders/cancel/{id}', [AdminOrderController::class, 'cancel'])->name('client.orders.cancel');
-    Route::post('update-status/{id}', [AdminOrderController::class, 'updateStatus'])->name('admin.orders.update_status')->middleware('list-order');
-
+    Route::post('update-status/{id}', [AdminOrderController::class, 'updateStatus'])->name('admin.orders.update_status');
 });
