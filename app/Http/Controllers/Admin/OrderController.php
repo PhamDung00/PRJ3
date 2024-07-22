@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Product;
+use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -33,7 +34,25 @@ class OrderController extends Controller
         foreach ($carts[0]["products"] as $product) {
             $products[] = Product::find($product->product_id);
         }
+        foreach($products as $index=>$product){
+            // TODO: update images to product
+            $products[$index]->setAttribute("images", $product->images);
+        }
         // return response()->json($products);
         return response()->view("admin.orders.detail", compact("order","carts","products"));
     }
+    public function updateStatus($id,Request $request)
+    {
+        $order =  Order::findOrFail($id);
+        $order->update(['status' => $request->status]);
+        return  response()->json([
+            'message' => 'success'
+        ], 200);
+    }
+
+    // public function updateStatus($id, Request $request){
+    //     $order = $this->order->findOrFail($id);
+    //     $order->update($request->all());
+    //     return redirect()->route('client.orders.index')->with(['message' => 'update success']);
+    // }
 }

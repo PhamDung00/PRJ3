@@ -112,11 +112,10 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/{coupon}/edit', 'edit')->name('edit')->middleware('permission:update-coupon');
     });
 
-    Route::resource("orders",AdminOrderController::class);
+    Route::resource("admin-orders",AdminOrderController::class);
     Route::get("order/history",[AdminOrderController::class,"history"])->name("orders.history");
     Route::get("order/show",[AdminOrderController::class,"show"])->name("orders.detail");
     Route::get('order', [AdminOrderController::class, 'index'])->name('admin.orders.index');
     Route::post('orders/cancel/{id}', [AdminOrderController::class, 'cancel'])->name('client.orders.cancel');
-    Route::post('update-status/{id}', [AdminOrderController::class, 'updateStatus'])->name('admin.orders.update_status')->middleware('list-order');
-
+    Route::post('update-status/{id}', [AdminOrderController::class, 'updateStatus'])->name('admin.orders.update_status');
 });

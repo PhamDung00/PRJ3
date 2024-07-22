@@ -74,10 +74,22 @@
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($carts[0]['products'] as $index => $product)
+                                                        <pre>
+                                                        {{ json_encode($products[$index], JSON_PRETTY_PRINT) }}    
+                                                    </pre>
                                                         <tr>
                                                             <td>{{ $product['id'] }}</td>
-                                                            <td><img class="product-img" src="assets/img/products/p1.jpg"
-                                                                    alt="" /></td>
+                                                            <td>
+                                                                @if (isset($products[$index]['images'][0]['url']))
+                                                                    <img class="product-img"
+                                                                        src="/{{ $products[$index]['images'][0]['url'] }}"
+                                                                        alt="" />
+                                                                @else
+                                                                    <img class="product-img"
+                                                                        src="https://vipha.co/wp-content/themes/vipha/images/empty-img.png"
+                                                                        alt="">
+                                                                @endif
+                                                            </td>
                                                             <td><strong>{{ $products[$index]['name'] }}</strong><br>{{ $products[$index]['description'] }}
                                                             </td>
                                                             <td class="text-center">${{ $products[$index]['price'] }}</td>

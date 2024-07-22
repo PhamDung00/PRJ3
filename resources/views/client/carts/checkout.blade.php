@@ -37,11 +37,11 @@
                 </span>
             </a>
         </div>
-        <form name="checkout-form" action="{{ route('client-orders.store') }}" method="post">
+        <form id="checkout-form" name="checkout-form" action="{{ route('client-orders.store') }}" method="post">
             @csrf
             {{-- hiddened inputs --}}
             <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
-            <input type="hidden" name="total" value="{{ $subTotal }}">
+            <input type="hidden" name="total" value="{{ $subTotal }}" id="total">
             <input type="hidden" name="status" value="Processing">
             <div class="checkout-form">
                 <div class="billing-info__wrapper">
@@ -58,14 +58,14 @@
                             </div>
                         </div>
                         <div class="col-md-12">
-                        @component('components.province', [
-                            'name' => 'address',
-                            'defaultValue' => '',
-                            'defautValueDisplay' => 'Country / Region*',
-                            'provinces' => $provinces,
-                            'label' => 'Country / Region*',
-                        ])
-                        @endcomponent
+                            @component('components.province', [
+                                'name' => 'address',
+                                'defaultValue' => '',
+                                'defautValueDisplay' => 'Country / Region*',
+                                'provinces' => $provinces,
+                                'label' => 'Country / Region*',
+                            ])
+                            @endcomponent
                         </div>
                         <div class="col-md-12">
                             <div class="form-floating mt-3 mb-3">
@@ -147,6 +147,8 @@
     <script>
         $(document).ready(() => {
             document.getElementById("shipment_method").innerText = localStorage.getItem("shipmentMethod");
+            // get the totalPrice from localStorage
+            document.getElementById("total").value = localStorage.getItem("totalPrice") ?? 0;
         })
         $(document).on("click", "#confirmation", e => {
             Swal.fire({
