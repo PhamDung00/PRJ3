@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\OrderController;
@@ -34,6 +35,7 @@ Route::get('/product', [HomeController::class, 'products'])->name('productlist')
 Route::get('product/{category_id}', [ClientProductController::class, 'index']) -> name('client.product.productlist');
 
 Route::get('productdetail/{id}', [ClientProductController::class, 'show']) -> name('client.products.productdetail');
+Route::post("/register/post", [RegisterController::class, "myRegister"])->name("register.post");
 
 Route::middleware(['auth'])->group(function () {
     Route::post('add-to-cart',[CartController::class,'store'])->name('client.carts.add');

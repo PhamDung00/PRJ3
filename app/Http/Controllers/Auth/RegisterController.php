@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -74,5 +75,25 @@ class RegisterController extends Controller
             'gender' => $data['gender'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+    public function myRegister(Request $request){
+        // $request->validate([
+        //     "email" => "required|email",
+        //     "phone" => "required",
+        // ]);
+        // check if email and phone number are in use
+        $oldUser = User::where("email", $request->email)->orWhere("phone", $request->phone)->first();
+        if($oldUser){
+            // return response()->json($oldUser, 200);
+            return response()->back()->with("error","Email or phone number already in use");
+        }
+        // check if password and repeat password are the same
+        if($request->input("password") != $request->input("password_confirmation")){
+            return response()->back()->with("error","Password and repeat password are not the same");
+        }
+        $user = User::create(array_merge($request->all(),[
+            "password"=>Hash::make($request->input("password")),
+        ]));
+        return response()->back()->with("success","Register success");
     }
 }

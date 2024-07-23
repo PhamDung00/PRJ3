@@ -278,8 +278,12 @@
                         <button class="btn-close-lg js-close-aside btn-close-aside ms-auto"></button>
                     </div><!-- /.aside-header -->
 
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register.post') }}">
                         @csrf
+                        @if (session()->has('error'))
+                            <p>{{ session()->get('error') }}</p>
+                        @endif
+                        <input type="hidden" name="role_id" value="5">
                         <div class="form-floating mb-4">
                             <input type="text"
                                 class="form-control form-control_gray @error('name') is-invalid @enderror"
@@ -341,8 +345,8 @@
                         <div class="pb-1"></div>
 
                         <div class="form-label-fixed mb-4">
-                            <label for="registerPasswordInput" class="form-label">{{ __('Password') }}</label>
-                            <input id="registerPasswordInput"
+                            <label for="password" class="form-label">{{ __('Password') }}</label>
+                            <input id="password"
                                 class="form-control form-control_gray @error('password') is-invalid @enderror"
                                 name="password" required autocomplete="new-password" type="password">
                             @error('password')
@@ -353,7 +357,6 @@
                         </div>
 
                         <div class="pb-1"></div>
-
                         <div class="form-label-fixed mb-4">
                             <label for="password-confirm" class="form-label">{{ __('Confirm Password') }}</label>
                             <input id="password-confirm" class="form-control form-control_gray"
