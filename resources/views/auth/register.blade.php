@@ -31,14 +31,40 @@
 
                 <div class="pb-3"></div>
 
-                    <div class="form-floating mb-3">
+                <div class="form-floating mb-3">
                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">                    <label for="customerEmailInput">Email address *</label>
                     @error('email')
                       <span class="invalid-feedback" role="alert">
                           <strong>{{ $message }}</strong>
                       </span>
                     @enderror
-</div>
+                </div>
+                
+                <div class="pb-3"></div>
+                
+                <div class="form-floating mb-3">
+                  <label for="Phone" class="form-label">{{ __('Phone') }}</label>
+                  <input id="phone" type="text" class="form-control form-control_gray @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+                  @error('phone')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                  @enderror
+                </div>
+
+                <div class="pb-3"></div>
+
+                <div class="form-label-fixed mb-4">
+                  <label for="Phone" class="form-label">{{ __('Gender') }}</label>
+                  <select name="gender" class="form-control">
+                      <option value="male">Male</option>
+                      <option value="fe-male">FeMale</option>
+                  </select>
+                  @error('gender')
+                      <span class="text-danger"> {{ $message }}</span>
+                  @enderror
+
+                </div>
 
                 <div class="pb-3"></div>
 

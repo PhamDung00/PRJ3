@@ -205,7 +205,7 @@
         <div class="mb-3 mb-xl-5 pb-3 pt-1 pb-xl-5"></div>
         <!-- Customer Login Form -->
 
-        <div class="aside aside_right overflow-hidden customer-forms" id="customerForms">
+        {{-- <div class="aside aside_right overflow-hidden customer-forms" id="customerForms">
             <div class="customer-forms__wrapper d-flex position-relative">
                 <div class="customer__login">
                     <div class="aside-header d-flex align-items-center">
@@ -370,7 +370,7 @@
                     </form>
                 </div><!-- /.customer__register -->
             </div><!-- /.customer-forms__wrapper -->
-        </div>
+        </div> --}}
 
 
         @yield('content')
