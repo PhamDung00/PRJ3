@@ -1,10 +1,7 @@
 @extends('client.layout.app')
 @section('title', 'Cart')
 @section('content')
-    @if (isset($cart))
-        <pre>
-        {{ json_encode($cart, JSON_PRETTY_PRINT) }}
-    </pre>
+    @if (isset($cart))  
         @if (session('message'))
             <h2 class="" style="text-align: center; width:100%; color:red"> {{ session('message') }}</h2>
         @endif
