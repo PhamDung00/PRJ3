@@ -12,7 +12,8 @@ class ProductController extends Controller
 {
     protected $category;
     protected $product;
-    public function __construct(Category $category, Product $product){
+    public function __construct(Category $category, Product $product)
+    {
         $this->category = $category;
         $this->product = $product;
     }
@@ -27,19 +28,26 @@ class ProductController extends Controller
         //
         $parentCategories = $this->category->getParents();
         $categories = [];
-        foreach($parentCategories as $parentCategory){
+        foreach ($parentCategories as $parentCategory) {
             // TODO: get child categories
             $categories[] = [
                 "parent" => $parentCategory,
                 "childrens" => $parentCategory->childrens
             ];
         }
-        $products = Product::join('category_prd as c_p', 'products.id', '=', 'c_p.product_id')
-                        ->join('categories as c', 'c_p.category_id', '=', 'c.id')
-                        ->where('c.id', $category_id)
-                        ->orWhere('c.parent_id', $category_id)
-                        ->select('products.*')
-                        ->paginate(2); // số sản phẩm trên mỗi trang
+        if ($category_id == 0) {
+            $products = Product::join('category_prd as c_p', 'products.id', '=', 'c_p.product_id')
+                ->join('categories as c', 'c_p.category_id', '=', 'c.id')
+                ->select('products.*')
+                ->paginate(2); // số sản phẩm trên mỗi trang
+        } else {
+            $products = Product::join('category_prd as c_p', 'products.id', '=', 'c_p.product_id')
+                ->join('categories as c', 'c_p.category_id', '=', 'c.id')
+                ->where('c.id', $category_id)
+                ->orWhere('c.parent_id', $category_id)
+                ->select('products.*')
+                ->paginate(2); // số sản phẩm trên mỗi trang
+        }
         return response()->view("client.products.productlist", compact("products", "categories"));
     }
 
@@ -75,7 +83,7 @@ class ProductController extends Controller
         //
         $parentCategories = $this->category->getParents();
         $categories = [];
-        foreach($parentCategories as $parentCategory){
+        foreach ($parentCategories as $parentCategory) {
             // TODO: get child categories
             $categories[] = [
                 "parent" => $parentCategory,
@@ -83,7 +91,7 @@ class ProductController extends Controller
             ];
         }
         $product = $this->product->with('details')->findOrFail($id);
-        return view('client.products.productdetail', compact("product",'categories'));
+        return view('client.products.productdetail', compact("product", 'categories'));
     }
 
     /**
@@ -118,5 +126,10 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function search($field)
+    {
+        $products = Product::where($field, 'LIKE', '%' . $_GET[$field] . '%')->get();
+        return response()->json($products);
     }
 }

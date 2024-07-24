@@ -156,13 +156,15 @@
                                 <p class="text-uppercase text-secondary fw-medium mb-4">What are you looking for?</p>
                                 <div class="position-relative">
                                     <input class="search-field__input search-popup__input w-100 fw-medium"
-                                        type="text" name="search-keyword" placeholder="Search products">
+                                        type="text" name="search-keyword" placeholder="Search products"
+                                        id="search">
                                     <button class="btn-icon search-popup__submit" type="submit">
                                         <svg class="d-block" width="20" height="20" viewBox="0 0 20 20"
                                             fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <use href="#icon_search" />
                                         </svg>
                                     </button>
+                                    <div id="search-result"></div>
                                     <button class="btn-icon btn-close-lg search-popup__reset" type="reset"></button>
                                 </div>
                             </form><!-- /.header-search -->
@@ -650,7 +652,34 @@
 
     <!-- Footer Scripts -->
     <script src="{{ asset('client/js/theme.js') }}"></script>
-
+    <script>
+        $(document).on("keydown", "#search", e => {
+            const url = "{{ route('product.search', 'name') }}";
+            $.ajax({
+                url: url,
+                type: "GET",
+                data: {
+                    name: e.target.value,
+                },
+                success: function(data) {
+                    const html = data.reduce((prev, current) => {
+                        const rawLink = "{{ route('client.products.productdetail', 0) }}";
+                        const linkSplitted = rawLink.split("/");
+                        linkSplitted[linkSplitted.length - 1] = current.id;
+                        const link = linkSplitted.join("/");
+                        return `
+                    ${prev}
+                    <div class="search-item">
+                        <a href="${link}">${current.name}</a>
+                    </div>
+                    `
+                    });
+                    $("#search-result").html(html);
+                },
+                error: console.log
+            });
+        })
+    </script>
 </body>
 
 <!-- Mirrored from uomo-html.flexkitux.com/Demo16/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 14 Jun 2024 16:48:04 GMT -->
