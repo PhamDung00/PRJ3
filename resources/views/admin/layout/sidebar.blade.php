@@ -57,7 +57,7 @@
                 <li class="has-sub">
                     <a class="sidenav-item-link" href="javascript:void(0)">
                         <i class="mdi mdi-account-group"></i>
-                        <span class="nav-text">123</span> <b class="caret"></b>
+                        <span class="nav-text">Customer list</span> <b class="caret"></b>
                     </a>
                     <div class="collapse">
                         <ul class="sub-menu" id="users" data-parent="#sidebar-menu">
@@ -68,7 +68,7 @@
                             </li>
 
                             <li class="">
-                                <a class="sidenav-item-link" href="user-list.html">
+                                <a class="sidenav-item-link" href="{{ route('customers') }}">
                                     <span class="nav-text">User List</span>
                                 </a>
                             </li>

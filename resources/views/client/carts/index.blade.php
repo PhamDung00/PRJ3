@@ -1,7 +1,7 @@
 @extends('client.layout.app')
 @section('title', 'Cart')
 @section('content')
-    @if (isset($cart))  
+    @if (isset($cart))
         @if (session('message'))
             <h2 class="" style="text-align: center; width:100%; color:red"> {{ session('message') }}</h2>
         @endif
@@ -299,7 +299,7 @@
             $(document).on("change", "#local_pickup", e => {
                 const price = Number(document.getElementsByClassName("total-price")[0].innerText.replace("$", ""));
                 const totalPriceAllElement = document.getElementsByClassName("total-price-all")[0];
-                totalPriceAllElement.innerText = `$${price + (e.target.checked ? -EXPRESS_SHIP_PRICE : 0)}`;
+                discountClientSide(e.target.checked ? -EXPRESS_SHIP_PRICE : 0)
                 const freeShipElement = document.getElementById("free_shipping");
                 if (e.target.checked) {
                     freeShipElement.checked = false;

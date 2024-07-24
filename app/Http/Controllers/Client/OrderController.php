@@ -25,7 +25,8 @@ class OrderController extends Controller
     }
     public function index()
     {
-        $orders =  $this->order->getWithPaginateBy(auth()->user()->id);
+        $orders =  Order::where("user_id",auth()->user()->id)->paginate(10);
+        // return response()->json($orders);
         return view('client.orders.index', compact('orders'));
     }
 
@@ -58,7 +59,7 @@ class OrderController extends Controller
             "customer_address"=>$address
         ]));
         // remove cart after convert it to order record
-        $carts = Cart::where("user_id", auth()->user()->id)->where("status","!=","pending")->get();
+        $carts = Cart::where("user_id", auth()->user()->id)->where("status","pending")->get();
         // find user
         $user = User::find(auth()->user()->id);
         $user->update([

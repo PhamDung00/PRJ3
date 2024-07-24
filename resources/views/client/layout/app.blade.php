@@ -49,7 +49,8 @@
         @endcomponent
         @component('components.icons.cart')
         @endcomponent
-
+        @component('components.icons.signout')
+        @endcomponent
         <symbol id="icon_close" viewBox="0 0 12 12">
             <path d="M0.311322 10.6261L10.9374 0L12 1.06261L1.37393 11.6887L0.311322 10.6261Z" fill="currentColor" />
             <path d="M1.06261 0.106781L11.6887 10.7329L10.6261 11.7955L0 1.16939L1.06261 0.106781Z"
@@ -167,14 +168,25 @@
                             </form><!-- /.header-search -->
                         </div><!-- /.search-popup -->
                     </div><!-- /.header-tools__item hover-container -->
-
                     <div class="header-tools__item hover-container">
-                        <a class="header-tools__item js-open-aside" href="#" data-aside="customerForms">
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <use href="#icon_user" />
-                            </svg>
-                        </a>
+                        @auth
+                            <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+										document.getElementById('logout-form').submit();">
+                                @component('components.icons.signout')
+                                @endcomponent
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        @else
+                            <a class="header-tools__item" href="{{ route('login') }}" data-aside="customerForms">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <use href="#icon_user" />
+                                </svg>
+                            </a>
+                        @endauth
                     </div>
 
                     <a href="#" class="header-tools__item header-tools__cart js-open-aside"

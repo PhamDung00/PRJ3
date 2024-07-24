@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\User;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -18,7 +21,7 @@ class OrderController extends Controller
     }
     public function index()
     {
-        $orders =  $this->order->getWithPaginateBy(auth()->user()->id);
+        $orders =  $this->order->orderBy('id', 'desc')->paginate(10);
         return view('admin.orders.index', compact('orders'));
     }
     public function cancel($id)
@@ -31,6 +34,7 @@ class OrderController extends Controller
         $order = $this->order->findOrFail($id);
         $carts = $order->getCarts();
         $products = [];
+        return response()->json(compact('order','carts','products'));
         foreach ($carts[0]["products"] as $product) {
             $products[] = Product::find($product->product_id);
         }
@@ -45,6 +49,19 @@ class OrderController extends Controller
     {
         $order =  Order::findOrFail($id);
         $order->update(['status' => $request->status]);
+        // update product quantity
+        $user = User::find($order->user_id);
+        $carts = Cart::where('user_id', $user->id)->where("status","processing")->get();
+        foreach($carts as $cart){
+            $quantity = $cart->products[0]->product_quantity;
+            $cart->update(["status"=> $request->status]);
+            if($request->status =="Accept")
+           { 
+            // TODO: update product quantity if status is accept
+                DB::update("UPDATE sizes SET quantity = GREATEST(0,quantity - {$quantity}) WHERE id = {$cart->products[0]->product_size}");
+                DB::update("UPDATE products SET quantity = GREATEST(0,quantity - {$quantity}) WHERE id = {$cart->products[0]->product_id}");
+            }
+        }
         return  response()->json([
             'message' => 'success'
         ], 200);

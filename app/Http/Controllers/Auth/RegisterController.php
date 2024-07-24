@@ -85,15 +85,15 @@ class RegisterController extends Controller
         $oldUser = User::where("email", $request->email)->orWhere("phone", $request->phone)->first();
         if($oldUser){
             // return response()->json($oldUser, 200);
-            return response()->back()->with("error","Email or phone number already in use");
+            return back()->with("error","Email or phone number already in use");
         }
         // check if password and repeat password are the same
         if($request->input("password") != $request->input("password_confirmation")){
-            return response()->back()->with("error","Password and repeat password are not the same");
+            return back()->with("error","Password and repeat password are not the same");
         }
         $user = User::create(array_merge($request->all(),[
             "password"=>Hash::make($request->input("password")),
         ]));
-        return response()->back()->with("success","Register success");
+        return back()->with("success","Register success");
     }
 }

@@ -121,4 +121,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('order', [AdminOrderController::class, 'index'])->name('admin.orders.index');
     Route::post('orders/cancel/{id}', [AdminOrderController::class, 'cancel'])->name('client.orders.cancel');
     Route::post('update-status/{id}', [AdminOrderController::class, 'updateStatus'])->name('admin.orders.update_status');
+        Route::get("/customers",[UserController::class,"customers"])->name("customers")->middleware('role:super-admin');
 });
