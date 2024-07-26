@@ -26,7 +26,7 @@
             <a href="{{ route('client.orders.index') }}" class="navigation__link">Order</a>
         </li>
         <li class="navigation__item">
-            <a href="{{ route('client.about.about') }}" class="navigation__link">About</a>
+            <a href="about.html" class="navigation__link">About</a>
         </li>
         <li class="navigation__item">
             <a href="{{ route('client.contact.contact') }}" class="navigation__link">Contact</a>

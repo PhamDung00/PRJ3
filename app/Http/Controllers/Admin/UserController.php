@@ -154,4 +154,8 @@ class UserController extends Controller
 
         return to_route('users.index')->with(['message' => 'User deleted successfully']);
     }
+    public function customers(){
+        $users = User::where('role_id',5)->paginate(3);
+        return response()->view('admin.customers.index', compact('users'));
+    }
 }

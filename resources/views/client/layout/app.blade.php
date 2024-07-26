@@ -49,7 +49,8 @@
         @endcomponent
         @component('components.icons.cart')
         @endcomponent
-
+        @component('components.icons.signout')
+        @endcomponent
         <symbol id="icon_close" viewBox="0 0 12 12">
             <path d="M0.311322 10.6261L10.9374 0L12 1.06261L1.37393 11.6887L0.311322 10.6261Z" fill="currentColor" />
             <path d="M1.06261 0.106781L11.6887 10.7329L10.6261 11.7955L0 1.16939L1.06261 0.106781Z"
@@ -155,26 +156,39 @@
                                 <p class="text-uppercase text-secondary fw-medium mb-4">What are you looking for?</p>
                                 <div class="position-relative">
                                     <input class="search-field__input search-popup__input w-100 fw-medium"
-                                        type="text" name="search-keyword" placeholder="Search products">
+                                        type="text" name="search-keyword" placeholder="Search products"
+                                        id="search">
                                     <button class="btn-icon search-popup__submit" type="submit">
                                         <svg class="d-block" width="20" height="20" viewBox="0 0 20 20"
                                             fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <use href="#icon_search" />
                                         </svg>
                                     </button>
+                                    <div id="search-result"></div>
                                     <button class="btn-icon btn-close-lg search-popup__reset" type="reset"></button>
                                 </div>
                             </form><!-- /.header-search -->
                         </div><!-- /.search-popup -->
                     </div><!-- /.header-tools__item hover-container -->
-
                     <div class="header-tools__item hover-container">
-                        <a class="header-tools__item js-open-aside" href="#" data-aside="customerForms">
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <use href="#icon_user" />
-                            </svg>
-                        </a>
+                        @auth
+                            <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+										document.getElementById('logout-form').submit();">
+                                @component('components.icons.signout')
+                                @endcomponent
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        @else
+                            <a class="header-tools__item" href="{{ route('login') }}" data-aside="customerForms">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <use href="#icon_user" />
+                                </svg>
+                            </a>
+                        @endauth
                     </div>
 
                     <a href="#" class="header-tools__item header-tools__cart js-open-aside"
@@ -194,6 +208,7 @@
 
     <main><!-- /.slideshow -->
         <!-- Customer Login Form -->
+
         <div class="aside aside_right overflow-hidden customer-forms" id="customerForms">
             <div class="customer-forms__wrapper d-flex position-relative">
                 <div class="customer__login">
@@ -267,8 +282,12 @@
                         <button class="btn-close-lg js-close-aside btn-close-aside ms-auto"></button>
                     </div><!-- /.aside-header -->
 
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register.post') }}">
                         @csrf
+                        @if (session()->has('error'))
+                            <p>{{ session()->get('error') }}</p>
+                        @endif
+                        <input type="hidden" name="role_id" value="5">
                         <div class="form-floating mb-4">
                             <input type="text"
                                 class="form-control form-control_gray @error('name') is-invalid @enderror"
@@ -330,8 +349,8 @@
                         <div class="pb-1"></div>
 
                         <div class="form-label-fixed mb-4">
-                            <label for="registerPasswordInput" class="form-label">{{ __('Password') }}</label>
-                            <input id="registerPasswordInput"
+                            <label for="password" class="form-label">{{ __('Password') }}</label>
+                            <input id="password"
                                 class="form-control form-control_gray @error('password') is-invalid @enderror"
                                 name="password" required autocomplete="new-password" type="password">
                             @error('password')
@@ -342,7 +361,6 @@
                         </div>
 
                         <div class="pb-1"></div>
-
                         <div class="form-label-fixed mb-4">
                             <label for="password-confirm" class="form-label">{{ __('Confirm Password') }}</label>
                             <input id="password-confirm" class="form-control form-control_gray"
@@ -359,7 +377,7 @@
                     </form>
                 </div><!-- /.customer__register -->
             </div><!-- /.customer-forms__wrapper -->
-        </div>
+        </div> --}}
 
 
         @yield('content')
@@ -599,7 +617,34 @@
 
     <!-- Footer Scripts -->
     <script src="{{ asset('client/js/theme.js') }}"></script>
-
+    <script>
+        $(document).on("keydown", "#search", e => {
+            const url = "{{ route('product.search', 'name') }}";
+            $.ajax({
+                url: url,
+                type: "GET",
+                data: {
+                    name: e.target.value,
+                },
+                success: function(data) {
+                    const html = data.reduce((prev, current) => {
+                        const rawLink = "{{ route('client.products.productdetail', 0) }}";
+                        const linkSplitted = rawLink.split("/");
+                        linkSplitted[linkSplitted.length - 1] = current.id;
+                        const link = linkSplitted.join("/");
+                        return `
+                    ${prev}
+                    <div class="search-item">
+                        <a href="${link}">${current.name}</a>
+                    </div>
+                    `
+                    });
+                    $("#search-result").html(html);
+                },
+                error: console.log
+            });
+        })
+    </script>
 </body>
 
 <!-- Mirrored from uomo-html.flexkitux.com/Demo16/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 14 Jun 2024 16:48:04 GMT -->

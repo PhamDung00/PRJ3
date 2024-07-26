@@ -140,12 +140,13 @@
                                             <div class="form-check">
                                                 <input class="form-check-input form-check-input_fill" type="checkbox"
                                                     value="" id="free_shipping">
-                                                <label class="form-check-label" for="free_shipping">Free shipping</label>
+                                                <label class="form-check-label" for="free_shipping"> Shipping $3</label>
                                             </div>
                                             <div class="form-check">
                                                 <input class="form-check-input form-check-input_fill" type="checkbox"
                                                     value="" id="local_pickup">
-                                                <label class="form-check-label" for="local_pickup">Express shipping</label>
+                                                <label class="form-check-label" for="local_pickup">Express shipping
+                                                    $8</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -200,6 +201,7 @@
         </script>
         <script>
             const EXPRESS_SHIP_PRICE = 8;
+            const SHIP_PRICE = 3;
             const discountClientSide = discount => {
                 // TODO: update at client side
                 const totalPrice = Number(document.getElementsByClassName("total-price")[0].innerText.replace("$", ""));
@@ -215,13 +217,13 @@
                 const localPickupElement = document.getElementById("local_pickup");
                 freeShippingElement.checked = localStorage.getItem("shipmentMethod") === "Free shipping";
                 localPickupElement.checked = localStorage.getItem("shipmentMethod") === "Express shipping";
-                discountClientSide(localStorage.getItem("shipmentMethod") === "Express shipping" ? +EXPRESS_SHIP_PRICE :
+                discountClientSide(localStorage.getItem("shipmentMethod") === "Express shipping" ? -EXPRESS_SHIP_PRICE :
+                    0);
+                discountClientSide(localStorage.getItem("shipmentMethod") === "Free shipping" ? -SHIP_PRICE :
                     0);
             })
 
             $(function() {
-                getTotalValue();
-
                 function getTotalValue() {
                     let total = $(".total-price").data("price");
                     let couponPrice = $(".coupon-div")?.data("price") ?? 0;
@@ -284,7 +286,7 @@
                             const totalPrice = cart.total_price;
                             $(".total-price").text(`$${totalPrice}`);
                             discountClientSide(document.getElementById("local_pickup").checked ?
-                                +EXPRESS_SHIP_PRICE : 0);
+                                -EXPRESS_SHIP_PRICE : 0);
                             Swal.fire({
                                 position: "top-end",
                                 icon: "success",
@@ -299,7 +301,7 @@
             $(document).on("change", "#local_pickup", e => {
                 const price = Number(document.getElementsByClassName("total-price")[0].innerText.replace("$", ""));
                 const totalPriceAllElement = document.getElementsByClassName("total-price-all")[0];
-                totalPriceAllElement.innerText = `$${price + (e.target.checked ? +EXPRESS_SHIP_PRICE : 0)}`;
+                totalPriceAllElement.innerText = `$${price + (e.target.checked ? -EXPRESS_SHIP_PRICE : 0)}`;
                 const freeShipElement = document.getElementById("free_shipping");
                 if (e.target.checked) {
                     freeShipElement.checked = false;
@@ -310,10 +312,11 @@
             $(document).on("change", "#free_shipping", e => {
                 const price = Number(document.getElementsByClassName("total-price")[0].innerText.replace("$", ""));
                 discountClientSide(0);
+                discountClientSide(e.target.checked ? -SHIP_PRICE : 0)
                 const localPickupElement = document.getElementById("local_pickup");
                 if (e.target.checked) {
                     localPickupElement.checked = false;
-                    localStorage.setItem("shipmentMethod", "Free shipping");
+                    localStorage.setItem("shipmentMethod", "Shipping $3");
                 }
             })
             $(document).on("click", "#confirmation", e => {

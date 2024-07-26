@@ -100,24 +100,30 @@
                     let data = {
                         status: $(this).val(),
                     };
-                    $.post(url, data, (res, status) => {
-                        console.log(status)
-                        if (status == "success")
-                            Swal.fire({
-                                position: "top-end",
-                                icon: "success",
-                                title: "success",
+                    $.ajax({
+                        type: "POST",
+                        url,
+                        data,
+                        success: (res) => {
+                            console.log(res)
+                            if (res.message == "success")
+                                Swal.fire({
+                                    position: "top-end",
+                                    icon: "success",
+                                    title: "success",
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                });
+                            else Swal.fire({
+                                position: "center",
+                                icon: "error",
+                                title: "error",
                                 showConfirmButton: false,
                                 timer: 1500,
-                            });
-                        else Swal.fire({
-                            position: "center",
-                            icon: "error",
-                            title: "error",
-                            showConfirmButton: false,
-                            timer: 1500,
-                            title: "HTTP Status Error: " + status
-                        })
+                                title: "HTTP Status Error: " + status
+                            })
+                        },
+                        error: console.log
                     });
                 });
             });

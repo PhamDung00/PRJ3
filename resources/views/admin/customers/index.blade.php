@@ -1,5 +1,5 @@
 @extends('admin.layout.app')
-@section('title', 'Users')
+@section('title', 'Customers')
 @section('content')
     <div style="width: 85vw; padding: 50px;">
         <!-- CONTENT WRAPPER -->
@@ -7,14 +7,14 @@
             <div class="content" style="padding: 0">
                 <div class="breadcrumb-wrapper breadcrumb-contacts">
                     <div>
-                        <h1>User List</h1>
+                        <h1>Customer List</h1>
                         <p class="breadcrumbs"><span><a href="index.html">Home</a></span>
-                            <span><i class="mdi mdi-chevron-right"></i></span>User
+                            <span><i class="mdi mdi-chevron-right"></i></span>Customer
                         </p>
                     </div>
                     <div>
-                        <a href="{{ route('users.create') }}"><button type="button" class="btn btn-primary"> Add User
-                            </button></a>
+                        <a href="{{ route('users.create') }}"><button type="button" class="btn btn-primary"> Add
+                                Customer</button></a>
                     </div>
                 </div>
                 @if (session()->has('message'))

@@ -76,9 +76,6 @@
                                 </thead>
                                 <tbody>
                                     {{-- hơi khoai --}}
-                                    <pre>
-                                        {{ json_encode($cart, JSON_PRETTY_PRINT) }}
-                                    </pre>
                                     @foreach ($cart as $c)
                                         @foreach ($c['products'] as $index => $product)
                                             <tr>
