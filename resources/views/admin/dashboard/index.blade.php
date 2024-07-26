@@ -34,6 +34,16 @@
                     </div>
                 </div>
                 <div class="col-xl-3 col-sm-6 p-b-15 lbl-card">
+                    <div class="card card-mini dash-card card-2">
+                        <div class="card-body">
+                            <h2 class="mb-1"> {{ $revenue }}
+                            </h2>
+                            <p>Coupon</p>
+                            <span class="mdi mdi-account-clock"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 p-b-15 lbl-card">
                     <div class="card card-mini dash-card card-3">
                         <div class="card-body">
                             <h2 class="mb-1">{{ $roleCount }}</h2>
@@ -56,7 +66,8 @@
                         <div class="card-body">
                             <h2 class="mb-1">{{ $orderCount }}</h2>
                             <p>Sales</p>
-                            <span class="mdi mdi-currency-usd"></span>
+                            <span class="mdi mdi-currency-usd">
+                            </span>
                         </div>
                     </div>
                 </div>

@@ -46,10 +46,12 @@ class Controller extends BaseController
                 $sql = "select sum(total) as total from orders where created_at > now() - interval 1 year";
                 break;
             default:
+                $sql = "select sum(total) as total from orders where created_at > now() - interval 1 month";
+                break;
         }
         $sql .= " and status = 'success'";
         // get the revenue
         $revenue = DB::select($sql);
-        return $revenue[0]->total;
+        return $revenue[0]->total ?? 0;
     }
 }

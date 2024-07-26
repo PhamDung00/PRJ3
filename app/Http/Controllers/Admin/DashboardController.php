@@ -41,9 +41,10 @@ class DashboardController extends Controller
         $couponCount = $this->coupon->count();
         $roleCount = $this->role->count();
         $products = Product::all();
-        foreach($products as $product){
+        foreach ($products as $product) {
             $productCount += $product->quantity;
         }
-        return view('admin.dashboard.index', compact('userCount', 'categoryCount', 'productCount', 'orderCount', 'couponCount', 'roleCount'));
+        $revenue = self::revenue();
+        return view('admin.dashboard.index', compact('userCount', 'categoryCount', 'productCount', 'orderCount', 'couponCount', 'roleCount', "revenue"));
     }
 }
