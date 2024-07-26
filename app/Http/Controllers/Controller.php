@@ -30,7 +30,7 @@ class Controller extends BaseController
     }
     public function revenue()
     {
-        $time = $_GET["time"];
+        $time = $_GET["time"] ?? "day";
         switch ($time) {
             case "day":
                 // day

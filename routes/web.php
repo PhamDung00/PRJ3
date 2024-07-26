@@ -13,6 +13,7 @@ use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\OrderController;
 use App\Http\Controllers\Client\ProductController as ClientProductController;
+use App\Http\Controllers\Controller;
 use App\Models\Province;
 use Illuminate\Support\Facades\Route;
 
@@ -126,3 +127,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('update-status/{id}', [AdminOrderController::class, 'updateStatus'])->name('admin.orders.update_status');
     Route::get("/customers", [UserController::class, "customers"])->name("customers")->middleware('role:super-admin');
 });
+
+Route::get("test", function () {
+    $controller = new Controller();
+    return view("admin.test", ["revenue" => $controller->revenue()]);
+})->name("test");
