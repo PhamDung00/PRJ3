@@ -2,7 +2,6 @@
 @section('content')
 <body>
   <main>
-    <div class="mb-4 pb-4"></div>
     <div class="d-flex justify-content-center">
       <form method="POST" action="{{ route('login') }}" class="w-50">
         @csrf
@@ -68,22 +67,20 @@
     </div>
   </main>
 
-  <div class="mb-5 pb-xl-5"></div>
-
   <!-- Page Overlay -->
   <div class="page-overlay"></div><!-- /.page-overlay -->
 
   <!-- External JavaScripts -->
-  <script src="js/plugins/jquery.min.js"></script>
-  <script src="js/plugins/bootstrap.bundle.min.js"></script>
-  <script src="js/plugins/bootstrap-slider.min.js"></script>
+  <script src="{{ asset('js/plugins/jquery.min.js')}}"></script>
+  <script src="{{ asset('js/plugins/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{ asset('js/plugins/bootstrap-slider.min.js')}}"></script>
 
-  <script src="js/plugins/swiper.min.js"></script>
-  <script src="js/plugins/countdown.js"></script>
-  <script src="js/plugins/jquery.fancybox.js"></script>
+  <script src="{{ asset('js/plugins/swiper.min.js')}}"></script>
+  <script src="{{ asset('js/plugins/countdown.js')}}"></script>
+  <script src="{{ asset('js/plugins/jquery.fancybox.js')}}"></script>
 
   <!-- Footer Scripts -->
-  <script src="js/theme.js"></script>
+  <script src="{{ asset('js/theme.js')}}"></script>
 
 </body>
 

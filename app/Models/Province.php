@@ -19,4 +19,8 @@ class Province extends Model
     public function childrens(){
         return $this->hasMany(Province::class,"province_at");
     }
+    public function districts(): HasMany
+    {
+        return $this->hasMany(District::class);
+    }
 }

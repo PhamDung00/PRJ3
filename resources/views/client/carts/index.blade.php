@@ -215,8 +215,8 @@
             $(document).ready(() => {
                 const freeShippingElement = document.getElementById("free_shipping");
                 const localPickupElement = document.getElementById("local_pickup");
-                freeShippingElement.checked = localStorage.getItem("shipmentMethod") === "Shipping $3";
-                localPickupElement.checked = localStorage.getItem("shipmentMethod") === "Express shipping $8";
+                freeShippingElement.checked = localStorage.getItem("shipmentMethod") === "Free shipping";
+                localPickupElement.checked = localStorage.getItem("shipmentMethod") === "Express shipping";
                 discountClientSide(localStorage.getItem("shipmentMethod") === "Express shipping" ? -EXPRESS_SHIP_PRICE :
                     0);
                 discountClientSide(localStorage.getItem("shipmentMethod") === "Free shipping" ? -SHIP_PRICE :
@@ -287,8 +287,6 @@
                             $(".total-price").text(`$${totalPrice}`);
                             discountClientSide(document.getElementById("local_pickup").checked ?
                                 -EXPRESS_SHIP_PRICE : 0);
-                            discountClientSide(document.getElementById("free_shipping").checked ?
-                                -SHIP_PRICE : 0);
                             Swal.fire({
                                 position: "top-end",
                                 icon: "success",
@@ -303,7 +301,7 @@
             $(document).on("change", "#local_pickup", e => {
                 const price = Number(document.getElementsByClassName("total-price")[0].innerText.replace("$", ""));
                 const totalPriceAllElement = document.getElementsByClassName("total-price-all")[0];
-                discountClientSide(e.target.checked ? -EXPRESS_SHIP_PRICE : 0)
+                totalPriceAllElement.innerText = `$${price + (e.target.checked ? -EXPRESS_SHIP_PRICE : 0)}`;
                 const freeShipElement = document.getElementById("free_shipping");
                 if (e.target.checked) {
                     freeShipElement.checked = false;

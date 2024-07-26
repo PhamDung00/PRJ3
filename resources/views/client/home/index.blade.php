@@ -1,6 +1,7 @@
 @extends('client.layout.app')
 @section('title', 'Home')
 @section('content') 
+
 <div class="mb-4 mb-xl-5 pt-1 pb-5"></div>
 
     <section class="grid-banner container mb-3">
@@ -48,12 +49,6 @@
       <li class="nav-item" role="presentation">
         <a class="nav-link nav-link_underscore text-uppercase active" id="collections-tab-1-trigger" data-bs-toggle="tab" href="#collections-tab-1" role="tab" aria-controls="collections-tab-1" aria-selected="true">New Arrivals</a>
       </li>
-      <li class="nav-item" role="presentation">
-        <a class="nav-link nav-link_underscore text-uppercase" id="collections-tab-2-trigger" data-bs-toggle="tab" href="#collections-tab-2" role="tab" aria-controls="collections-tab-2" aria-selected="true">Bestsellers</a>
-      </li>
-      <li class="nav-item" role="presentation">
-        <a class="nav-link nav-link_underscore text-uppercase" id="collections-tab-3-trigger" data-bs-toggle="tab" href="#collections-tab-3" role="tab" aria-controls="collections-tab-3" aria-selected="true">Most Viewed</a>
-      </li>
     </ul>
     <div class="tab-content pt-2" id="collections-tab-content">
     
@@ -83,7 +78,7 @@
 
               <div class="pc__info position-relative">
                 <div class="pc__category text-secondary fw-semi-bold d-flex align-items-center justify-content-between">
-                  <span>BIKES</span>
+                  <span>SHOES</span>
                 </div>
                 <h6 class="pc__title fw-bold text-uppercase fs-18"><a href="{{ route('client.products.productdetail', $iprd->id) }}">{{ $iprd->name }}</a></h6>
                 <div class="product-card__price d-flex">
@@ -108,138 +103,7 @@
     </div>
   </section>
 
-  <div class="mb-3 pb-3 pt-1"></div>
 
-  <section class="video-banner position-relative">
-    <div class="h-100 d-flex flex-column justify-content-center position-relative py-3 py-xl-5">
-      <div class="container position-relative">
-        <h6 class="text-uppercase fs-18 fw-medium text-uppercase text-white">ADRENALIN</h6>
-        <h2 class="h1 fw-bold color-white text-uppercase lh-1">Nothing<br>Can Stop You</h2>
-
-        <button class="btn-video-player text-white position-absolute right-0 top-50 translate-middle border-1 border-white" data-video="#video_banner_1">
-          <svg class="btn-play" width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M15.4465 9.04281C15.4206 8.99101 15.3947 8.9651 15.3688 8.9392C15.317 8.86149 15.2652 8.80968 15.1875 8.73197C15.1098 8.65426 15.0062 8.57655 14.9285 8.52474L8.99656 4.43198L3.03874 0.313318C2.65019 0.0283787 2.15802 -0.0493319 1.71766 0.0283788C1.2773 0.106089 0.862847 0.365125 0.603811 0.753678C0.500197 0.909099 0.422487 1.06452 0.370679 1.21994C0.318872 1.34946 0.292969 1.47898 0.292969 1.6344C0.292969 1.6603 0.292969 1.71211 0.292969 1.73801V10.0012V18.2386C0.292969 18.7307 0.500197 19.1711 0.81104 19.4819C1.09598 19.7928 1.53634 20 2.02851 20C2.23573 20 2.44296 19.9741 2.62429 19.8964C2.80561 19.8446 2.96103 19.741 3.11646 19.6115L8.99656 15.5446L14.9026 11.4518C14.9285 11.4259 14.9803 11.4 15.0062 11.3741C15.3688 11.0892 15.602 10.7006 15.6797 10.2862C15.7574 9.87173 15.6797 9.40546 15.4465 9.04281ZM14.1514 10.3639L8.19355 14.4826L2.33935 18.5235C2.31345 18.5235 2.28754 18.5494 2.28754 18.5494C2.26164 18.5753 2.20983 18.6012 2.15802 18.6271C2.10622 18.653 2.08031 18.653 2.02851 18.653C1.92489 18.653 1.82128 18.6012 1.74357 18.5494C1.66586 18.4717 1.63995 18.3681 1.63995 18.2645V10.0012H1.61405V1.84163C1.61405 1.81572 1.61405 1.78982 1.61405 1.76392V1.73801C1.61405 1.71211 1.61405 1.68621 1.63995 1.6603C1.63995 1.6344 1.66586 1.6085 1.66586 1.58259C1.69176 1.55669 1.69176 1.55669 1.69176 1.53078C1.74357 1.45307 1.84718 1.40127 1.92489 1.40127C2.02851 1.37536 2.10622 1.40127 2.20983 1.45307C2.23573 1.47898 2.26164 1.47898 2.28754 1.50488L8.19355 5.59764L14.1255 9.6904C14.1514 9.71631 14.1773 9.71631 14.1773 9.74221C14.2032 9.76811 14.2032 9.79402 14.2291 9.79402C14.2809 9.89763 14.3068 10.0012 14.3068 10.1049C14.2809 10.2085 14.2291 10.3121 14.1514 10.3639Z" fill="white"></path>
-          </svg>
-          <svg class="btn-pause" width="14" height="22" viewBox="0 0 14 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1 20.7391V1.26087C1 1.1168 1.1168 1 1.26087 1C1.40494 1 1.52174 1.1168 1.52174 1.26087V20.7391C1.52174 20.8832 1.40494 21 1.26087 21C1.1168 21 1 20.8832 1 20.7391Z" stroke="white"></path>
-            <path d="M12.4785 20.7391V1.26087C12.4785 1.1168 12.5953 1 12.7394 1C12.8835 1 13.0003 1.1168 13.0003 1.26087V20.7391C13.0003 20.8832 12.8835 21 12.7394 21C12.5953 21 12.4785 20.8832 12.4785 20.7391Z" stroke="white"></path>
-          </svg>
-        </button>
-      </div>
-    </div>
-    <video id="video_banner_1" class="bg-video" poster="../images/home/demo16/video_bg.jpg">
-      <source src="https://uomo-html.flexkitux.com/videos/video_1.mp4">
-    </video>
-  </section>
-
-  <div class="mb-3 mb-xl-5 pb-3 pt-1 pb-xl-5"></div>
-
-  <section class="banner-slider container">
-    <div id="banner_slider" class="position-relative">
-      <div class="swiper-container js-swiper-slider"
-        data-settings='{
-          "autoplay": {
-            "delay": 5000
-          },
-          "navigation": {
-            "nextEl": "#banner_slider .products-carousel__next",
-            "prevEl": "#banner_slider .products-carousel__prev"
-          },
-          "pagination": false,
-          "slidesPerView": 1,
-          "effect": "none",
-          "loop": true
-        }'>
-
-      <div class="products-carousel__prev position-absolute top-50 d-flex align-items-center justify-content-center border-radius-0 border-1 transparent-bg navigation-sm mt-0">
-        <svg class="w-auto" width="7" height="11" viewBox="0 0 7 11" xmlns="http://www.w3.org/2000/svg"><use href="#icon_prev_sm"></use></svg>
-      </div><!-- /.slideshow__prev -->
-      <div class="products-carousel__next position-absolute top-50 d-flex align-items-center justify-content-center border-radius-0 border-1 transparent-bg navigation-sm mt-0">
-        <svg class="w-auto" width="7" height="11" viewBox="0 0 7 11" xmlns="http://www.w3.org/2000/svg"><use href="#icon_next_sm"></use></svg>
-      </div><!-- /.slideshow__next -->
-    </div>
-  </section>
-
-  <section class="blog-carousel container">
-    <h2 class="section-title text-uppercase fs-40 fw-bold text-center mb-2">Latest Articles</h2>
-    <p class="fs-15 mb-2 pb-xl-2 mb-xl-4 text-secondary text-center">The World's Premium Brands In One Destination.</p>
-
-    <div class="position-relative">
-      <div class="swiper-container js-swiper-slider"
-        data-settings='{
-          "autoplay": {
-            "delay": 5000
-          },
-          "slidesPerView": 3,
-          "slidesPerGroup": 3,
-          "effect": "none",
-          "loop": true,
-          "pagination": false,
-          "breakpoints": {
-            "320": {
-              "slidesPerView": 1,
-              "slidesPerGroup": 1,
-              "spaceBetween": 14
-            },
-            "768": {
-              "slidesPerView": 2,
-              "slidesPerGroup": 2,
-              "spaceBetween": 24
-            },
-            "992": {
-              "slidesPerView": 3,
-              "slidesPerGroup": 1,
-              "spaceBetween": 30
-            }
-          }
-        }'>
-        <div class="swiper-wrapper blog-grid row-cols-xl-3">
-          <div class="swiper-slide blog-grid__item position-relative">
-            <div class="blog-grid__item-image mb-0">
-              <img loading="lazy" class="h-auto" src="../images/home/demo16/blog-1.jpg" width="450" height="350" alt="">
-            </div>
-            <div class="blog-grid__item-detail position-absolute w-100 h-100 left-0 bottom-0 px-4 px-xl-5 pb-4 pb-xl-5 d-flex flex-column justify-content-end">
-              <div class="blog-grid__item-meta text-uppercase">
-                <span class="blog-grid__item-meta__author text-white">By Admin</span>
-                <span class="blog-grid__item-meta__date text-white">July 15, 2024</span>
-              </div>
-              <div class="blog-grid__item-title mb-0">
-                <a href="blog_single.html" class="h6 text-uppercase fs-22 fw-bold text-white">Woman with good shoes is never be ugly place</a>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide blog-grid__item position-relative">
-            <div class="blog-grid__item-image mb-0">
-              <img loading="lazy" class="h-auto" src="../images/home/demo16/blog-2.jpg" width="450" height="350" alt="">
-            </div>
-            <div class="blog-grid__item-detail position-absolute w-100 h-100 left-0 bottom-0 px-4 px-xl-5 pb-4 pb-xl-5 d-flex flex-column justify-content-end">
-              <div class="blog-grid__item-meta text-uppercase">
-                <span class="blog-grid__item-meta__author text-white">By Admin</span>
-                <span class="blog-grid__item-meta__date text-white">Aprial 05, 2023</span>
-              </div>
-              <div class="blog-grid__item-title mb-0">
-                <a href="blog_single.html" class="h6 text-uppercase fs-22 fw-bold text-white">Woman with good shoes is never be ugly place</a>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide blog-grid__item position-relative">
-            <div class="blog-grid__item-image mb-0">
-              <img loading="lazy" class="h-auto" src="../images/home/demo16/blog-3.jpg" width="450" height="350" alt="">
-            </div>
-            <div class="blog-grid__item-detail position-absolute w-100 h-100 left-0 bottom-0 px-4 px-xl-5 pb-4 pb-xl-5 d-flex flex-column justify-content-end">
-              <div class="blog-grid__item-meta text-uppercase">
-                <span class="blog-grid__item-meta__author text-white">By Admin</span>
-                <span class="blog-grid__item-meta__date text-white">Aprial 05, 2023</span>
-              </div>
-              <div class="blog-grid__item-title mb-0">
-                <a href="blog_single.html" class="h6 text-uppercase fs-22 fw-bold text-white">Woman with good shoes is never be ugly place</a>
-              </div>
-            </div>
-          </div>
-        </div><!-- /.swiper-wrapper -->
-      </div><!-- /.swiper-container js-swiper-slider -->
-    </div><!-- /.position-relative -->
-  </section>
  
   
   <!-- /.aside aside_right -->
@@ -370,7 +234,7 @@
         <div class="row p-0 m-0">
           <div class="col-md-6 p-0 d-none d-md-block">
             <div class="newsletter-popup__bg h-100 w-100">
-              <img loading="lazy" src="../images/newsletter-popup.jpg" class="h-100 w-100 object-fit-cover d-block" alt="">
+              <img loading="lazy" src="https://antashop.shop/wp-content/uploads/2022/09/moski-tekaski-copati-1.jpg.webp" class="h-100 w-100 object-fit-cover d-block" alt="">
             </div>
           </div>
           <div class="col-md-6 p-0 d-flex align-items-center">

@@ -74,6 +74,7 @@ class RegisterController extends Controller
             'phone' => $data['phone'],
             'gender' => $data['gender'],
             'password' => Hash::make($data['password']),
+            'role_id' => 6,
         ]);
     }
     public function myRegister(Request $request){

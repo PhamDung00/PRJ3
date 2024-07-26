@@ -14,8 +14,9 @@
                                     class="sub-menu__title">{{ $category['parent']['name'] }}</a>
                                 @foreach ($category['childrens'] as $childCategory)
                                     <a href="{{ route('client.product.productlist', $childCategory->id) }}"
-                                        class="menu-link menu-link_us-s">{{ $childCategory->name }}</a>
+                                        class="menu-link menu-link_us-s">{{ $childCategory->name }}</a><br>
                                 @endforeach
+                                
                             </li>
                         </ul>
                 @endforeach
@@ -24,15 +25,11 @@
         <li class="navigation__item">
             <a href="{{ route('client.orders.index') }}" class="navigation__link">Order</a>
         </li>
-        @auth
-            @if (auth()->user()->role_id != 5)
-                <li class="navigation__item">
-                    <a href="{{ route('dashboard') }}" class="navigation__link">Dashboard</a>
-                </li>
-            @endif
-        @endauth
         <li class="navigation__item">
-            <a href="contact.html" class="navigation__link">Contact</a>
+            <a href="about.html" class="navigation__link">About</a>
+        </li>
+        <li class="navigation__item">
+            <a href="{{ route('client.contact.contact') }}" class="navigation__link">Contact</a>
         </li>
     </ul><!-- /.navigation__list -->
 </nav>
