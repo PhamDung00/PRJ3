@@ -24,9 +24,13 @@
         <li class="navigation__item">
             <a href="{{ route('client.orders.index') }}" class="navigation__link">Order</a>
         </li>
-        <li class="navigation__item">
-            <a href="about.html" class="navigation__link">About</a>
-        </li>
+        @auth
+            @if (auth()->user()->role_id != 5)
+                <li class="navigation__item">
+                    <a href="{{ route('dashboard') }}" class="navigation__link">Dashboard</a>
+                </li>
+            @endif
+        @endauth
         <li class="navigation__item">
             <a href="contact.html" class="navigation__link">Contact</a>
         </li>
