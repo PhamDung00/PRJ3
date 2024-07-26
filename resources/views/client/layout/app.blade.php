@@ -131,7 +131,7 @@
         <div class="container">
             <div class="header-desk header-desk_type_1">
                 <div class="logo">
-                    <a href="index.html">
+                    <a href="">
                         <img src="../images/logo.png" alt="Uomo" class="logo__image d-block">
                     </a>
                 </div><!-- /.logo -->
@@ -186,13 +186,6 @@
                         <span class="cart-amount d-block position-absolute js-cart-items-count"
                             id="productCountCart">{{ $countProductInCart }}</span>
                     </a>
-
-                    <a class="header-tools__item" href="account_wishlist.html">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <use href="#icon_heart" />
-                        </svg>
-                    </a>
                 </div><!-- /.header__tools -->
             </div><!-- /.header-desk header-desk_type_1 -->
         </div><!-- /.container -->
@@ -200,11 +193,7 @@
     <!-- End Header Type 2 -->
 
     <main><!-- /.slideshow -->
-
-
-        <div class="mb-3 mb-xl-5 pb-3 pt-1 pb-xl-5"></div>
         <!-- Customer Login Form -->
-
         <div class="aside aside_right overflow-hidden customer-forms" id="customerForms">
             <div class="customer-forms__wrapper d-flex position-relative">
                 <div class="customer__login">
@@ -427,8 +416,6 @@
             </div><!-- /.aside-content -->
         </div><!-- /.aside -->
 
-        <div class="mb-3 mb-xl-4 pb-3 pt-1 pb-xl-4"></div>
-
         <section class="service-promotion container">
             <div class="row">
                 <div class="col-md-4 text-center mb-5 mb-md-0">
@@ -545,29 +532,6 @@
         <div class="footer-bottom">
             <div class="d-block d-md-flex align-items-center container">
                 <span class="footer-copyright me-auto">2024 Dung va Nanh</span>
-                <div class="footer-settings d-block d-md-flex align-items-center">
-                    <div class="d-flex align-items-center">
-                        <label for="footerSettingsLanguage" class="me-2 text-white">Language</label>
-                        <select id="footerSettingsLanguage" class="form-select form-select-sm bg-transparent border-0"
-                            aria-label="Default select example" name="store-language">
-                            <option class="footer-select__option" selected>United Kingdom | English</option>
-                            <option class="footer-select__option" value="1">United States | English</option>
-                            <option class="footer-select__option" value="2">German</option>
-                            <option class="footer-select__option" value="3">French</option>
-                            <option class="footer-select__option" value="4">Swedish</option>
-                        </select>
-                    </div>
-
-                    <div class="d-flex align-items-center">
-                        <label for="footerSettingsCurrency" class="ms-md-3 me-2 text-white">Currency</label>
-                        <select id="footerSettingsCurrency" class="form-select form-select-sm bg-transparent border-0"
-                            aria-label="Default select example" name="store-language">
-                            <option selected>$ USD</option>
-                            <option value="1">£ GBP</option>
-                            <option value="2">€ EURO</option>
-                        </select>
-                    </div>
-                </div><!-- /.footer-settings -->
             </div><!-- /.d-flex -->
         </div><!-- /.footer-bottom container -->
     </footer>

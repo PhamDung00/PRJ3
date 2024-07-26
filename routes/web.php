@@ -30,6 +30,8 @@ Route::get('/',[HomeController::class,'index'])->name('client.home');
 Route::get('/home',[HomeController::class,'index'])->name('client.home');
 
 Route::get('/product', [HomeController::class, 'products'])->name('productlist');
+Route::get('/about', [HomeController::class, 'index'])->name('client.about.about');
+Route::get('/contact', [HomeController::class, 'index'])->name('client.contact.contact');
 
 Route::get('product/{category_id}', [ClientProductController::class, 'index']) -> name('client.product.productlist');
 

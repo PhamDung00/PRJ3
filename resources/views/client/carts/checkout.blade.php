@@ -4,7 +4,7 @@
     $subTotal = -session('discount_amount_price') ?? 0;
     if (isset($carts['products'])) {
         foreach ($carts['products'] as $product) {
-            $subTotal += $product->product_price * $product->product_quantity;
+            $subTotal += $product->product_price * $product->product_quantity +8 ;
         }
     } else {
         $carts['products'] = [];
