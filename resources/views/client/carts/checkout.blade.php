@@ -129,11 +129,11 @@
                                     </tr>
                                     <tr>
                                         <th>SHIPPING</th>
-                                        <td id="shipment_method">Free shipping</td>
+                                        <td id="shipment_method"></td>
                                     </tr>
                                     <tr>
                                         <th>TOTAL</th>
-                                        <td>${{ $subTotal }}</td>
+                                        <td id="total-price">${{ $subTotal }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -149,6 +149,7 @@
             document.getElementById("shipment_method").innerText = localStorage.getItem("shipmentMethod");
             // get the totalPrice from localStorage
             document.getElementById("total").value = localStorage.getItem("totalPrice") ?? 0;
+            document.getElementById("total-price").innerText = localStorage.getItem("totalPrice") ?? 0;
         })
         $(document).on("click", "#confirmation", e => {
             Swal.fire({
