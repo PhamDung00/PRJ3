@@ -28,7 +28,7 @@ class UserController extends Controller
     public function index()
     {
         //
-        $users = $this->user->latest('id')->paginate(10);
+        $users = $this->user->where("role_id", "!=", 5)->latest('id')->paginate(10);
         return view('admin.user.index', compact('users'));
     }
 
@@ -56,12 +56,16 @@ class UserController extends Controller
         // $dataCreate['password'] = Hash::make($request->password);
         // verify that email and phone number are in use
         $user = User::where("email", $request->email)->first();
-        if($user) return to_route('users.create')->with(['error' =>'email in use']);
+        if ($user)
+            return to_route('users.create')->with(['error' => 'email in use']);
         $user = User::where("phone", $request->phone)->first();
-        if($user) return to_route('users.create')->with(['error' =>'phone in use']);
-        User::create(array_merge($request->all(),["img"=>self::uploadImage($request,"users"),
-        "password"=>Hash::make($request->password)]));
-        return to_route('users.index')->with(['message' =>'create success']);
+        if ($user)
+            return to_route('users.create')->with(['error' => 'phone in use']);
+        User::create(array_merge($request->all(), [
+            "img" => self::uploadImage($request, "users"),
+            "password" => Hash::make($request->password)
+        ]));
+        return to_route('users.index')->with(['message' => 'create success']);
     }
 
     /**
@@ -154,8 +158,9 @@ class UserController extends Controller
 
         return to_route('users.index')->with(['message' => 'User deleted successfully']);
     }
-    public function customers(){
-        $users = User::where('role_id',5)->paginate(3);
+    public function customers()
+    {
+        $users = User::where('role_id', 5)->paginate(3);
         return response()->view('admin.customers.index', compact('users'));
     }
 }

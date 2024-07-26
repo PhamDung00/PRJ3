@@ -17,7 +17,8 @@ class ProductController extends Controller
     protected $product;
     protected $category;
 
-    public function __construct(Product $product, Category $category){
+    public function __construct(Product $product, Category $category)
+    {
         $this->product = $product;
         $this->category = $category;
     }
@@ -42,10 +43,11 @@ class ProductController extends Controller
     public function create()
     {
         //
-        $categories = $this->category->get(['id','name']);
+        $categories = $this->category->get(['id', 'name']);
         return response()->view('admin.products.create', compact('categories'));
     }
-    private function addSizes(Request $request, $productDetail){
+    private function addSizes(Request $request, $productDetail)
+    {
         $productDetail->sizes()->delete();
         foreach ($productDetail->sizes as $size) {
             Size::create([
@@ -55,11 +57,12 @@ class ProductController extends Controller
             ]);
         }
     }
-    private function createQuantity($request){
+    private function createQuantity($request)
+    {
         $quantity = 0;
         $productDetails = $request->product_details;
         foreach ($productDetails as $value) {
-            foreach($value["sizes"] as $sizes){
+            foreach ($value["sizes"] as $sizes) {
                 $quantity += $sizes["quantity"];
             }
         }
@@ -78,7 +81,7 @@ class ProductController extends Controller
             "quantity" => self::createQuantity($request)
         ]));
         $productDetails = $request->product_details;
-        foreach($productDetails as $detail){
+        foreach ($productDetails as $detail) {
             $productDetail = ProductDetail::create([
                 "product_id" => $product->id
             ]);
@@ -126,7 +129,8 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    private function updateProductDetail($productDetail){
+    private function updateProductDetail($productDetail)
+    {
         $productDetail->setAttribute("sizes", $productDetail->sizes);
         return $productDetail;
     }
@@ -153,13 +157,13 @@ class ProductController extends Controller
     {
         //
         $product = Product::findOrFail($id);
-        $product->update(array_merge($request->all(),[
+        $product->update(array_merge($request->all(), [
             "quantity" => self::createQuantity($request)
         ]));
         // Xóa chi tiết sản phẩm cũ
         $product->details()->delete();
         $productDetails = $request->product_details;
-        foreach($productDetails as $detail){
+        foreach ($productDetails as $detail) {
             $productDetail = ProductDetail::create([
                 "product_id" => $product->id
             ]);
@@ -180,7 +184,7 @@ class ProductController extends Controller
                 ]);
             }
         }
-        
+
         return redirect(route("products.index"))->with("success", "Cập nhật thành công");
     }
 
